@@ -19,7 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -289,6 +291,19 @@ public class AddCustomerFormController implements Initializable {
 
             preparedStatement.executeUpdate();
 
+            customerIdInput.setText("");
+            customerIdError.setText("");
+            title.setValue("Title");
+            nameInput.setText("");
+            dateOfBarth.getEditor().clear();
+            salaryInput.setText("");
+            salaryError.setText("");
+            addressInput.setText("");
+            cityInput.setText("");
+            provinceInput.setText("");
+            postalCodeInput.setText("");
+            postalCodeError.setText("");
+
             CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
             CenterController.alert.setContentText(customer.getCustomerId() + " Customer is entered into the system successfully.");
             CenterController.alert.show();
@@ -319,8 +334,54 @@ public class AddCustomerFormController implements Initializable {
     private void deleteAction(ActionEvent actionEvent) {
     }
 
+    // search customer
     @FXML
     private void searchAction(ActionEvent actionEvent) {
+        try{
+            ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
+            resultSet.next();
+
+            title.setValue(resultSet.getString("title"));
+            nameInput.setText(resultSet.getString("name"));
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.parse(resultSet.getString("dateOfBarth"), dateTimeFormatter);
+            dateOfBarth.setValue(localDate);
+            salaryInput.setText(resultSet.getString("salary"));
+            addressInput.setText(resultSet.getString("address"));
+            cityInput.setText(resultSet.getString("city"));
+            provinceInput.setText(resultSet.getString("province"));
+            postalCodeInput.setText(resultSet.getString("postalCode"));
+
+        } catch (SQLException e) {
+            title.setValue("Title");
+            nameInput.setText("");
+            dateOfBarth.getEditor().clear();
+            salaryInput.setText("");
+            addressInput.setText("");
+            cityInput.setText("");
+            provinceInput.setText("");
+            postalCodeInput.setText("");
+
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+    }
+
+    @FXML
+    private void cancelFormAction() {
+        customerIdInput.setText("");
+        customerIdError.setText("");
+        title.setValue("Title");
+        nameInput.setText("");
+        dateOfBarth.getEditor().clear();
+        salaryInput.setText("");
+        salaryError.setText("");
+        addressInput.setText("");
+        cityInput.setText("");
+        provinceInput.setText("");
+        postalCodeInput.setText("");
+        postalCodeError.setText("");
     }
 
     @Override

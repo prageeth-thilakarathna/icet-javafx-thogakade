@@ -1,19 +1,21 @@
 
 •
-java:S1192q"SDefine a constant instead of duplicating this literal "* only digits(0-9)" 3 times.(‘ÿÃy8´Ñ†õó1J$e47302e3-e33e-4dee-b8fa-6676dc5b6a35
+java:S1192s"SDefine a constant instead of duplicating this literal "* only digits(0-9)" 3 times.(‘ÿÃy8”ø‹øó1J$2636b8f8-8d23-48c3-bda8-e61d09522ba5
+
+java:S1192¨"FDefine a constant instead of duplicating this literal "Title" 3 times.(Õı·ùÿÿÿÿÿ8¾Ûøó1J$da6c6d27-99af-46e0-ada0-3f276900f03a
+˜
+java:S2095˜"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8Ãø‹øó1J$a83b9b16-6bce-4f70-b3be-29ce027c1811
 Å
-java:S1186»"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥ğ¨¥8éĞ˜õó1J$b0073f68-43e1-4131-9985-6cff291488e9
+java:S1186Ê"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥ğ¨¥8Ãø‹øó1J$0e093a9b-1194-49fa-a586-c01c7f0c881e
 Ê
-java:S1186¿"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¹à—şÿÿÿÿ8òÑ†õó1J$21ab0442-d965-4bab-aa3a-c2f48640969e
-Ä
-java:S1186Ã"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ş™»?8òÑ†õó1J$6f999468-95a6-4116-9882-7895550d56ca
+java:S1186Î"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¹à—şÿÿÿÿ8Ãø‹øó1J$3df52716-ba6d-4ddb-b4c1-e5d66f443dac
 ‹
-java:S1126„"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8‚Ò†õó1J$6e9e56ae-747c-49a4-8438-731acd0e1601
+java:S1126†"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8Òø‹øó1J$39ec0eed-eca0-402d-9768-3e1a90625610
 †
-java:S1126½"BReplace this if-then-else statement by a single method invocation.(Éªàœ8‚Ò†õó1J$75b37d72-8a11-42c7-b18a-003c25523927
+java:S1126¿"BReplace this if-then-else statement by a single method invocation.(Éªàœ8Òø‹øó1J$28504d86-69c5-4e5b-a30b-a65701e25707
 ‹
-java:S1126Í"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8‚Ò†õó1J$cf37accc-3639-4e40-a764-b6673d452be7
+java:S1126Ï"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8Òø‹øó1J$eb824b96-e97d-4ab0-b64e-a9908f1bca1e
 ‹
-java:S1126İ"BReplace this if-then-else statement by a single method invocation.(¶ß¸Íıÿÿÿÿ8‚Ò†õó1J$266d0c9a-dcfe-4723-8cfe-659671426566
+java:S1126ß"BReplace this if-then-else statement by a single method invocation.(¶ß¸Íıÿÿÿÿ8Òø‹øó1J$38e52483-4a2d-452b-b62c-00e688971fcd
 ‹
-java:S1126Š"BReplace this if-then-else statement by a single method invocation.(½Ø¯œúÿÿÿÿ8‘Ò†õó1J$90481d9d-76fc-4ec2-877c-0547133c3b20
+java:S1126Œ"BReplace this if-then-else statement by a single method invocation.(½Ø¯œúÿÿÿÿ8Òø‹øó1J$698e065a-eb4c-4bfa-8dd2-0ac5a9cc227b
