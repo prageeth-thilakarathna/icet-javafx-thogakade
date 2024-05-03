@@ -82,6 +82,7 @@ public class AddCustomerFormController implements Initializable {
     private JFXTextField provinceInput;
     @FXML
     private JFXTextField postalCodeInput;
+    private Customer searchCustomer;
 
     // add customer
     @FXML
@@ -288,9 +289,9 @@ public class AddCustomerFormController implements Initializable {
         int postalCodeLength = postalCodeInput.getText().length();
         boolean customerIdIsHave = false;
 
-        try{
+        try {
             ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 customerIdIsHave = true;
             }
 
@@ -302,8 +303,17 @@ public class AddCustomerFormController implements Initializable {
 
         if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && !customerIdIsHave) {
             btnAddCustomer.setDisable(false);
+            btnUpdate.setDisable(true);
+        } else if(customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && customerIdIsHave){
+            if(searchCustomer!=null){
+                validateUpdate();
+            } else {
+                btnUpdate.setDisable(true);
+            }
+            btnAddCustomer.setDisable(true);
         } else {
             btnAddCustomer.setDisable(true);
+            btnUpdate.setDisable(true);
         }
     }
 
@@ -338,6 +348,8 @@ public class AddCustomerFormController implements Initializable {
             provinceInput.setText("");
             postalCodeInput.setText("");
             postalCodeError.setText("");
+            tableFirst.setItems(getTableData());
+            tableSecond.setItems(getTableData());
 
             CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
             CenterController.alert.setContentText(customer.getCustomerId() + " Customer is entered into the system successfully.");
@@ -361,18 +373,49 @@ public class AddCustomerFormController implements Initializable {
         return titles;
     }
 
+    // update customer
     @FXML
     private void updateAction(ActionEvent actionEvent) {
     }
 
+    private void validateUpdate() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate searchDateOfBarth = LocalDate.parse(searchCustomer.getDateOfBarth(), dateTimeFormatter);
+
+        if (customerIdInput.getText().equals(searchCustomer.getCustomerId())) {
+            if (!title.getValue().equals(searchCustomer.getTitle())) {
+                btnUpdate.setDisable(false);
+            } else if (!nameInput.getText().equals(searchCustomer.getName())) {
+                btnUpdate.setDisable(false);
+            } else if (!dateOfBarth.getValue().equals(searchDateOfBarth)) {
+                btnUpdate.setDisable(false);
+            } else if (!salaryInput.getText().equals(searchCustomer.getSalary())) {
+                btnUpdate.setDisable(false);
+            } else if (!addressInput.getText().equals(searchCustomer.getAddress())) {
+                btnUpdate.setDisable(false);
+            } else if (!cityInput.getText().equals(searchCustomer.getCity())) {
+                btnUpdate.setDisable(false);
+            } else if (!provinceInput.getText().equals(searchCustomer.getProvince())) {
+                btnUpdate.setDisable(false);
+            } else if (!postalCodeInput.getText().equals(searchCustomer.getPostalCode())) {
+                btnUpdate.setDisable(false);
+            } else {
+                btnUpdate.setDisable(true);
+            }
+        } else {
+            btnUpdate.setDisable(true);
+        }
+    }
+
     @FXML
     private void deleteAction(ActionEvent actionEvent) {
+
     }
 
     // search customer
     @FXML
     private void searchAction(ActionEvent actionEvent) {
-        try{
+        try {
             ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
             resultSet.next();
 
@@ -386,16 +429,34 @@ public class AddCustomerFormController implements Initializable {
             cityInput.setText(resultSet.getString("city"));
             provinceInput.setText(resultSet.getString("province"));
             postalCodeInput.setText(resultSet.getString("postalCode"));
+            validateInputs();
+
+            Customer customer = new Customer(
+                    "0" + resultSet.getString("customerId"),
+                    resultSet.getString("title"),
+                    resultSet.getString("name"),
+                    resultSet.getString("dateOfBarth"),
+                    resultSet.getString("salary"),
+                    resultSet.getString("address"),
+                    resultSet.getString("city"),
+                    resultSet.getString("province"),
+                    resultSet.getString("postalCode")
+            );
+            searchCustomer = customer;
 
         } catch (SQLException e) {
             title.setValue("Title");
             nameInput.setText("");
             dateOfBarth.getEditor().clear();
             salaryInput.setText("");
+            salaryError.setText("");
             addressInput.setText("");
             cityInput.setText("");
             provinceInput.setText("");
             postalCodeInput.setText("");
+            postalCodeError.setText("");
+            searchCustomer = null;
+            validateInputs();
 
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
@@ -417,17 +478,19 @@ public class AddCustomerFormController implements Initializable {
         provinceInput.setText("");
         postalCodeInput.setText("");
         postalCodeError.setText("");
+        searchCustomer = null;
+        validateInputs();
     }
 
-    private ObservableList<Customer> getTableData(){
+    private ObservableList<Customer> getTableData() {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
-        try{
+        try {
             ResultSet resultSet = CenterController.getInstance().getAllCustomers();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Customer customer = new Customer(
-                        "0"+resultSet.getString("customerId"),
+                        "0" + resultSet.getString("customerId"),
                         resultSet.getString("title"),
                         resultSet.getString("name"),
                         resultSet.getString("dateOfBarth"),
@@ -454,6 +517,7 @@ public class AddCustomerFormController implements Initializable {
         title.setItems(getTitles());
         btnAddCustomer.setDisable(true);
         dateOfBarth.setEditable(false);
+        btnUpdate.setDisable(true);
 
         colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
