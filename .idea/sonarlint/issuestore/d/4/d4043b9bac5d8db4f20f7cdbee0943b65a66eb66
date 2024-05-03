@@ -1,5 +1,9 @@
 
 
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ι°Αµώÿÿÿÿ8—¶«υσ1J$2a198e5f-4692-4295-99b2-7d44e607be0f
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ι°Αµώÿÿÿÿ8®Ψ ϋσ1J$66b2d885-87f1-44ad-9c80-d7a58af4cb4f
+
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ι°Αµώÿÿÿÿ8½•ϋσ1J$9b90a0d8-7366-490b-80db-4a2db5eb1071
 α
-java:S6548"A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³ΪΉώÿÿÿÿÿ8ί™¦υσ1J$6a199e44-ef01-49cc-ae78-075ec27f9604
+java:S6548"A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³ΪΉώÿÿÿÿÿ8½•ϋσ1J$3f3b4017-2363-4446-893f-e24b42a7afc2
+A
+java:S6905"Don't use the query "SELECT *".(ÿώ«όÿÿÿÿ8ε¤ϋσ1

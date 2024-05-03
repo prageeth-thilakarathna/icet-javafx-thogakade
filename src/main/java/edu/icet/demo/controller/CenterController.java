@@ -23,4 +23,11 @@ public class CenterController {
         Statement statement = connection.createStatement();
         return statement.executeQuery(sql);
     }
+
+    public ResultSet getAllCustomers() throws SQLException {
+        String sql = "SELECT * FROM customer";
+        Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(sql);
+    }
 }

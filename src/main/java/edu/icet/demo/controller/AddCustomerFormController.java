@@ -9,10 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -26,6 +24,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AddCustomerFormController implements Initializable {
+    @FXML
+    private TableView<Customer> tableFirst;
+    @FXML
+    private TableColumn<Customer, String> colFirstTblCustomerId;
+    @FXML
+    private TableColumn<Customer, String> colTitle;
+    @FXML
+    private TableColumn<Customer, String> colName;
+    @FXML
+    private TableColumn<Customer, String> colDateOfBarth;
+    @FXML
+    private TableColumn<Customer, String> colSalary;
+    @FXML
+    private TableView<Customer> tableSecond;
+    @FXML
+    private TableColumn<Customer, String> colSecondTblCustomerId;
+    @FXML
+    private TableColumn<Customer, String> colAddress;
+    @FXML
+    private TableColumn<Customer, String> colCity;
+    @FXML
+    private TableColumn<Customer, String> colProvince;
+    @FXML
+    private TableColumn<Customer, String> colPostalCode;
     @FXML
     private Label salaryError;
     @FXML
@@ -264,8 +286,21 @@ public class AddCustomerFormController implements Initializable {
         int cityLength = cityInput.getText().length();
         int provinceLength = provinceInput.getText().length();
         int postalCodeLength = postalCodeInput.getText().length();
+        boolean customerIdIsHave = false;
 
-        if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0) {
+        try{
+            ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
+            if(resultSet.next()){
+                customerIdIsHave = true;
+            }
+
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+
+        if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && !customerIdIsHave) {
             btnAddCustomer.setDisable(false);
         } else {
             btnAddCustomer.setDisable(true);
@@ -384,10 +419,54 @@ public class AddCustomerFormController implements Initializable {
         postalCodeError.setText("");
     }
 
+    private ObservableList<Customer> getTableData(){
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+
+        try{
+            ResultSet resultSet = CenterController.getInstance().getAllCustomers();
+
+            while(resultSet.next()){
+                Customer customer = new Customer(
+                        "0"+resultSet.getString("customerId"),
+                        resultSet.getString("title"),
+                        resultSet.getString("name"),
+                        resultSet.getString("dateOfBarth"),
+                        resultSet.getString("salary"),
+                        resultSet.getString("address"),
+                        resultSet.getString("city"),
+                        resultSet.getString("province"),
+                        resultSet.getString("postalCode")
+                );
+                allCustomers.add(customer);
+            }
+
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+
+        return allCustomers;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         title.setItems(getTitles());
         btnAddCustomer.setDisable(true);
         dateOfBarth.setEditable(false);
+
+        colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDateOfBarth.setCellValueFactory(new PropertyValueFactory<>("dateOfBarth"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colSecondTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+
+        tableFirst.setItems(getTableData());
+        tableSecond.setItems(getTableData());
     }
 }

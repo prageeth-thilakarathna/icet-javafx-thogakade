@@ -193,6 +193,9 @@
                      <VBox.margin>
                         <Insets left="160.0" top="15.0" />
                      </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </VBox>
@@ -200,22 +203,22 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView layoutX="3.0" layoutY="30.0" prefHeight="225.0" prefWidth="784.0" translateX="30.0">
+                  <TableView fx:id="tableFirst" layoutX="3.0" layoutY="30.0" prefHeight="225.0" prefWidth="784.0" translateX="30.0">
                     <columns>
-                      <TableColumn prefWidth="170.0" text="Customer ID" />
-                      <TableColumn prefWidth="50.0" text="Title" />
-                        <TableColumn prefWidth="300.0" text="Name" />
-                        <TableColumn prefWidth="131.0" text="Date of Barth" />
-                        <TableColumn prefWidth="132.0" text="Salary" />
+                      <TableColumn fx:id="colFirstTblCustomerId" prefWidth="170.0" text="Customer ID" />
+                      <TableColumn fx:id="colTitle" prefWidth="50.0" text="Title" />
+                        <TableColumn fx:id="colName" prefWidth="300.0" text="Name" />
+                        <TableColumn fx:id="colDateOfBarth" prefWidth="131.0" text="Date of Barth" />
+                        <TableColumn fx:id="colSalary" prefWidth="132.0" text="Salary" />
                     </columns>
                   </TableView>
-                  <TableView layoutX="33.0" layoutY="284.0" prefHeight="225.0" prefWidth="785.0">
+                  <TableView fx:id="tableSecond" layoutX="33.0" layoutY="284.0" prefHeight="225.0" prefWidth="785.0">
                     <columns>
-                      <TableColumn prefWidth="170.0" text="Customer ID" />
-                      <TableColumn prefWidth="264.0" text="Address" />
-                        <TableColumn minWidth="0.0" prefWidth="135.0" text="City" />
-                        <TableColumn prefWidth="135.0" text="Province" />
-                        <TableColumn text="Postal Code" />
+                      <TableColumn fx:id="colSecondTblCustomerId" prefWidth="170.0" text="Customer ID" />
+                      <TableColumn fx:id="colAddress" prefWidth="264.0" text="Address" />
+                        <TableColumn fx:id="colCity" minWidth="0.0" prefWidth="135.0" text="City" />
+                        <TableColumn fx:id="colProvince" prefWidth="135.0" text="Province" />
+                        <TableColumn fx:id="colPostalCode" text="Postal Code" />
                     </columns>
                   </TableView>
                   <Separator layoutX="2.0" layoutY="26.0" orientation="VERTICAL" prefHeight="483.0" prefWidth="6.0" />
