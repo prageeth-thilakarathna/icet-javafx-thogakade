@@ -1,3 +1,16 @@
 
-_
-java:S2094"BRemove this empty class, write its code or make it an "interface".(ÅĞªä8ÌÎï1
+‹
+java:S1192;"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8¨ˆè•ö1J$9874e127-030c-4286-9fa3-16e95160c130
+”
+java:S1192W"LDefine a constant instead of duplicating this literal "description" 4 times.(ğøŠšøÿÿÿÿ8¨ˆè•ö1J$34c440ec-4131-4ee4-9937-3ab1f770449e
+Å
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ü·°«8•‰è•ö1J$0a53e3bb-5027-4e3f-a201-90a58e1961f0
+‡
+java:S1117x"?Rename "customerIDs" which hides the field declared at line 44.(ÆãÒüÿÿÿÿ8Ô‰è•ö1J$d7c0505c-e794-4746-b0bc-eb6dab3c68b6
+†
+java:S1117‹"=Rename "itemCODEs" which hides the field declared at line 42.(ôÅ¨÷úÿÿÿÿ8Ô‰è•ö1J$5eb0e968-ffc5-4c06-a521-149fea52470e
+„	java:S125¢"<This block of commented-out lines of code should be removed.(ÔŞ±›ıÿÿÿÿ8Ô‰è•ö1J$17a73ed2-72c8-4abf-822e-ba8038e07f6b
+~
+java:S1128"6Remove this unused import 'javafx.animation.Timeline'.(˜‰ë÷øÿÿÿÿ8Ô‰è•ö1J$f4af3e7c-3e5d-4db7-83ef-da704100e185
+x
+java:S1144"4Remove this unused private "loadDateAndTime" method.(ü·°«8Ô‰è•ö1J$6497b830-f051-4954-b1e2-2e72062aeccf

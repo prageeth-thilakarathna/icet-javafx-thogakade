@@ -4,6 +4,7 @@ import edu.icet.demo.db.LoadDBDriver;
 import javafx.scene.control.Alert;
 import lombok.Getter;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +27,20 @@ public class CenterController {
 
     public ResultSet getAllCustomers() throws SQLException {
         String sql = "SELECT * FROM customer";
+        Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(sql);
+    }
+
+    public ResultSet getAllItem() throws SQLException {
+        String sql = "SELECT * FROM item";
+        Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(sql);
+    }
+
+    public ResultSet getItem(String itemCode) throws SQLException {
+        String sql = "SELECT * FROM item WHERE itemCode='"+itemCode+"'";
         Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
         Statement statement = connection.createStatement();
         return statement.executeQuery(sql);

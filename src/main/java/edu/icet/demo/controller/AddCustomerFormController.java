@@ -338,9 +338,9 @@ public class AddCustomerFormController implements Initializable {
 
             customerIdInput.setText("");
             customerIdError.setText("");
-            title.setValue("Title");
+            title.setValue(null);
             nameInput.setText("");
-            dateOfBarth.getEditor().clear();
+            dateOfBarth.setValue(null);
             salaryInput.setText("");
             salaryError.setText("");
             addressInput.setText("");
@@ -445,9 +445,9 @@ public class AddCustomerFormController implements Initializable {
             searchCustomer = customer;
 
         } catch (SQLException e) {
-            title.setValue("Title");
+            title.setValue(null);
             nameInput.setText("");
-            dateOfBarth.getEditor().clear();
+            dateOfBarth.setValue(null);
             salaryInput.setText("");
             salaryError.setText("");
             addressInput.setText("");
@@ -468,9 +468,9 @@ public class AddCustomerFormController implements Initializable {
     private void cancelFormAction() {
         customerIdInput.setText("");
         customerIdError.setText("");
-        title.setValue("Title");
+        title.setValue(null);
         nameInput.setText("");
-        dateOfBarth.getEditor().clear();
+        dateOfBarth.setValue(null);
         salaryInput.setText("");
         salaryError.setText("");
         addressInput.setText("");

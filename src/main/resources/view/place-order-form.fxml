@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.PlaceOrderController">
    <children>
@@ -16,6 +26,223 @@
                </font>
             </Label>
          </top>
+         <bottom>
+            <HBox prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <left>
+            <VBox alignment="CENTER_LEFT" prefHeight="535.0" prefWidth="316.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXComboBox fx:id="customerIDs" onAction="#customerIdSelectAction" promptText="Customer IDs">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <Pane prefHeight="137.0" prefWidth="316.0">
+                     <children>
+                        <Label layoutY="11.0" text="Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="24.0" text="Address">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="54.0" text="Salary">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="84.0" text="City">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="nameDisplay" layoutX="125.0" layoutY="11.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="addressDisplay" layoutX="125.0" layoutY="44.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="salaryDisplay" layoutX="125.0" layoutY="74.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="cityDisplay" layoutX="125.0" layoutY="104.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <JFXComboBox fx:id="itemCODEs" onAction="#itemCodeSelectAction" promptText="Item CODEs">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <Pane layoutX="10.0" layoutY="170.0" prefHeight="137.0" prefWidth="316.0">
+                     <children>
+                        <Label layoutY="11.0" text="DESC">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="24.0" text="Pack Size">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="54.0" text="Unit Price">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="-1.0" layoutY="84.0" text="QTY On Hand">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" top="20.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="descriptionDisplay" layoutX="125.0" layoutY="11.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="packSizeDisplay" layoutX="125.0" layoutY="44.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="unitPriceDisplay" layoutX="125.0" layoutY="74.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="qtyOnHandDisplay" layoutX="125.0" layoutY="104.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Pane prefHeight="81.0" prefWidth="316.0">
+                     <children>
+                        <TextField layoutX="30.0" prefHeight="30.0" prefWidth="140.0" promptText="Enter QTY">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="191.0" mnemonicParsing="false" style="-fx-background-color: #008DDA;" text="Add to Cart" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="30.0" layoutY="41.0" mnemonicParsing="false" onAction="#selectionCancelAction" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="80.0" prefWidth="853.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="27.0" text="Date">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateDisplay" layoutX="84.0" layoutY="27.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="300.0" layoutY="28.0" text="Time">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timeDisplay" layoutX="372.0" layoutY="28.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="584.0" layoutY="27.0" text="Order ID">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="orderIdDisplay" layoutX="687.0" layoutY="27.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutY="19.0" orientation="VERTICAL" prefHeight="509.0" prefWidth="2.0" />
+                        <Separator layoutX="284.0" layoutY="21.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="3.0" />
+                        <Separator layoutX="568.0" layoutY="21.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="3.0" />
+                     </children>
+                  </Pane>
+                  <TableView prefHeight="406.0" prefWidth="793.0">
+                    <columns>
+                      <TableColumn prefWidth="100.0" text="Item Code" />
+                      <TableColumn prefWidth="393.0" text="Description" />
+                        <TableColumn prefWidth="100.0" text="Quantity" />
+                        <TableColumn prefWidth="100.0" text="Unit Price" />
+                        <TableColumn prefWidth="100.0" text="Total" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+            </VBox>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
