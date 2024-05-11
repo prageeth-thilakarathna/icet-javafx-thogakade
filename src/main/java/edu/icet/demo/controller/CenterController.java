@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 
 public class CenterController {
     @Getter
@@ -17,6 +18,8 @@ public class CenterController {
     private CenterController(){}
 
     public static final Alert alert = new Alert(Alert.AlertType.NONE);
+
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     public ResultSet getCustomer(String customerId) throws SQLException {
         String sql = "SELECT * FROM customer WHERE customerId='"+customerId+"'";

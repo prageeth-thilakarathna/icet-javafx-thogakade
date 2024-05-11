@@ -1,17 +1,17 @@
 
 
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8Ïëİ”ô1J$a222621d-fecc-4783-a769-c8ae8233460e
+java:S20950"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$1299d440-7bd1-4062-9ed6-3095c43b0458
 
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8¤Âğ”ô1J$004e561d-3f46-4f39-88ec-3d6381b01af0
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$14045b4e-4340-47c7-8ac5-84b61bd16e73
 
-java:S2095&"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8Ïëİ”ô1J$376df9fe-6d69-47be-ae14-87923614ee21
+java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$a1960b96-3bed-45ff-87a1-758bc61ef065
 
-java:S2095-"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8Ïëİ”ô1J$de0232d4-4a0e-4075-acde-21df336cd180
+java:S2095""GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$d37d22df-5553-42c2-9fc8-9c42da5e09f9
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³Ú¹şÿÿÿÿÿ8Óëİ”ô1J$b74d7b66-5726-43bf-b0f8-401fcdc338bb
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³Ú¹şÿÿÿÿÿ8ú¤£šö1J$615759eb-fc8a-4269-9f33-68036b24818d
 g
-java:S6905"Don't use the query "SELECT *".(ÿş«üÿÿÿÿ8Ûëİ”ô1J$f268ed15-35ff-4957-ac90-4b260c13bae7
+java:S6905 "Don't use the query "SELECT *".(ÿş«üÿÿÿÿ8Š¥£šö1J$a641fff6-0260-4fca-84a4-aeffd8b570f8
 a
-java:S6905$"Don't use the query "SELECT *".(ÂÌs8Ûëİ”ô1J$2d4e7bc5-c7c4-4536-b76f-765cd0d0f21e
+java:S6905'"Don't use the query "SELECT *".(ÂÌs8Š¥£šö1J$ee28e7f1-e134-421c-bafe-dde6357e53e9
 
-java:S1128"7Remove this unused import 'javax.xml.transform.Result'.(âÓ¸ûÿÿÿÿ8İëİ”ô1J$bc88ef23-d648-44ca-88d5-fdd0be3b3bdf
+java:S1128"7Remove this unused import 'javax.xml.transform.Result'.(âÓ¸ûÿÿÿÿ8Š¥£šö1J$5ed25435-b08c-4698-8ae8-db2b26ba15e9

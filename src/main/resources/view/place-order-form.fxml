@@ -27,7 +27,20 @@
             </Label>
          </top>
          <bottom>
-            <HBox prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER" />
+            <HBox alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#placeOrderAction" style="-fx-background-color: #65B741;" text="Place Order" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children></HBox>
          </bottom>
          <left>
             <VBox alignment="CENTER_LEFT" prefHeight="535.0" prefWidth="316.0" BorderPane.alignment="CENTER">
@@ -160,14 +173,14 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </Pane>
-                  <Pane prefHeight="81.0" prefWidth="316.0">
+                  <Pane prefHeight="90.0" prefWidth="316.0">
                      <children>
-                        <TextField layoutX="30.0" prefHeight="30.0" prefWidth="140.0" promptText="Enter QTY">
+                        <TextField fx:id="inputQuantity" layoutX="30.0" onKeyPressed="#quantityKeyPressed" onKeyTyped="#quantityKeyTyped" prefHeight="30.0" prefWidth="140.0" promptText="Enter QTY">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="191.0" mnemonicParsing="false" style="-fx-background-color: #008DDA;" text="Add to Cart" textFill="WHITE">
+                        <Button fx:id="btnAddToCart" layoutX="191.0" mnemonicParsing="false" onAction="#addToCartAction" style="-fx-background-color: #008DDA;" text="Add to Cart" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -175,7 +188,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="30.0" layoutY="41.0" mnemonicParsing="false" onAction="#selectionCancelAction" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE">
+                        <Button layoutX="30.0" layoutY="61.0" mnemonicParsing="false" onAction="#selectionCancelAction" style="-fx-background-color: #000000;" text="Cancel" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -183,6 +196,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <Label fx:id="quantityError" layoutX="30.0" layoutY="30.0" textFill="RED" />
                      </children>
                   </Pane>
                </children>
@@ -228,13 +242,13 @@
                         <Separator layoutX="568.0" layoutY="21.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="3.0" />
                      </children>
                   </Pane>
-                  <TableView prefHeight="406.0" prefWidth="793.0">
+                  <TableView fx:id="tblOrderDetail" prefHeight="406.0" prefWidth="793.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="Item Code" />
-                      <TableColumn prefWidth="393.0" text="Description" />
-                        <TableColumn prefWidth="100.0" text="Quantity" />
-                        <TableColumn prefWidth="100.0" text="Unit Price" />
-                        <TableColumn prefWidth="100.0" text="Total" />
+                      <TableColumn fx:id="colItemCode" prefWidth="100.0" text="Item Code" />
+                      <TableColumn fx:id="colDescription" prefWidth="393.0" text="Description" />
+                        <TableColumn fx:id="colQuantity" prefWidth="100.0" text="Quantity" />
+                        <TableColumn fx:id="colUnitPrice" prefWidth="100.0" text="Unit Price" />
+                        <TableColumn fx:id="colTotal" prefWidth="100.0" text="Total" />
                     </columns>
                      <VBox.margin>
                         <Insets left="30.0" right="30.0" top="20.0" />

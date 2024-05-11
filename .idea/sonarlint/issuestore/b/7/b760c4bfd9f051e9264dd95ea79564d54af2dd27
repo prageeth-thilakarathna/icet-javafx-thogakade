@@ -1,16 +1,29 @@
 
+’
+java:S1192}"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$909ce62e-e3e5-4d7d-8f37-d6e5d1b0fc1f
 ‹
-java:S1192;"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8¨ˆè•ö1J$9874e127-030c-4286-9fa3-16e95160c130
+java:S1192X"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$aec6b351-f93c-4f2a-9c4f-38cd04605e07
+
+java:S1192µ"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$dcc799e4-cfb5-4f37-b994-31d7b904182c
 ”
-java:S1192W"LDefine a constant instead of duplicating this literal "description" 4 times.(ğøŠšøÿÿÿÿ8¨ˆè•ö1J$34c440ec-4131-4ee4-9937-3ab1f770449e
-Å
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ü·°«8•‰è•ö1J$0a53e3bb-5027-4e3f-a201-90a58e1961f0
-‡
-java:S1117x"?Rename "customerIDs" which hides the field declared at line 44.(ÆãÒüÿÿÿÿ8Ô‰è•ö1J$d7c0505c-e794-4746-b0bc-eb6dab3c68b6
+java:S1192u"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$64a992fb-e79a-4e7f-82b7-315ce450d8ea
+˜
+java:S2095ö"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$fd4fe4d9-86f3-482d-b92c-35d86838cc30
+‹
+java:S2095ò"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$4eff53e2-e3b0-4b74-b6c5-b99676260c81
+‹
+java:S2095ú"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$d0c576ed-6f65-4f6d-9ee4-baeb1dcfe379
+˜
+java:S2095Õ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$615181b8-bf14-4803-a92c-06e49a395ede
+ˆ
+java:S1117œ"?Rename "customerIDs" which hides the field declared at line 71.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$693ded4d-532e-451c-a9ad-013de1364084
 †
-java:S1117‹"=Rename "itemCODEs" which hides the field declared at line 42.(ôÅ¨÷úÿÿÿÿ8Ô‰è•ö1J$5eb0e968-ffc5-4c06-a521-149fea52470e
-„	java:S125¢"<This block of commented-out lines of code should be removed.(ÔŞ±›ıÿÿÿÿ8Ô‰è•ö1J$17a73ed2-72c8-4abf-822e-ba8038e07f6b
-~
-java:S1128"6Remove this unused import 'javafx.animation.Timeline'.(˜‰ë÷øÿÿÿÿ8Ô‰è•ö1J$f4af3e7c-3e5d-4db7-83ef-da704100e185
-x
-java:S1144"4Remove this unused private "loadDateAndTime" method.(ü·°«8Ô‰è•ö1J$6497b830-f051-4954-b1e2-2e72062aeccf
+java:S1117¯"=Rename "itemCODEs" which hides the field declared at line 69.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$da74556b-293e-439d-87d0-48a0ada1b83f
+c
+java:S6905ø"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$13fdb897-d837-4cf1-981a-1002cb16e59e
+†
+java:S1126„"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$4329df55-9bc6-44e7-bdab-701ac58101b6
+†
+java:S1126Â"BReplace this if-then-else statement by a single method invocation.(Î‡Õ‹8³¬Ìµö1J$40403216-5559-4d11-bd83-38d60a44bb62
+Ÿ
+java:S6912û"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$7ebf869f-2bf0-428d-986c-fdeafbef5b43
