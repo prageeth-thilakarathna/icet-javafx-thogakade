@@ -17,11 +17,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.AddCustomerFormController">
+<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.CustomerFormController">
    <children>
       <BorderPane prefHeight="658.0" prefWidth="1169.0">
          <top>
-            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1173.0" style="-fx-background-color: #000000;" text="Add Customer Form" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1173.0" style="-fx-background-color: #000000;" text="Customer Form" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -61,6 +61,17 @@
                      </cursor>
                      <HBox.margin>
                         <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#backAction" style="-fx-background-color: #4e08aa;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="798.0" />
                      </HBox.margin>
                   </Button>
                </children>
