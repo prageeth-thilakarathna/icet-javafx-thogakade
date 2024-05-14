@@ -4,9 +4,9 @@ java:S20950"GUse try-with-resources or close this "Statement" in a "finally" cl
 
 java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$14045b4e-4340-47c7-8ac5-84b61bd16e73
 
-java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$a1960b96-3bed-45ff-87a1-758bc61ef065
-
 java:S2095""GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$d37d22df-5553-42c2-9fc8-9c42da5e09f9
+
+java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$a1960b96-3bed-45ff-87a1-758bc61ef065
 á
 java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³Ú¹şÿÿÿÿÿ8ú¤£šö1J$615759eb-fc8a-4269-9f33-68036b24818d
 g

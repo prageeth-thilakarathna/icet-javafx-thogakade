@@ -2,8 +2,10 @@ package edu.icet.demo.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import edu.icet.demo.db.LoadDBDriver;
+import edu.icet.demo.bo.BoFactory;
+import edu.icet.demo.bo.custom.CustomerBo;
 import edu.icet.demo.model.Customer;
+import edu.icet.demo.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -87,6 +87,8 @@ public class CustomerFormController implements Initializable {
     private JFXTextField postalCodeInput;
     private Customer searchCustomer;
 
+    private CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+
     // add customer
     @FXML
     private void addCustomerAction() {
@@ -102,7 +104,10 @@ public class CustomerFormController implements Initializable {
                 provinceInput.getText(),
                 postalCodeInput.getText()
         );
-        addCustomer(customer);
+        boolean res = customerBo.addCustomer(customer);
+        if (res) {
+            clearForm();
+        }
     }
 
     @FXML
@@ -307,8 +312,8 @@ public class CustomerFormController implements Initializable {
         if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && !customerIdIsHave) {
             btnAddCustomer.setDisable(false);
             btnUpdate.setDisable(true);
-        } else if(customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && customerIdIsHave){
-            if(searchCustomer!=null){
+        } else if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && customerIdIsHave) {
+            if (searchCustomer != null) {
                 validateUpdate();
             } else {
                 btnUpdate.setDisable(true);
@@ -320,49 +325,21 @@ public class CustomerFormController implements Initializable {
         }
     }
 
-    private void addCustomer(Customer customer) {
-        String sql = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
-
-        try {
-            Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1, Integer.parseInt(customer.getCustomerId()));
-            preparedStatement.setString(2, customer.getTitle());
-            preparedStatement.setString(3, customer.getName());
-            preparedStatement.setString(4, customer.getDateOfBarth());
-            preparedStatement.setDouble(5, Double.parseDouble(customer.getSalary()));
-            preparedStatement.setString(6, customer.getAddress());
-            preparedStatement.setString(7, customer.getCity());
-            preparedStatement.setString(8, customer.getProvince());
-            preparedStatement.setInt(9, Integer.parseInt(customer.getPostalCode()));
-
-            preparedStatement.executeUpdate();
-
-            customerIdInput.setText("");
-            customerIdError.setText("");
-            title.setValue(null);
-            nameInput.setText("");
-            dateOfBarth.setValue(null);
-            salaryInput.setText("");
-            salaryError.setText("");
-            addressInput.setText("");
-            cityInput.setText("");
-            provinceInput.setText("");
-            postalCodeInput.setText("");
-            postalCodeError.setText("");
-            tableFirst.setItems(getTableData());
-            tableSecond.setItems(getTableData());
-
-            CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            CenterController.alert.setContentText(customer.getCustomerId() + " Customer is entered into the system successfully.");
-            CenterController.alert.show();
-
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
+    private void clearForm() {
+        customerIdInput.setText("");
+        customerIdError.setText("");
+        title.setValue(null);
+        nameInput.setText("");
+        dateOfBarth.setValue(null);
+        salaryInput.setText("");
+        salaryError.setText("");
+        addressInput.setText("");
+        cityInput.setText("");
+        provinceInput.setText("");
+        postalCodeInput.setText("");
+        postalCodeError.setText("");
+        tableFirst.setItems(getTableData());
+        tableSecond.setItems(getTableData());
     }
 
     private ObservableList<String> getTitles() {
@@ -417,7 +394,7 @@ public class CustomerFormController implements Initializable {
 
     // search customer
     @FXML
-    private void searchAction(ActionEvent actionEvent) {
+    private void searchAction() {
         try {
             ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
             resultSet.next();

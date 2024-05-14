@@ -1,5 +1,5 @@
 package edu.icet.demo.util;
 
-public enum BoType {
+public enum DaoType {
     CUSTOMER,ITEM
 }

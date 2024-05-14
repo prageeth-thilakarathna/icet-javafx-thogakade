@@ -1,11 +1,13 @@
-package edu.icet.demo.model;
+package edu.icet.demo.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
-public class Customer {
+@NoArgsConstructor
+@Setter
+public class CustomerEntity {
     private String customerId;
     private String title;
     private String name;
