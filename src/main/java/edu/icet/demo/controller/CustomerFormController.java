@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {
@@ -297,10 +298,12 @@ public class CustomerFormController implements Initializable {
         int postalCodeLength = postalCodeInput.getText().length();
         boolean customerIdIsHave = false;
 
+        String id = "";
         try {
             ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
             if (resultSet.next()) {
                 customerIdIsHave = true;
+                id = "0"+resultSet.getString("customerId");
             }
 
         } catch (SQLException e) {
@@ -313,11 +316,7 @@ public class CustomerFormController implements Initializable {
             btnAddCustomer.setDisable(false);
             btnUpdate.setDisable(true);
         } else if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && customerIdIsHave) {
-            if (searchCustomer != null) {
-                validateUpdate();
-            } else {
-                btnUpdate.setDisable(true);
-            }
+            validateUpdate(id);
             btnAddCustomer.setDisable(true);
         } else {
             btnAddCustomer.setDisable(true);
@@ -355,10 +354,28 @@ public class CustomerFormController implements Initializable {
 
     // update customer
     @FXML
-    private void updateAction(ActionEvent actionEvent) {
+    private void updateAction() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Customer customer = new Customer(
+                customerIdInput.getText(),
+                title.getValue(),
+                nameInput.getText(),
+                dateOfBarth.getValue().format(dateTimeFormatter),
+                salaryInput.getText(),
+                addressInput.getText(),
+                cityInput.getText(),
+                provinceInput.getText(),
+                postalCodeInput.getText()
+        );
+
+        boolean res = customerBo.updateCustomer(customer);
+        if (res) {
+            clearForm();
+        }
     }
 
-    private void validateUpdate() {
+    private void validateUpdate(String id) {
+        setCustomerToSearchCustomer(Objects.requireNonNull(searchCustomer(id)));
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate searchDateOfBarth = LocalDate.parse(searchCustomer.getDateOfBarth(), dateTimeFormatter);
 
@@ -395,9 +412,8 @@ public class CustomerFormController implements Initializable {
     // search customer
     @FXML
     private void searchAction() {
-        try {
-            ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
-            resultSet.next();
+        try{
+            ResultSet resultSet = searchCustomer(customerIdInput.getText());
 
             title.setValue(resultSet.getString("title"));
             nameInput.setText(resultSet.getString("name"));
@@ -411,6 +427,15 @@ public class CustomerFormController implements Initializable {
             postalCodeInput.setText(resultSet.getString("postalCode"));
             validateInputs();
 
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+    }
+
+    private void setCustomerToSearchCustomer(ResultSet resultSet){
+        try {
             Customer customer = new Customer(
                     "0" + resultSet.getString("customerId"),
                     resultSet.getString("title"),
@@ -424,6 +449,22 @@ public class CustomerFormController implements Initializable {
             );
             searchCustomer = customer;
 
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+    }
+
+    private ResultSet searchCustomer(String id){
+        try{
+            ResultSet resultSet = CenterController.getInstance().getCustomer(id);
+
+            if(resultSet.next()){
+                return resultSet;
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             title.setValue(null);
             nameInput.setText("");
@@ -442,6 +483,7 @@ public class CustomerFormController implements Initializable {
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
         }
+        return null;
     }
 
     @FXML

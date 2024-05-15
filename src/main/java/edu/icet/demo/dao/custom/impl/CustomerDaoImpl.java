@@ -37,7 +37,42 @@ public class CustomerDaoImpl implements CustomerDao {
                 CenterController.alert.show();
             }
             return Boolean.TRUE.equals(res);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return false;
+    }
 
+    @Override
+    public boolean update(CustomerEntity entity) {
+        String sql = "UPDATE customer SET title=?, name=?, dateOfBarth=?, salary=?, address=?, city=?, province=?, postalCode=? WHERE customerId=?";
+
+        try {
+            Boolean res = CrudUtil.execute(
+                    sql,
+                    entity.getCustomerId(),
+                    entity.getTitle(),
+                    entity.getName(),
+                    entity.getDateOfBarth(),
+                    entity.getSalary(),
+                    entity.getAddress(),
+                    entity.getCity(),
+                    entity.getProvince(),
+                    entity.getPostalCode()
+            );
+
+            if(Boolean.TRUE.equals(res)){
+                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
+                CenterController.alert.setContentText(entity.getCustomerId() + " Customer update is successfully.");
+                CenterController.alert.show();
+            } else {
+                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+                CenterController.alert.setContentText("Failed! An error occurred while updating the "+entity.getCustomerId()+" customer.");
+                CenterController.alert.show();
+            }
+            return Boolean.TRUE.equals(res);
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());

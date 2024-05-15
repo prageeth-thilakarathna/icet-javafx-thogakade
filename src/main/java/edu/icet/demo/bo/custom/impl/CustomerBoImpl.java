@@ -16,4 +16,11 @@ public class CustomerBoImpl implements CustomerBo {
     public boolean addCustomer(Customer customer) {
         return customerDao.save(new ModelMapper().map(customer, CustomerEntity.class));
     }
+
+    @Override
+    public boolean updateCustomer(Customer customer) {
+        return customerDao.update(new ModelMapper().map(customer, CustomerEntity.class));
+    }
+
+
 }

@@ -1,7 +1,7 @@
 
-q
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ì‚ÉÊúÿÿÿÿ8Ê©€Â÷1
-\
-java:S1118":Add a private constructor to hide the implicit public one.(ş¼¬·ÿÿÿÿÿ8Í©€Â÷1
-J
-java:S1125"(Remove the unnecessary boolean literals.(–ÌªÖøÿÿÿÿ8Ğ©€Â÷1
+—
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ì‚ÉÊúÿÿÿÿ8ÉğÑ×÷1J$f80e0f2d-6b28-4f0e-8c60-9be879cdaeff
+‚
+java:S1118":Add a private constructor to hide the implicit public one.(ş¼¬·ÿÿÿÿÿ8ÉğÑ×÷1J$9caf9e64-a4ac-49a2-a287-7fef9a9d12f9
+p
+java:S1125"(Remove the unnecessary boolean literals.(–ÌªÖøÿÿÿÿ8ÙğÑ×÷1J$528e0c17-ca9b-409b-a5bc-c48c02c47a8b
