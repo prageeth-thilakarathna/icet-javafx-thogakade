@@ -1,29 +1,29 @@
 
 ’
-java:S1192}"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$909ce62e-e3e5-4d7d-8f37-d6e5d1b0fc1f
+java:S1192}"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$f2910ddc-45c1-477e-9df7-ac4bcbe24c30
 ‹
-java:S1192X"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$aec6b351-f93c-4f2a-9c4f-38cd04605e07
+java:S1192X"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$20ab624b-b589-4a19-ba82-a63f3571a278
 
-java:S1192µ"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$dcc799e4-cfb5-4f37-b994-31d7b904182c
+java:S1192µ"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$12654b40-c375-4b92-990d-0fefbe0f188b
 ”
-java:S1192u"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$64a992fb-e79a-4e7f-82b7-315ce450d8ea
+java:S1192u"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$bfcf66b9-000e-4d17-9b2b-c8f33945c0a2
 ˜
-java:S2095ö"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$fd4fe4d9-86f3-482d-b92c-35d86838cc30
-‹
-java:S2095ò"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$4eff53e2-e3b0-4b74-b6c5-b99676260c81
-‹
-java:S2095ú"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$d0c576ed-6f65-4f6d-9ee4-baeb1dcfe379
+java:S2095Õ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$bcca260d-92a5-44e1-bad6-dc890bc3f1b3
 ˜
-java:S2095Õ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$615181b8-bf14-4803-a92c-06e49a395ede
+java:S2095ö"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8¶«Ìµö1J$1fb99dbb-410e-40c1-a718-f8b83ef134ba
+‹
+java:S2095ú"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$7c25c41a-a271-4286-b492-af639f2aa26d
+‹
+java:S2095ò"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8¶«Ìµö1J$69074bf5-92cc-4a01-bcb1-0aec5d2aacd7
 ˆ
-java:S1117œ"?Rename "customerIDs" which hides the field declared at line 71.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$693ded4d-532e-451c-a9ad-013de1364084
+java:S1117œ"?Rename "customerIDs" which hides the field declared at line 71.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$63ed82f9-cf2a-4e14-a7e4-e59ec30e117d
 †
-java:S1117¯"=Rename "itemCODEs" which hides the field declared at line 69.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$da74556b-293e-439d-87d0-48a0ada1b83f
+java:S1117¯"=Rename "itemCODEs" which hides the field declared at line 69.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$de515ac3-019a-4830-aaef-e3e90665893c
 c
-java:S6905ø"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$13fdb897-d837-4cf1-981a-1002cb16e59e
+java:S6905ø"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$125735a0-a6d5-4b05-9ae4-4b3ada679316
 †
-java:S1126„"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$4329df55-9bc6-44e7-bdab-701ac58101b6
+java:S1126„"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$dc15105f-ef0e-4e5c-a659-59e6070cc082
 †
-java:S1126Â"BReplace this if-then-else statement by a single method invocation.(Î‡Õ‹8³¬Ìµö1J$40403216-5559-4d11-bd83-38d60a44bb62
+java:S1126Â"BReplace this if-then-else statement by a single method invocation.(Î‡Õ‹8³¬Ìµö1J$c86e3518-25b9-414f-9bcf-887d319c1179
 Ÿ
-java:S6912û"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$7ebf869f-2bf0-428d-986c-fdeafbef5b43
+java:S6912û"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$ae2a6768-89f0-42b8-9a10-5bef527d2166

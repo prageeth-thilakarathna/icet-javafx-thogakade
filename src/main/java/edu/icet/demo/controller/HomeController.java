@@ -20,7 +20,10 @@ public class HomeController {
     }
 
     @FXML
-    private void ordersAction(ActionEvent actionEvent) {
+    private void ordersAction() throws IOException {
+        Parent parent = new FXMLLoader(getClass().getResource("/view/orders-form.fxml")).load();
+        anchorPane.getChildren().clear();
+        anchorPane.getChildren().add(parent);
     }
 
     @FXML

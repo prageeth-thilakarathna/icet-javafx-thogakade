@@ -1,6 +1,7 @@
-package edu.icet.demo.controller;
+package edu.icet.demo.controller.orders;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.db.LoadDBDriver;
 import edu.icet.demo.model.OrderDetail;
 import javafx.animation.Animation;

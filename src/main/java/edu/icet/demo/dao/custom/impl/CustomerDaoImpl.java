@@ -6,13 +6,13 @@ import edu.icet.demo.entity.CustomerEntity;
 import edu.icet.demo.util.CrudUtil;
 import javafx.scene.control.Alert;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean save(CustomerEntity entity) {
         String sql = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
-
         try {
             Boolean res = CrudUtil.execute(
                     sql,
@@ -48,7 +48,6 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean update(CustomerEntity entity) {
         String sql = "UPDATE customer SET title=?, name=?, dateOfBarth=?, salary=?, address=?, city=?, province=?, postalCode=? WHERE customerId=?";
-
         try {
             Boolean res = CrudUtil.execute(
                     sql,
@@ -84,10 +83,8 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean delete(String id) {
         String sql = "DELETE FROM customer WHERE customerId=?";
-
         try{
             Boolean res = CrudUtil.execute(sql, id);
-
             if(Boolean.TRUE.equals(res)){
                 CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
                 CenterController.alert.setContentText(id + " Customer delete is successfully.");
@@ -104,5 +101,31 @@ public class CustomerDaoImpl implements CustomerDao {
             CenterController.alert.show();
         }
         return false;
+    }
+
+    @Override
+    public ResultSet findById(String id) {
+        String sql = "SELECT * FROM customer WHERE customerId='"+id+"'";
+        try{
+            return CrudUtil.execute(sql, id);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return null;
+    }
+
+    @Override
+    public ResultSet findAll() {
+        String sql = "SELECT * FROM customer";
+        try{
+            return CrudUtil.execute(sql);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return null;
     }
 }

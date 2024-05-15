@@ -1,17 +1,15 @@
 
 
-java:S20950"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$1299d440-7bd1-4062-9ed6-3095c43b0458
+java:S2095("GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$4c5c0889-0a1c-4861-8f39-12f918d08c06
 
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$14045b4e-4340-47c7-8ac5-84b61bd16e73
+java:S2095/"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$e405d592-583d-4261-b1e2-89c0d6cc3ccc
 
-java:S2095""GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$d37d22df-5553-42c2-9fc8-9c42da5e09f9
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$7ca7f0b5-c7ea-4c00-b944-9042fcf1df55
 
-java:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$a1960b96-3bed-45ff-87a1-758bc61ef065
+java:S2095!"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ8ê¤£šö1J$c3d60898-b96e-40c3-a8c8-ab8f5a83530e
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³Ú¹şÿÿÿÿÿ8ú¤£šö1J$615759eb-fc8a-4269-9f33-68036b24818d
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(³Ú¹şÿÿÿÿÿ8ú¤£šö1J$64070fa9-3574-4de9-be46-aaab0df2e47b
 g
-java:S6905 "Don't use the query "SELECT *".(ÿş«üÿÿÿÿ8Š¥£šö1J$a641fff6-0260-4fca-84a4-aeffd8b570f8
+java:S6905"Don't use the query "SELECT *".(ÿş«üÿÿÿÿ8Š¥£šö1J$4b60d7eb-ba17-4c77-856f-28dcb56c219f
 a
-java:S6905'"Don't use the query "SELECT *".(ÂÌs8Š¥£šö1J$ee28e7f1-e134-421c-bafe-dde6357e53e9
-
-java:S1128"7Remove this unused import 'javax.xml.transform.Result'.(âÓ¸ûÿÿÿÿ8Š¥£šö1J$5ed25435-b08c-4698-8ae8-db2b26ba15e9
+java:S6905&"Don't use the query "SELECT *".(ÂÌs8Š¥£šö1J$faacec54-7c97-4a0c-bce2-bedcc6d45910

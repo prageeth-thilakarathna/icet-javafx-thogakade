@@ -3,7 +3,9 @@ package edu.icet.demo.util;
 import edu.icet.demo.db.LoadDBDriver;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CrudUtil {
     public static <T> T execute(String sql, Object... object) throws SQLException {
@@ -24,11 +26,11 @@ public class CrudUtil {
             }
             int res = preparedStatement.executeUpdate();
             return (T) (Boolean) (res>0 ? true:false);
+
+        } else if(sql.startsWith("SELECT")){
+            Statement statement = LoadDBDriver.getLoadDBDriverInstance().getConnection().createStatement();
+            return (T) statement.executeQuery(sql);
         }
-
-
-
-
 
 
         return null;

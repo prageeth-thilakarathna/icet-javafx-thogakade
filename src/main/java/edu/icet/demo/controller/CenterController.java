@@ -4,7 +4,6 @@ import edu.icet.demo.db.LoadDBDriver;
 import javafx.scene.control.Alert;
 import lombok.Getter;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

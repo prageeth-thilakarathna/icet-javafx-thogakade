@@ -1,9 +1,10 @@
-package edu.icet.demo.controller;
+package edu.icet.demo.controller.customer;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.demo.bo.BoFactory;
 import edu.icet.demo.bo.custom.CustomerBo;
+import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.model.Customer;
 import edu.icet.demo.util.BoType;
 import javafx.collections.FXCollections;
@@ -66,8 +67,6 @@ public class CustomerFormController implements Initializable {
     @FXML
     private JFXTextField customerIdInput;
     @FXML
-    private Button btnSearch;
-    @FXML
     private Label customerIdError;
     @FXML
     private JFXComboBox<String> title;
@@ -86,13 +85,24 @@ public class CustomerFormController implements Initializable {
     @FXML
     private JFXTextField postalCodeInput;
     private Customer searchCustomer;
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
+    private static final String CHAR_SAFE = "* only digits(0-9)";
+    private static final String CUSTOMER_ID = "customerId";
+    private static final String TITLE_TYPE = "title";
+    private static final String NAME = "name";
+    private static final String DATE_OF_BARTH = "dateOfBarth";
+    private static final String SALARY = "salary";
+    private static final String ADDRESS = "address";
+    private static final String CITY = "city";
+    private static final String PROVINCE = "province";
+    private static final String POSTAL_CODE = "postalCode";
 
-    private CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
 
     // add customer
     @FXML
     private void addCustomerAction() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         Customer customer = new Customer(
                 customerIdInput.getText(),
                 title.getValue(),
@@ -143,7 +153,7 @@ public class CustomerFormController implements Initializable {
             } else if (!conditionFirstEquals0) {
                 customerIdError.setText("* Not a first digit==0");
             } else {
-                customerIdError.setText("* only digits(0-9)");
+                customerIdError.setText(CHAR_SAFE);
             }
         }
     }
@@ -161,12 +171,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private void nameKeyPressed(KeyEvent keyEvent) {
         int length = nameInput.getText().length();
-
-        if (length < 30 || keyEvent.getCode().getCode() == 8) {
-            nameInput.setEditable(true);
-        } else {
-            nameInput.setEditable(false);
-        }
+        nameInput.setEditable(length < 30 || keyEvent.getCode().getCode() == 8);
     }
 
     @FXML
@@ -205,7 +210,7 @@ public class CustomerFormController implements Initializable {
             } else if (length == 8) {
                 salaryError.setText("* only 08 digits");
             } else {
-                salaryError.setText("* only digits(0-9)");
+                salaryError.setText(CHAR_SAFE);
             }
         }
     }
@@ -218,12 +223,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private void addressKeyPressed(KeyEvent keyEvent) {
         int length = addressInput.getText().length();
-
-        if (length < 50 || keyEvent.getCode().getCode() == 8) {
-            addressInput.setEditable(true);
-        } else {
-            addressInput.setEditable(false);
-        }
+        addressInput.setEditable(length < 50 || keyEvent.getCode().getCode() == 8);
     }
 
     @FXML
@@ -234,12 +234,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private void cityKeyPressed(KeyEvent keyEvent) {
         int length = cityInput.getText().length();
-
-        if (length < 30 || keyEvent.getCode().getCode() == 8) {
-            cityInput.setEditable(true);
-        } else {
-            cityInput.setEditable(false);
-        }
+        cityInput.setEditable(length < 30 || keyEvent.getCode().getCode() == 8);
     }
 
     @FXML
@@ -250,12 +245,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private void provinceKeyPressed(KeyEvent keyEvent) {
         int length = provinceInput.getText().length();
-
-        if (length < 20 || keyEvent.getCode().getCode() == 8) {
-            provinceInput.setEditable(true);
-        } else {
-            provinceInput.setEditable(false);
-        }
+        provinceInput.setEditable(length < 20 || keyEvent.getCode().getCode() == 8);
     }
 
     @FXML
@@ -277,7 +267,7 @@ public class CustomerFormController implements Initializable {
             if (length == 5) {
                 postalCodeError.setText("* only 05 digits");
             } else {
-                postalCodeError.setText("* only digits(0-9)");
+                postalCodeError.setText(CHAR_SAFE);
             }
         }
     }
@@ -299,10 +289,10 @@ public class CustomerFormController implements Initializable {
 
         String id = "";
         try {
-            ResultSet resultSet = CenterController.getInstance().getCustomer(customerIdInput.getText());
+            ResultSet resultSet = customerBo.getCustomer(customerIdInput.getText());
             if (resultSet.next()) {
                 customerIdIsHave = true;
-                id = "0"+resultSet.getString("customerId");
+                id = "0" + resultSet.getString(CUSTOMER_ID);
             }
 
         } catch (SQLException e) {
@@ -356,7 +346,7 @@ public class CustomerFormController implements Initializable {
     // update customer
     @FXML
     private void updateAction() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         Customer customer = new Customer(
                 customerIdInput.getText(),
                 title.getValue(),
@@ -377,7 +367,7 @@ public class CustomerFormController implements Initializable {
 
     private void validateUpdate(String id) {
         setCustomerToSearchCustomer(Objects.requireNonNull(searchCustomer(id)));
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         LocalDate searchDateOfBarth = LocalDate.parse(searchCustomer.getDateOfBarth(), dateTimeFormatter);
 
         if (customerIdInput.getText().equals(searchCustomer.getCustomerId())) {
@@ -416,19 +406,20 @@ public class CustomerFormController implements Initializable {
     // search customer
     @FXML
     private void searchAction() {
-        try{
+        try {
             ResultSet resultSet = searchCustomer(customerIdInput.getText());
 
-            title.setValue(resultSet.getString("title"));
-            nameInput.setText(resultSet.getString("name"));
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate localDate = LocalDate.parse(resultSet.getString("dateOfBarth"), dateTimeFormatter);
+            assert resultSet != null;
+            title.setValue(resultSet.getString(TITLE_TYPE));
+            nameInput.setText(resultSet.getString(NAME));
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+            LocalDate localDate = LocalDate.parse(resultSet.getString(DATE_OF_BARTH), dateTimeFormatter);
             dateOfBarth.setValue(localDate);
-            salaryInput.setText(resultSet.getString("salary"));
-            addressInput.setText(resultSet.getString("address"));
-            cityInput.setText(resultSet.getString("city"));
-            provinceInput.setText(resultSet.getString("province"));
-            postalCodeInput.setText(resultSet.getString("postalCode"));
+            salaryInput.setText(resultSet.getString(SALARY));
+            addressInput.setText(resultSet.getString(ADDRESS));
+            cityInput.setText(resultSet.getString(CITY));
+            provinceInput.setText(resultSet.getString(PROVINCE));
+            postalCodeInput.setText(resultSet.getString(POSTAL_CODE));
             validateInputs();
 
         } catch (SQLException e) {
@@ -438,20 +429,19 @@ public class CustomerFormController implements Initializable {
         }
     }
 
-    private void setCustomerToSearchCustomer(ResultSet resultSet){
+    private void setCustomerToSearchCustomer(ResultSet resultSet) {
         try {
-            Customer customer = new Customer(
-                    "0" + resultSet.getString("customerId"),
-                    resultSet.getString("title"),
-                    resultSet.getString("name"),
-                    resultSet.getString("dateOfBarth"),
-                    resultSet.getString("salary"),
-                    resultSet.getString("address"),
-                    resultSet.getString("city"),
-                    resultSet.getString("province"),
-                    resultSet.getString("postalCode")
+            searchCustomer = new Customer(
+                    "0" + resultSet.getString(CUSTOMER_ID),
+                    resultSet.getString(TITLE_TYPE),
+                    resultSet.getString(NAME),
+                    resultSet.getString(DATE_OF_BARTH),
+                    resultSet.getString(SALARY),
+                    resultSet.getString(ADDRESS),
+                    resultSet.getString(CITY),
+                    resultSet.getString(PROVINCE),
+                    resultSet.getString(POSTAL_CODE)
             );
-            searchCustomer = customer;
 
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
@@ -460,9 +450,9 @@ public class CustomerFormController implements Initializable {
         }
     }
 
-    private ResultSet searchCustomer(String id){
-        try{
-            ResultSet resultSet = CenterController.getInstance().getCustomer(id);
+    private ResultSet searchCustomer(String id) {
+        try {
+            ResultSet resultSet = customerBo.getCustomer(id);
             resultSet.next();
             return resultSet;
 
@@ -509,19 +499,19 @@ public class CustomerFormController implements Initializable {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
         try {
-            ResultSet resultSet = CenterController.getInstance().getAllCustomers();
+            ResultSet resultSet = customerBo.getAllCustomers();
 
             while (resultSet.next()) {
                 Customer customer = new Customer(
-                        "0" + resultSet.getString("customerId"),
-                        resultSet.getString("title"),
-                        resultSet.getString("name"),
-                        resultSet.getString("dateOfBarth"),
-                        resultSet.getString("salary"),
-                        resultSet.getString("address"),
-                        resultSet.getString("city"),
-                        resultSet.getString("province"),
-                        resultSet.getString("postalCode")
+                        "0" + resultSet.getString(CUSTOMER_ID),
+                        resultSet.getString(TITLE_TYPE),
+                        resultSet.getString(NAME),
+                        resultSet.getString(DATE_OF_BARTH),
+                        resultSet.getString(SALARY),
+                        resultSet.getString(ADDRESS),
+                        resultSet.getString(CITY),
+                        resultSet.getString(PROVINCE),
+                        resultSet.getString(POSTAL_CODE)
                 );
                 allCustomers.add(customer);
             }
@@ -550,16 +540,16 @@ public class CustomerFormController implements Initializable {
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
-        colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colDateOfBarth.setCellValueFactory(new PropertyValueFactory<>("dateOfBarth"));
-        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        colSecondTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
-        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>(TITLE_TYPE));
+        colName.setCellValueFactory(new PropertyValueFactory<>(NAME));
+        colDateOfBarth.setCellValueFactory(new PropertyValueFactory<>(DATE_OF_BARTH));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>(SALARY));
+        colSecondTblCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>(ADDRESS));
+        colCity.setCellValueFactory(new PropertyValueFactory<>(CITY));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>(PROVINCE));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>(POSTAL_CODE));
 
         tableFirst.setItems(getTableData());
         tableSecond.setItems(getTableData());

@@ -8,9 +8,11 @@ import edu.icet.demo.model.Customer;
 import edu.icet.demo.util.DaoType;
 import org.modelmapper.ModelMapper;
 
+import java.sql.ResultSet;
+
 public class CustomerBoImpl implements CustomerBo {
 
-    private CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    private final CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
 
     @Override
     public boolean addCustomer(Customer customer) {
@@ -25,6 +27,16 @@ public class CustomerBoImpl implements CustomerBo {
     @Override
     public boolean deleteCustomer(String id) {
         return customerDao.delete(id);
+    }
+
+    @Override
+    public ResultSet getCustomer(String id) {
+        return customerDao.findById(id);
+    }
+
+    @Override
+    public ResultSet getAllCustomers() {
+        return customerDao.findAll();
     }
 
 
