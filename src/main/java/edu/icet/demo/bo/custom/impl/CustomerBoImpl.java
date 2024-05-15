@@ -22,5 +22,10 @@ public class CustomerBoImpl implements CustomerBo {
         return customerDao.update(new ModelMapper().map(customer, CustomerEntity.class));
     }
 
+    @Override
+    public boolean deleteCustomer(String id) {
+        return customerDao.delete(id);
+    }
+
 
 }

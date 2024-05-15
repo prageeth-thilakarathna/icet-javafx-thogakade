@@ -8,7 +8,6 @@ import edu.icet.demo.model.Customer;
 import edu.icet.demo.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -318,9 +317,11 @@ public class CustomerFormController implements Initializable {
         } else if (customerIdLength == 10 && title.getValue() != null && nameLength > 0 && dateOfBarth.getValue() != null && salaryLength > 0 && addressLength > 0 && cityLength > 0 && provinceLength > 0 && postalCodeLength > 0 && customerIdIsHave) {
             validateUpdate(id);
             btnAddCustomer.setDisable(true);
+            btnDelete.setDisable(false);
         } else {
             btnAddCustomer.setDisable(true);
             btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
         }
     }
 
@@ -405,8 +406,11 @@ public class CustomerFormController implements Initializable {
     }
 
     @FXML
-    private void deleteAction(ActionEvent actionEvent) {
-
+    private void deleteAction() {
+        boolean res = customerBo.deleteCustomer(customerIdInput.getText());
+        if (res) {
+            clearForm();
+        }
     }
 
     // search customer
@@ -459,12 +463,9 @@ public class CustomerFormController implements Initializable {
     private ResultSet searchCustomer(String id){
         try{
             ResultSet resultSet = CenterController.getInstance().getCustomer(id);
+            resultSet.next();
+            return resultSet;
 
-            if(resultSet.next()){
-                return resultSet;
-            } else {
-                return null;
-            }
         } catch (SQLException e) {
             title.setValue(null);
             nameInput.setText("");
@@ -547,6 +548,7 @@ public class CustomerFormController implements Initializable {
         btnAddCustomer.setDisable(true);
         dateOfBarth.setEditable(false);
         btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
 
         colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));

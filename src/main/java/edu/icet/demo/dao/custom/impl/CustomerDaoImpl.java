@@ -80,4 +80,29 @@ public class CustomerDaoImpl implements CustomerDao {
         }
         return false;
     }
+
+    @Override
+    public boolean delete(String id) {
+        String sql = "DELETE FROM customer WHERE customerId=?";
+
+        try{
+            Boolean res = CrudUtil.execute(sql, id);
+
+            if(Boolean.TRUE.equals(res)){
+                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
+                CenterController.alert.setContentText(id + " Customer delete is successfully.");
+                CenterController.alert.show();
+            } else {
+                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+                CenterController.alert.setContentText("Failed! An error occurred while deleting the "+id+" customer.");
+                CenterController.alert.show();
+            }
+            return Boolean.TRUE.equals(res);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return false;
+    }
 }

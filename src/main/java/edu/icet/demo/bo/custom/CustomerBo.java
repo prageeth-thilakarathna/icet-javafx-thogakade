@@ -7,4 +7,6 @@ public interface CustomerBo extends SuperBo {
     boolean addCustomer(Customer customer);
 
     boolean updateCustomer(Customer customer);
+
+    boolean deleteCustomer(String id);
 }

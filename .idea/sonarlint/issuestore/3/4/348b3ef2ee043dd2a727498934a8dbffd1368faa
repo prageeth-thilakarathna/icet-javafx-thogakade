@@ -1,33 +1,31 @@
 
 Œ
-java:S1192¨"HDefine a constant instead of duplicating this literal "address" 4 times.(×ŠËº8Âû­Ö÷1J$00af1fd3-3176-4cde-a5bd-7e645a7a2130
+java:S1192¬"HDefine a constant instead of duplicating this literal "address" 4 times.(×ŠËº8„€Ù÷1J$1946684e-db72-4606-b8fe-d4f2d95298d8
 ”
-java:S1192«"KDefine a constant instead of duplicating this literal "postalCode" 4 times.(’¶ß¢úÿÿÿÿ8Âû­Ö÷1J$042a1602-3729-4f20-ba00-1da9ab36eaa4
+java:S1192¯"KDefine a constant instead of duplicating this literal "postalCode" 4 times.(’¶ß¢úÿÿÿÿ8„€Ù÷1J$1bf7815b-a2ae-4140-9353-f0a1ac1a6b9a
 –
-java:S1192“"SDefine a constant instead of duplicating this literal "* only digits(0-9)" 3 times.(‘ÿÃy8Âû­Ö÷1J$eb76fd68-4e3a-43a8-b0a5-6a2556fc6e65
+java:S1192’"SDefine a constant instead of duplicating this literal "* only digits(0-9)" 3 times.(‘ÿÃy8„€Ù÷1J$7e022b13-3c9c-4366-92d3-2484d8da4077
 
-java:S1192§"GDefine a constant instead of duplicating this literal "salary" 4 times.(³ÁÓùÿÿÿÿ8Âû­Ö÷1J$6f9a06e8-cc97-4c1e-8fe7-627e7cfc4157
+java:S1192«"GDefine a constant instead of duplicating this literal "salary" 4 times.(³ÁÓùÿÿÿÿ8„€Ù÷1J$759d773d-3c09-4198-815c-3b9c6a3592ed
 Š
-java:S1192¢"FDefine a constant instead of duplicating this literal "title" 4 times.(éĞàœ8Âû­Ö÷1J$147abf5e-12b2-47ab-b871-61164393967a
+java:S1192¦"FDefine a constant instead of duplicating this literal "title" 4 times.(éĞàœ8„€Ù÷1J$a4dfa832-6523-4dec-ad37-9d67d017531e
 •
-java:S1192¥"LDefine a constant instead of duplicating this literal "dateOfBarth" 4 times.(êç“Íûÿÿÿÿ8Âû­Ö÷1J$aee13cdb-1c5a-4e74-a342-1fc4a8b752cb
+java:S1192©"LDefine a constant instead of duplicating this literal "dateOfBarth" 4 times.(êç“Íûÿÿÿÿ8„€Ù÷1J$9f4161bb-511e-4bdf-8da9-23986df52b39
 ’
-java:S1192ª"IDefine a constant instead of duplicating this literal "province" 4 times.(ÜÏ¯ùÿÿÿÿ8Âû­Ö÷1J$913c9287-1804-4682-aaf1-3c8dbabfa380
+java:S1192®"IDefine a constant instead of duplicating this literal "province" 4 times.(ÜÏ¯ùÿÿÿÿ8„€Ù÷1J$63c41b24-3d33-456f-bccd-6bdff61f4838
 ”
-java:S1192²"KDefine a constant instead of duplicating this literal "customerId" 5 times.(Úù­°ıÿÿÿÿ8Âû­Ö÷1J$d97e4e58-8a8f-4ec5-9ddf-50fcf22a10dc
+java:S1192±"KDefine a constant instead of duplicating this literal "customerId" 5 times.(Úù­°ıÿÿÿÿ8„€Ù÷1J$dbf50898-810e-4a29-b000-8f03cf8a6d6c
 “
-java:S1192`"KDefine a constant instead of duplicating this literal "yyyy-MM-dd" 4 times.(Ï¾‚âúÿÿÿÿ8Âû­Ö÷1J$a3425812-d7b9-4dee-9479-7f4406150913
+java:S1192_"KDefine a constant instead of duplicating this literal "yyyy-MM-dd" 4 times.(Ï¾‚âúÿÿÿÿ8„€Ù÷1J$2d3e3e4d-2213-47a1-a441-a8df65117257
 ‹
-java:S2259¢"GA "NullPointerException" could be thrown; "resultSet" is nullable here.(éĞàœ8Şü­Ö÷1J$7d46ef13-9c39-4672-8fd2-9d98f9abec97
-Ê
-java:S1186˜"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¹à—şÿÿÿÿ8Şü­Ö÷1J$317b4c04-7330-4708-b738-465da7b39379
+java:S2259¦"GA "NullPointerException" could be thrown; "resultSet" is nullable here.(éĞàœ8 €Ù÷1J$19147cea-f517-4437-98d7-7cff15127d1f
 ‹
-java:S1126¦"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8Şü­Ö÷1J$e13c15e0-8993-453b-9b4c-6c06d1bc03c4
+java:S1126¥"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8°€Ù÷1J$b64cd710-8728-4b3c-9040-a01721888207
 †
-java:S1126ß"BReplace this if-then-else statement by a single method invocation.(Éªàœ8ïü­Ö÷1J$cd00ce73-db91-4569-8eec-0f5eeaf14697
+java:S1126Ş"BReplace this if-then-else statement by a single method invocation.(Éªàœ8°€Ù÷1J$6e746991-7371-498d-a15d-0889946d95c4
 ‹
-java:S1126ï"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8ğü­Ö÷1J$cd6d27ed-43af-4b02-a674-9d32f3ffd045
+java:S1126î"BReplace this if-then-else statement by a single method invocation.(ç÷Ó¯ùÿÿÿÿ8°€Ù÷1J$d32557ec-e957-457b-9f8f-9f534bdf15a7
 ‹
-java:S1126ÿ"BReplace this if-then-else statement by a single method invocation.(¶ß¸Íıÿÿÿÿ8ñü­Ö÷1J$ea2db30d-a2d6-4aa0-a15d-3fe192787698
+java:S1126ş"BReplace this if-then-else statement by a single method invocation.(¶ß¸Íıÿÿÿÿ8°€Ù÷1J$f6e77c1f-85c5-4b8f-aa1e-3b2a96a3cb64
 ‹
-java:S1126"BReplace this if-then-else statement by a single method invocation.(–ÿÜ şÿÿÿÿ8şü­Ö÷1J$a16830ef-9df2-4546-b18b-9074e9e53278
+java:S1126"BReplace this if-then-else statement by a single method invocation.(–ÿÜ şÿÿÿÿ8¿€Ù÷1J$ba143058-9d12-43be-8fc2-9c39a5ec50b3
