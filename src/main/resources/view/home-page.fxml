@@ -45,7 +45,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ordersAction" style="-fx-background-color: #8da1af;" text="Orders" textFill="WHITE">
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#orderAction" style="-fx-background-color: #8da1af;" text="Order" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

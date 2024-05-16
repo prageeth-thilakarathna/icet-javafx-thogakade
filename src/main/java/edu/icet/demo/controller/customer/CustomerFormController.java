@@ -442,7 +442,6 @@ public class CustomerFormController implements Initializable {
                     resultSet.getString(PROVINCE),
                     resultSet.getString(POSTAL_CODE)
             );
-
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
@@ -497,10 +496,8 @@ public class CustomerFormController implements Initializable {
 
     private ObservableList<Customer> getTableData() {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-
         try {
             ResultSet resultSet = customerBo.getAllCustomers();
-
             while (resultSet.next()) {
                 Customer customer = new Customer(
                         "0" + resultSet.getString(CUSTOMER_ID),
@@ -515,13 +512,11 @@ public class CustomerFormController implements Initializable {
                 );
                 allCustomers.add(customer);
             }
-
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
         }
-
         return allCustomers;
     }
 

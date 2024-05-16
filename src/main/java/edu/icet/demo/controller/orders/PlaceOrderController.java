@@ -3,7 +3,7 @@ package edu.icet.demo.controller.orders;
 import com.jfoenix.controls.JFXComboBox;
 import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.db.LoadDBDriver;
-import edu.icet.demo.model.OrderDetail;
+import edu.icet.demo.model.TblOrderDetail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -34,17 +34,17 @@ public class PlaceOrderController implements Initializable {
     @FXML
     private TextField inputQuantity;
     @FXML
-    private TableView<OrderDetail> tblOrderDetail;
+    private TableView<TblOrderDetail> tblOrderDetail;
     @FXML
-    private TableColumn<OrderDetail, String> colItemCode;
+    private TableColumn<TblOrderDetail, String> colItemCode;
     @FXML
-    private TableColumn<OrderDetail, String> colDescription;
+    private TableColumn<TblOrderDetail, String> colDescription;
     @FXML
-    private TableColumn<OrderDetail, String> colQuantity;
+    private TableColumn<TblOrderDetail, String> colQuantity;
     @FXML
-    private TableColumn<OrderDetail, String> colUnitPrice;
+    private TableColumn<TblOrderDetail, String> colUnitPrice;
     @FXML
-    private TableColumn<OrderDetail, String> colTotal;
+    private TableColumn<TblOrderDetail, String> colTotal;
     @FXML
     private Label dateDisplay;
     @FXML
@@ -72,7 +72,7 @@ public class PlaceOrderController implements Initializable {
     @FXML
     private JFXComboBox<String> customerIDs;
 
-    private ObservableList<OrderDetail> orderDetails = FXCollections.observableArrayList();
+    private ObservableList<TblOrderDetail> tblOrderDetails = FXCollections.observableArrayList();
 
     @FXML
     private void customerIdSelectAction(ActionEvent actionEvent) {
@@ -309,7 +309,7 @@ public class PlaceOrderController implements Initializable {
 
             String total = CenterController.df.format(Integer.parseInt(quantity)*resultSet.getDouble("unitPrice"));
 
-            OrderDetail orderDetail = new OrderDetail(
+            TblOrderDetail tblOrderDetail = new TblOrderDetail(
                     resultSet.getString("itemCode"),
                     resultSet.getString("description"),
                     quantity,
@@ -317,10 +317,10 @@ public class PlaceOrderController implements Initializable {
                     total
             );
 
-            orderDetails.add(orderDetail);
-            tblOrderDetail.setItems(orderDetails);
+            tblOrderDetails.add(tblOrderDetail);
+            this.tblOrderDetail.setItems(tblOrderDetails);
 
-            if(!orderDetails.isEmpty()){
+            if(!tblOrderDetails.isEmpty()){
                 btnPlaceOrder.setDisable(false);
             } else {
                 btnPlaceOrder.setDisable(true);
@@ -357,8 +357,8 @@ public class PlaceOrderController implements Initializable {
             orderIdDisplay.setText(getOrderId());
             btnPlaceOrder.setDisable(true);
             clearFields();
-            orderDetails = null;
-            tblOrderDetail.setItems(orderDetails);
+            tblOrderDetails = null;
+            tblOrderDetail.setItems(tblOrderDetails);
 
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
@@ -368,15 +368,15 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void saveOrderDetail() throws SQLException {
-        for(int i=0; i<orderDetails.size(); i++){
+        for(int i = 0; i< tblOrderDetails.size(); i++){
             String sql = "INSERT INTO orderDetail VALUES(?,?,?)";
 
             Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, orderIdDisplay.getText());
-            preparedStatement.setString(2, orderDetails.get(i).getItemCode());
-            preparedStatement.setInt(3, Integer.parseInt(orderDetails.get(i).getQuantity()));
+            preparedStatement.setString(2, tblOrderDetails.get(i).getItemCode());
+            preparedStatement.setInt(3, Integer.parseInt(tblOrderDetails.get(i).getQuantity()));
             preparedStatement.executeUpdate();
         }
     }

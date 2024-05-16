@@ -1,0 +1,21 @@
+
+’
+java:S1192~"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$95223a20-45eb-42b1-ad79-45debdace0d8
+‹
+java:S1192Y"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$fafb34a2-ef26-41cb-b713-5c285a870b7e
+
+java:S1192¶"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$21e5b883-960b-4da6-9084-a5af83c94452
+”
+java:S1192v"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$2256845f-a53f-418c-8a26-1757476a8e38
+ˆ
+java:S1117"?Rename "customerIDs" which hides the field declared at line 72.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$896d1fd7-44f8-469a-b6f7-496691c9e0b3
+†
+java:S1117°"=Rename "itemCODEs" which hides the field declared at line 70.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$21a71b41-95e2-4efc-8d6c-05d3077b03f0
+c
+java:S6905ù"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$5eb3428d-ae92-4656-852c-af7d9593c943
+†
+java:S1126…"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$1fad56a9-efe8-4d88-aed3-256146857b72
+†
+java:S1126Ã"BReplace this if-then-else statement by a single method invocation.(Î‡Õ‹8³¬Ìµö1J$b786fb21-1934-49ee-a128-e5a547cc8938
+Ÿ
+java:S6912ü"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$a9187072-d046-448a-949e-986e61478734

@@ -1,14 +1,12 @@
 
-
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ò½¾øÿÿÿÿ8­ß¦â÷1J$8daff96d-a7df-4568-bc73-8174113cde34
-—
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ì‚ÉÊúÿÿÿÿ8­ß¦â÷1J$b8abeaf6-063b-47a6-a89e-1d5f1c3380df
-‚
-java:S1118
-":Add a private constructor to hide the implicit public one.(ş¼¬·ÿÿÿÿÿ8­ß¦â÷1J$071fbf6d-90dd-49c0-86cf-3287e8cdbf6c
-š
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(©ÙÂƒúÿÿÿÿ8­ß¦â÷1J$53c4a13a-c362-4799-a21b-a2fce136189c
-p
-java:S1125"(Remove the unnecessary boolean literals.(–ÌªÖøÿÿÿÿ8­ß¦â÷1J$e4fd7c1b-1847-4eac-8500-7175a5f90ef4
+i
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ò½¾øÿÿÿÿ8¹æíı÷1
 q
-java:S1128"/Remove this unused import 'java.sql.ResultSet'.(ˆóÚw8ê¨â÷1J$89ea1dce-970e-456a-a735-5f87aa33698e
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ì‚ÉÊúÿÿÿÿ8¹æíı÷1
+‚
+java:S1118	":Add a private constructor to hide the implicit public one.(ş¼¬·ÿÿÿÿÿ8­ß¦â÷1J$ad5b70ac-ee4f-4538-82ad-578fb11402c7
+š
+java:S3776
+"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(©ÙÂƒúÿÿÿÿ8­ß¦â÷1J$8cb5295c-5844-401e-a22c-5b1a016501e6
+p
+java:S1125"(Remove the unnecessary boolean literals.(–ÌªÖøÿÿÿÿ8­ß¦â÷1J$7be08c78-fbb8-4382-a8c6-48a9db8bc4fb

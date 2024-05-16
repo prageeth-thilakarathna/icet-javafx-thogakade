@@ -1,0 +1,21 @@
+
+’
+java:S1192m"JDefine a constant instead of duplicating this literal "unitPrice" 3 times.(ñŸíÀøÿÿÿÿ8¡‚ø1J$fdd650de-daff-4f87-bede-1271c58a45a8
+‘
+java:S1192m"IDefine a constant instead of duplicating this literal "quantity" 3 times.(ñŸíÀøÿÿÿÿ8¡‚ø1J$76984f03-d308-4d08-8569-c48c2ab82310
+‹
+java:S1192f"HDefine a constant instead of duplicating this literal "orderId" 3 times.(¨–«¡8¡‚ø1J$b33717e1-ec5d-4bfc-afce-9f5df14434a0
+‘
+java:S1192j"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(×Íì•üÿÿÿÿ8¡‚ø1J$e52c72bc-06d5-42fc-8d20-c7de562c0000
+
+java:S1192["KDefine a constant instead of duplicating this literal "customerId" 4 times.(§Á¶8¡‚ø1J$237c7760-3010-4252-b568-614d57387523
+
+java:S1192\"JDefine a constant instead of duplicating this literal "orderDate" 3 times.(êıŞú8¡‚ø1J$e8c06cf4-7b93-42b5-8442-f86d548d81aa
+Ê
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¹à—şÿÿÿÿ8Ì¡‚ø1J$5955209b-980d-4eb0-a960-be918999b35d
+Ê
+java:S1186¢"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(­¡şşÿÿÿÿ8Ì¡‚ø1J$723803a4-ce3e-473e-893a-ffb7f85f714e
+Å
+java:S1186¦"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ûö‹È8Ì¡‚ø1J$ef16936f-96b9-4a30-a747-c626890d8312
+„
+java:S1117n"BRename "tblOrderDetail" which hides the field declared at line 46.(‰¯Ÿ8Ü¡‚ø1J$c521541e-521b-4519-ac49-6a91aee03e7d
