@@ -1,21 +1,31 @@
 
-’
-java:S1192~"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$95223a20-45eb-42b1-ad79-45debdace0d8
-‹
-java:S1192Y"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$fafb34a2-ef26-41cb-b713-5c285a870b7e
 
-java:S1192¶"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$21e5b883-960b-4da6-9084-a5af83c94452
+java:S1192¼"IDefine a constant instead of duplicating this literal "itemCode" 3 times.(İÖû§8û©Ìµö1J$c1cba078-307b-475c-ad84-ed505a714471
 ”
-java:S1192v"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$2256845f-a53f-418c-8a26-1757476a8e38
+java:S1192|"LDefine a constant instead of duplicating this literal "description" 6 times.(ğøŠšøÿÿÿÿ8û©Ìµö1J$0f0fd1be-52cb-4b99-84da-857b106ff7d8
+“
+java:S1192„"JDefine a constant instead of duplicating this literal "unitPrice" 4 times.(šÑúúøÿÿÿÿ8û©Ìµö1J$ae4c0cf3-5150-4402-890d-30bac5b69eff
+‹
+java:S1192_"HDefine a constant instead of duplicating this literal "address" 5 times.(´¬µÁ8û©Ìµö1J$f3384c96-a4bf-42ce-81ae-1aabce06f1a3
+‹
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8çµÉ„ø1J$57c32213-d1d4-46da-bbc3-b920f8a54bf6
+˜
+java:S2095ı"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8çµÉ„ø1J$c94fbbe0-eeea-4ad0-8670-8ad5b82e2add
+˜
+java:S2095Ü"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½¨“Ğúÿÿÿÿ8çµÉ„ø1J$38ee63fd-019b-49e1-9d9d-540ea38688a9
+‹
+java:S2095ù"GUse try-with-resources or close this "Statement" in a "finally" clause.(†—İ8çµÉ„ø1J$e1b9f6b5-061e-454e-aa00-35317f423459
 ˆ
-java:S1117"?Rename "customerIDs" which hides the field declared at line 72.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$896d1fd7-44f8-469a-b6f7-496691c9e0b3
+java:S1117£"?Rename "customerIDs" which hides the field declared at line 78.(ÆãÒüÿÿÿÿ8…¬Ìµö1J$d93be470-2610-481e-b41f-00725ae76919
 †
-java:S1117°"=Rename "itemCODEs" which hides the field declared at line 70.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$21a71b41-95e2-4efc-8d6c-05d3077b03f0
+java:S1117¶"=Rename "itemCODEs" which hides the field declared at line 76.(ôÅ¨÷úÿÿÿÿ8…¬Ìµö1J$7262f82c-bb23-4aaa-9825-000ad880d70c
 c
-java:S6905ù"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$5eb3428d-ae92-4656-852c-af7d9593c943
+java:S6905ÿ"Don't use the query "SELECT *".(Î¡„˜8”¬Ìµö1J$3eb4c45b-1ee5-4ca1-bcad-a92b73db9d3e
 †
-java:S1126…"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$1fad56a9-efe8-4d88-aed3-256146857b72
-†
-java:S1126Ã"BReplace this if-then-else statement by a single method invocation.(Î‡Õ‹8³¬Ìµö1J$b786fb21-1934-49ee-a128-e5a547cc8938
+java:S1126‹"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤¬Ìµö1J$d179eb38-767c-4b6c-9138-4765ce277e08
+…
+java:S1117¾"BRename "tblOrderDetail" which hides the field declared at line 42.(‰¯Ÿ8©¸É„ø1J$7e6318bb-1cdb-48e0-9480-b5b6cb662cf3
+‹
+java:S1126É"BReplace this if-then-else statement by a single method invocation.(ÈòÖèøÿÿÿÿ8³¬Ìµö1J$3e7fcc69-2951-411c-b2ce-b2735e455f2f
 Ÿ
-java:S6912ü"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$a9187072-d046-448a-949e-986e61478734
+java:S6912‚"VUse "addBatch" and "executeBatch" to execute multiple SQL statements in a single call.(Ñ’Ş©úÿÿÿÿ8Ó¬Ìµö1J$f8615b24-3fd9-4ab2-9aa5-4d08209a4efb

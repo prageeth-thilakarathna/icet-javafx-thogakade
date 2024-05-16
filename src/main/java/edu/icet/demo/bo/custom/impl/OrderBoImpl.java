@@ -20,4 +20,9 @@ public class OrderBoImpl implements OrderBo {
     public ResultSet getOrder(String id) {
         return orderDao.findById(id);
     }
+
+    @Override
+    public boolean deleteOrder(String id) {
+        return orderDao.delete(id);
+    }
 }

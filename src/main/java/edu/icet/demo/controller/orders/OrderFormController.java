@@ -13,9 +13,10 @@ import edu.icet.demo.model.Order;
 import edu.icet.demo.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,6 +75,12 @@ public class OrderFormController implements Initializable {
     private Label dspProvince;
     @FXML
     private Label dspPostalCode;
+    private static final String CUSTOMER_ID = "customerId";
+    private static final String ORDER_DATE = "orderDate";
+    private static final String ORDER_ID = "orderId";
+    private static final String ITEM_CODE = "itemCode";
+    private static final String QUANTITY = "quantity";
+    private static final String UNIT_PRICE = "unitPrice";
 
     private final OrderBo orderBo = BoFactory.getInstance().getBo(BoType.ORDER);
     private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
@@ -88,10 +96,10 @@ public class OrderFormController implements Initializable {
             btnSearch.setDisable(true);
             btnCancel.setDisable(false);
             btnDelete.setDisable(false);
-            dspCustomerId.setText("0"+resultSet.getString("customerId"));
-            dspDateAndTime.setText(resultSet.getString("orderDate"));
+            dspCustomerId.setText("0"+resultSet.getString(CUSTOMER_ID));
+            dspDateAndTime.setText(resultSet.getString(ORDER_DATE));
 
-            ResultSet resultSetCustomer = customerBo.getCustomer("0"+resultSet.getString("customerId"));
+            ResultSet resultSetCustomer = customerBo.getCustomer("0"+resultSet.getString(CUSTOMER_ID));
             resultSetCustomer.next();
             dspName.setText(resultSetCustomer.getString("name"));
             dspAddress.setText(resultSetCustomer.getString("address"));
@@ -99,22 +107,22 @@ public class OrderFormController implements Initializable {
             dspProvince.setText(resultSetCustomer.getString("province"));
             dspPostalCode.setText(resultSetCustomer.getString("postalCode"));
 
-            ResultSet resultSetOrderDetail = orderDetailBo.getOrderDetail(resultSet.getString("orderId"));
+            ResultSet resultSetOrderDetail = orderDetailBo.getOrderDetail(resultSet.getString(ORDER_ID));
             ObservableList<TblOrderDetail> tblOrderDetailList = FXCollections.observableArrayList();
 
             while (resultSetOrderDetail.next()){
-                ResultSet resultSetItem = itemBo.getItem(resultSetOrderDetail.getString("itemCode"));
+                ResultSet resultSetItem = itemBo.getItem(resultSetOrderDetail.getString(ITEM_CODE));
                 resultSetItem.next();
 
-                String total = CenterController.df.format(resultSetOrderDetail.getInt("quantity")*resultSetItem.getDouble("unitPrice"));
-                TblOrderDetail tblOrderDetail = new TblOrderDetail(
-                        resultSetItem.getString("itemCode"),
+                String total = CenterController.df.format(resultSetOrderDetail.getInt(QUANTITY)*resultSetItem.getDouble(UNIT_PRICE));
+                TblOrderDetail orderDetail = new TblOrderDetail(
+                        resultSetItem.getString(ITEM_CODE),
                         resultSetItem.getString("description"),
-                        resultSetOrderDetail.getString("quantity"),
-                        resultSetItem.getString("unitPrice"),
+                        resultSetOrderDetail.getString(QUANTITY),
+                        resultSetItem.getString(UNIT_PRICE),
                         total
                 );
-                tblOrderDetailList.add(tblOrderDetail);
+                tblOrderDetailList.add(orderDetail);
             }
             setOrderDetailData(tblOrderDetailList);
         } catch (SQLException e) {
@@ -155,15 +163,26 @@ public class OrderFormController implements Initializable {
     }
 
     @FXML
-    private void deleteAction(ActionEvent actionEvent) {
+    private void deleteAction() {
+        boolean res = orderBo.deleteOrder(txtOrderId.getText());
+        if(res){
+            clearForm();
+            tblOrder.setItems(getOrdersTableData());
+        }
     }
 
     @FXML
-    private void placeOrderAction(ActionEvent actionEvent) {
+    private void placeOrderAction() throws IOException {
+        Parent parent = new FXMLLoader(getClass().getResource("/view/place-order-form.fxml")).load();
+        anchorPane.getChildren().clear();
+        anchorPane.getChildren().add(parent);
     }
 
     @FXML
-    private void backAction(ActionEvent actionEvent) {
+    private void backAction() throws IOException {
+        Parent parent = new FXMLLoader(getClass().getResource("/view/home-page.fxml")).load();
+        anchorPane.getChildren().clear();
+        anchorPane.getChildren().add(parent);
     }
 
     private ObservableList<Order> getOrdersTableData(){
@@ -172,9 +191,9 @@ public class OrderFormController implements Initializable {
             ResultSet resultSet = orderBo.getAllOrders();
             while(resultSet.next()){
                 Order order = new Order(
-                        resultSet.getString("orderId"),
-                        resultSet.getString("orderDate"),
-                        resultSet.getString("customerId")
+                        resultSet.getString(ORDER_ID),
+                        resultSet.getString(ORDER_DATE),
+                        resultSet.getString(CUSTOMER_ID)
                 );
                 allOrders.add(order);
             }
@@ -191,16 +210,14 @@ public class OrderFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnDelete.setDisable(true);
         btnCancel.setDisable(true);
-        colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
-        colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colOrderId.setCellValueFactory(new PropertyValueFactory<>(ORDER_ID));
+        colOrderDate.setCellValueFactory(new PropertyValueFactory<>(ORDER_DATE));
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>(ITEM_CODE));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>(QUANTITY));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(UNIT_PRICE));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
-
         tblOrder.setItems(getOrdersTableData());
-
     }
 }

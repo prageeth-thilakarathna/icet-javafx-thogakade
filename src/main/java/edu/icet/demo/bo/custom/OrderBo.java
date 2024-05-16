@@ -8,4 +8,6 @@ public interface OrderBo extends SuperBo {
     ResultSet getAllOrders();
 
     ResultSet getOrder(String id);
+
+    boolean deleteOrder(String id);
 }

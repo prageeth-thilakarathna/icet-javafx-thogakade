@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.orders.PlaceOrderController">
+<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.orders.PlaceOrderController">
    <children>
       <BorderPane prefHeight="658.0" prefWidth="1169.0">
          <top>
@@ -30,6 +30,28 @@
             <HBox alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#placeOrderAction" style="-fx-background-color: #65B741;" text="Place Order" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="1054.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToHomeAction" style="-fx-background-color: #4e08aa;" text="Go to Home " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="1084.0" layoutY="10.0" mnemonicParsing="false" onAction="#backAction" style="-fx-background-color: #4e08aa;" text="Back" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
