@@ -1,15 +1,19 @@
 package edu.icet.demo.controller.orders;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.icet.demo.bo.BoFactory;
+import edu.icet.demo.bo.custom.OrderBo;
+import edu.icet.demo.bo.custom.OrderDetailBo;
 import edu.icet.demo.controller.CenterController;
-import edu.icet.demo.db.LoadDBDriver;
+import edu.icet.demo.model.Order;
+import edu.icet.demo.model.OrderDetail;
 import edu.icet.demo.model.TblOrderDetail;
+import edu.icet.demo.util.BoType;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +33,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class PlaceOrderController implements Initializable {
+    @FXML
+    private Label dspCustomerId;
+    @FXML
+    private Button btnCancel;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -77,14 +85,20 @@ public class PlaceOrderController implements Initializable {
     private JFXComboBox<String> itemCODEs;
     @FXML
     private JFXComboBox<String> customerIDs;
+    private static final String ADDRESS = "address";
+    private static final String DESCRIPTION = "description";
+    private static final String UNIT_PRICE = "unitPrice";
+    private static final String ITEM_CODE = "itemCode";
 
     private ObservableList<TblOrderDetail> tblOrderDetails = FXCollections.observableArrayList();
+    private final OrderBo orderBo = BoFactory.getInstance().getBo(BoType.ORDER);
+    private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
 
     @FXML
-    private void customerIdSelectAction(ActionEvent actionEvent) {
+    private void customerIdSelectAction() {
         try {
             ResultSet resultSet = CenterController.getInstance().getCustomer(customerIDs.getValue());
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 if (resultSet.getString("name").length() < 10) {
                     nameDisplay.setText(resultSet.getString("name").substring(0, resultSet.getString("name").length()));
                 } else {
@@ -92,11 +106,11 @@ public class PlaceOrderController implements Initializable {
                     nameDisplay.setTooltip(new Tooltip(resultSet.getString("name")));
                 }
 
-                if (resultSet.getString("address").length() < 10) {
-                    addressDisplay.setText(resultSet.getString("address").substring(0, resultSet.getString("address").length()));
+                if (resultSet.getString(ADDRESS).length() < 10) {
+                    addressDisplay.setText(resultSet.getString(ADDRESS).substring(0, resultSet.getString(ADDRESS).length()));
                 } else {
-                    addressDisplay.setText(resultSet.getString("address").substring(0, 10) + "...");
-                    addressDisplay.setTooltip(new Tooltip(resultSet.getString("address")));
+                    addressDisplay.setText(resultSet.getString(ADDRESS).substring(0, 10) + "...");
+                    addressDisplay.setTooltip(new Tooltip(resultSet.getString(ADDRESS)));
                 }
 
                 salaryDisplay.setText(resultSet.getString("salary"));
@@ -107,6 +121,7 @@ public class PlaceOrderController implements Initializable {
                     cityDisplay.setText(resultSet.getString("city").substring(0, 10) + "...");
                     cityDisplay.setTooltip(new Tooltip(resultSet.getString("city")));
                 }
+                dspCustomerId.setText(customerIDs.getValue());
                 inputValidation();
             }
         } catch (SQLException e) {
@@ -117,19 +132,19 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    private void itemCodeSelectAction(ActionEvent actionEvent) {
+    private void itemCodeSelectAction() {
         try {
             ResultSet resultSet = CenterController.getInstance().getItem(itemCODEs.getValue());
-            if(resultSet.next()){
-                if (resultSet.getString("description").length() < 10) {
-                    descriptionDisplay.setText(resultSet.getString("description").substring(0, resultSet.getString("dscription").length()));
+            if (resultSet.next()) {
+                if (resultSet.getString(DESCRIPTION).length() < 10) {
+                    descriptionDisplay.setText(resultSet.getString(DESCRIPTION).substring(0, resultSet.getString("dscription").length()));
                 } else {
-                    descriptionDisplay.setText(resultSet.getString("description").substring(0, 10) + "...");
-                    descriptionDisplay.setTooltip(new Tooltip(resultSet.getString("description")));
+                    descriptionDisplay.setText(resultSet.getString(DESCRIPTION).substring(0, 10) + "...");
+                    descriptionDisplay.setTooltip(new Tooltip(resultSet.getString(DESCRIPTION)));
                 }
 
                 packSizeDisplay.setText(resultSet.getString("packSize"));
-                unitPriceDisplay.setText(resultSet.getString("unitPrice"));
+                unitPriceDisplay.setText(resultSet.getString(UNIT_PRICE));
                 qtyOnHandDisplay.setText(resultSet.getString("qtyOnHand"));
                 inputValidation();
             }
@@ -143,9 +158,10 @@ public class PlaceOrderController implements Initializable {
     @FXML
     private void selectionCancelAction() {
         clearFields();
+        inputValidation();
     }
 
-    private void clearFields(){
+    private void clearFields() {
         customerIDs.setValue(null);
         nameDisplay.setText("");
         addressDisplay.setText("");
@@ -157,55 +173,48 @@ public class PlaceOrderController implements Initializable {
         unitPriceDisplay.setText("");
         qtyOnHandDisplay.setText("");
         inputQuantity.setText("");
+        quantityError.setText("");
     }
 
     private ObservableList<String> getCustomerIDs() {
-        ObservableList<String> customerIDs = FXCollections.observableArrayList();
-
+        ObservableList<String> customerIdList = FXCollections.observableArrayList();
         try {
             ResultSet resultSet = CenterController.getInstance().getAllCustomers();
-
             while (resultSet.next()) {
-                customerIDs.add("0" + resultSet.getString("customerId"));
+                customerIdList.add("0" + resultSet.getString("customerId"));
             }
-
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
         }
-
-        return customerIDs;
+        return customerIdList;
     }
 
     private ObservableList<String> getItemCODEs() {
-        ObservableList<String> itemCODEs = FXCollections.observableArrayList();
-
+        ObservableList<String> itemCodeList = FXCollections.observableArrayList();
         try {
             ResultSet resultSet = CenterController.getInstance().getAllItem();
-
             while (resultSet.next()) {
-                itemCODEs.add(resultSet.getString("itemCode"));
+                itemCodeList.add(resultSet.getString(ITEM_CODE));
             }
-
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
         }
-
-        return itemCODEs;
+        return itemCodeList;
     }
 
     // set data and time
-    private void loadDateAndTime(){
+    private void loadDateAndTime() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateDisplay.setText(simpleDateFormat.format(date));
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, e->{
+        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             LocalTime localTime = LocalTime.now();
-            timeDisplay.setText(localTime.getHour()+":"+localTime.getMinute()+":"+localTime.getSecond());
+            timeDisplay.setText(localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond());
         }), new KeyFrame(Duration.seconds(1)));
 
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -213,15 +222,15 @@ public class PlaceOrderController implements Initializable {
     }
 
     // id generate
-    private String getOrderId(){
+    private String getOrderId() {
         try {
-            ResultSet resultTableRowCount = getTableRowCount();
+            ResultSet resultTableRowCount = orderBo.getTableRowCount();
             resultTableRowCount.next();
 
             int size = resultTableRowCount.getInt("row_count");
 
             if (size > 0) {
-                ResultSet resultSet = getTableLastId();
+                ResultSet resultSet = orderBo.getTableLastId();
                 resultSet.next();
 
                 String lastId = resultSet.getString("orderId");
@@ -242,32 +251,24 @@ public class PlaceOrderController implements Initializable {
         return null;
     }
 
-    // get table row count
-    private ResultSet getTableRowCount() throws SQLException{
-        String sql = "SELECT COUNT(*) AS row_count FROM orders";
-        Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
-        Statement stm = connection.createStatement();
-        return stm.executeQuery(sql);
-    }
-
-    // get table last id
-    private ResultSet getTableLastId() throws SQLException {
-        String sql = "SELECT * FROM orders ORDER BY orderId DESC LIMIT 1";
-        Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
-        Statement stm = connection.createStatement();
-        return stm.executeQuery(sql);
-    }
-
     @FXML
-    private void addToCartAction(ActionEvent actionEvent) {
+    private void addToCartAction() {
         addOrderDetail(itemCODEs.getValue(), inputQuantity.getText());
+        clearFields();
+        inputValidation();
     }
 
-    private void inputValidation(){
-        if(customerIDs.getValue()!=null && itemCODEs.getValue()!=null && !inputQuantity.getText().isEmpty()){
+    private void inputValidation() {
+        if (customerIDs.getValue() != null && itemCODEs.getValue() != null && !inputQuantity.getText().isEmpty()) {
             btnAddToCart.setDisable(false);
         } else {
             btnAddToCart.setDisable(true);
+        }
+
+        if (customerIDs.getValue() != null || itemCODEs.getValue() != null || !inputQuantity.getText().isEmpty()) {
+            btnCancel.setDisable(false);
+        } else {
+            btnCancel.setDisable(true);
         }
     }
 
@@ -304,34 +305,31 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    private void quantityKeyTyped(KeyEvent keyEvent) {
+    private void quantityKeyTyped() {
         inputValidation();
     }
 
-    private void addOrderDetail(String itemCode, String quantity){
-        try{
+    private void addOrderDetail(String itemCode, String quantity) {
+        try {
             ResultSet resultSet = CenterController.getInstance().getItem(itemCode);
             resultSet.next();
 
-            String total = CenterController.df.format(Integer.parseInt(quantity)*resultSet.getDouble("unitPrice"));
-
-            TblOrderDetail tblOrderDetail = new TblOrderDetail(
-                    resultSet.getString("itemCode"),
-                    resultSet.getString("description"),
+            String total = CenterController.df.format(Integer.parseInt(quantity) * resultSet.getDouble(UNIT_PRICE));
+            TblOrderDetail orderDetail = new TblOrderDetail(
+                    resultSet.getString(ITEM_CODE),
+                    resultSet.getString(DESCRIPTION),
                     quantity,
-                    resultSet.getString("unitPrice"),
+                    resultSet.getString(UNIT_PRICE),
                     total
             );
-
-            tblOrderDetails.add(tblOrderDetail);
+            tblOrderDetails.add(orderDetail);
             this.tblOrderDetail.setItems(tblOrderDetails);
 
-            if(!tblOrderDetails.isEmpty()){
+            if (!tblOrderDetails.isEmpty()) {
                 btnPlaceOrder.setDisable(false);
             } else {
                 btnPlaceOrder.setDisable(true);
             }
-
         } catch (SQLException e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
@@ -340,51 +338,45 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    private void placeOrderAction(ActionEvent actionEvent) {
-        String sql = "INSERT INTO orders VALUES(?,?,?)";
-
-        try{
-            Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            Date date = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dateAndTime = simpleDateFormat.format(date)+" "+timeDisplay.getText();
-
-            preparedStatement.setString(1, orderIdDisplay.getText());
-            preparedStatement.setString(2, dateAndTime);
-            preparedStatement.setInt(3, Integer.parseInt(customerIDs.getValue()));
-            preparedStatement.executeUpdate();
-            saveOrderDetail();
-
-            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-            CenterController.alert.setContentText(orderIdDisplay.getText()+" Order is entered into the system successfully.");
-            CenterController.alert.show();
-            orderIdDisplay.setText(getOrderId());
-            btnPlaceOrder.setDisable(true);
-            clearFields();
-            tblOrderDetails = null;
-            tblOrderDetail.setItems(tblOrderDetails);
-
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    private void placeOrderAction() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateAndTime = simpleDateFormat.format(date) + " " + timeDisplay.getText();
+        Order order = new Order(
+                orderIdDisplay.getText(),
+                dateAndTime,
+                dspCustomerId.getText()
+        );
+        boolean res = orderBo.placeOrder(order);
+        if (res) {
+            boolean response = addOrderDetail();
+            if (response) {
+                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+                CenterController.alert.setContentText(orderIdDisplay.getText() + " Order is entered into the system successfully.");
+                CenterController.alert.show();
+                orderIdDisplay.setText(getOrderId());
+                btnPlaceOrder.setDisable(true);
+                clearFields();
+                dspCustomerId.setText("");
+                tblOrderDetails = FXCollections.observableArrayList();
+                tblOrderDetail.setItems(tblOrderDetails);
+            }
         }
     }
 
-    private void saveOrderDetail() throws SQLException {
-        for(int i = 0; i< tblOrderDetails.size(); i++){
-            String sql = "INSERT INTO orderDetail VALUES(?,?,?)";
-
-            Connection connection = LoadDBDriver.getLoadDBDriverInstance().getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, orderIdDisplay.getText());
-            preparedStatement.setString(2, tblOrderDetails.get(i).getItemCode());
-            preparedStatement.setInt(3, Integer.parseInt(tblOrderDetails.get(i).getQuantity()));
-            preparedStatement.executeUpdate();
+    private boolean addOrderDetail() {
+        for (TblOrderDetail ob : tblOrderDetails) {
+            OrderDetail orderDetail = new OrderDetail(
+                    orderIdDisplay.getText(),
+                    ob.getItemCode(),
+                    ob.getQuantity()
+            );
+            boolean res = orderDetailBo.addOrderDetail(orderDetail);
+            if (!res) {
+                return false;
+            }
         }
+        return true;
     }
 
     @FXML
@@ -410,12 +402,12 @@ public class PlaceOrderController implements Initializable {
         loadDateAndTime();
         orderIdDisplay.setText(getOrderId());
         btnAddToCart.setDisable(true);
+        btnCancel.setDisable(true);
         btnPlaceOrder.setDisable(true);
-
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>(ITEM_CODE));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(UNIT_PRICE));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 }

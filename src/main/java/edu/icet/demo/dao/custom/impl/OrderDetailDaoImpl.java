@@ -12,6 +12,20 @@ import java.sql.SQLException;
 public class OrderDetailDaoImpl implements OrderDetailDao {
     @Override
     public boolean save(OrderDetailEntity entity) {
+        String sql = "INSERT INTO orderDetail VALUES(?,?,?)";
+        try{
+            Boolean res = CrudUtil.execute(
+                    sql,
+                    entity.getOrderId(),
+                    entity.getItemCode(),
+                    entity.getQuantity()
+            );
+            return Boolean.TRUE.equals(res);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
         return false;
     }
 

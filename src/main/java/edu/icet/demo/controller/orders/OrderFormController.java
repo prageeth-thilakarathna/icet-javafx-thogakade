@@ -89,17 +89,17 @@ public class OrderFormController implements Initializable {
 
     @FXML
     private void searchAction() {
-        try{
+        try {
             ResultSet resultSet = orderBo.getOrder(txtOrderId.getText());
             resultSet.next();
             txtOrderId.setEditable(false);
             btnSearch.setDisable(true);
             btnCancel.setDisable(false);
             btnDelete.setDisable(false);
-            dspCustomerId.setText("0"+resultSet.getString(CUSTOMER_ID));
+            dspCustomerId.setText("0" + resultSet.getString(CUSTOMER_ID));
             dspDateAndTime.setText(resultSet.getString(ORDER_DATE));
 
-            ResultSet resultSetCustomer = customerBo.getCustomer("0"+resultSet.getString(CUSTOMER_ID));
+            ResultSet resultSetCustomer = customerBo.getCustomer("0" + resultSet.getString(CUSTOMER_ID));
             resultSetCustomer.next();
             dspName.setText(resultSetCustomer.getString("name"));
             dspAddress.setText(resultSetCustomer.getString("address"));
@@ -110,11 +110,11 @@ public class OrderFormController implements Initializable {
             ResultSet resultSetOrderDetail = orderDetailBo.getOrderDetail(resultSet.getString(ORDER_ID));
             ObservableList<TblOrderDetail> tblOrderDetailList = FXCollections.observableArrayList();
 
-            while (resultSetOrderDetail.next()){
+            while (resultSetOrderDetail.next()) {
                 ResultSet resultSetItem = itemBo.getItem(resultSetOrderDetail.getString(ITEM_CODE));
                 resultSetItem.next();
 
-                String total = CenterController.df.format(resultSetOrderDetail.getInt(QUANTITY)*resultSetItem.getDouble(UNIT_PRICE));
+                String total = CenterController.df.format(resultSetOrderDetail.getInt(QUANTITY) * resultSetItem.getDouble(UNIT_PRICE));
                 TblOrderDetail orderDetail = new TblOrderDetail(
                         resultSetItem.getString(ITEM_CODE),
                         resultSetItem.getString("description"),
@@ -137,11 +137,11 @@ public class OrderFormController implements Initializable {
         }
     }
 
-    private void setOrderDetailData(ObservableList<TblOrderDetail> tblOrderDetail){
+    private void setOrderDetailData(ObservableList<TblOrderDetail> tblOrderDetail) {
         this.tblOrderDetail.setItems(tblOrderDetail);
     }
 
-    private void clearForm(){
+    private void clearForm() {
         txtOrderId.setText("");
         btnDelete.setDisable(true);
         dspCustomerId.setText("");
@@ -165,7 +165,7 @@ public class OrderFormController implements Initializable {
     @FXML
     private void deleteAction() {
         boolean res = orderBo.deleteOrder(txtOrderId.getText());
-        if(res){
+        if (res) {
             clearForm();
             tblOrder.setItems(getOrdersTableData());
         }
@@ -185,11 +185,11 @@ public class OrderFormController implements Initializable {
         anchorPane.getChildren().add(parent);
     }
 
-    private ObservableList<Order> getOrdersTableData(){
+    private ObservableList<Order> getOrdersTableData() {
         ObservableList<Order> allOrders = FXCollections.observableArrayList();
-        try{
+        try {
             ResultSet resultSet = orderBo.getAllOrders();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 Order order = new Order(
                         resultSet.getString(ORDER_ID),
                         resultSet.getString(ORDER_DATE),
