@@ -1,17 +1,7 @@
 
-Ã
-java:S11867"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ş™»?8ñëï®ø1J$9f1072c7-1cb8-4d74-b336-6a839456fdd4
-É
-java:S1186;"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¬ÜÒ¬ûÿÿÿÿ8Ó³ñ®ø1J$1c627914-6d29-432e-825f-62c3f50a5502
-Ä
-java:S1186?"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Å¨¥ş8ğÚñ®ø1J$9610ad51-a06f-4320-9b3e-25960a340020
-Ä
-java:S1186C"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥ğ¨¥8‡‹ò®ø1J$e6ff0ca1-88c6-4dbb-a22a-75e4183c74f8
-É
-java:S1186G"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(û¹à—şÿÿÿÿ8ØÇò®ø1J$037c8664-9ca9-4ccc-8361-51a30e7e092c
-É
-java:S1186J"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(šáÓ…ùÿÿÿÿ8ûÆç¯ø1J$bbe9ab72-8db4-415d-b90b-7abb8565243a
-É
-java:S1186O"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ8ÅÉã¯ø1J$a4ac5268-4250-465c-bea4-5c9ea89a56fe
-|
-java:S1144J"4Remove this unused private "getNextItemCode" method.(šáÓ…ùÿÿÿÿ8‹Çç¯ø1J$c158b06a-7758-463a-a368-c42ec3be98f4
+‹
+java:S1126"BReplace this if-then-else statement by a single method invocation.(ä¬â§üÿÿÿÿ8Ñ…½ø1J$84c7d2d5-a7f7-487c-ad67-1031120e06e4
+‹
+java:S1126£"BReplace this if-then-else statement by a single method invocation.(ªé†øÿÿÿÿ8Ñ…½ø1J$3003c846-db93-4e01-861d-afeb42e1e1c6
+†
+java:S1126°"BReplace this if-then-else statement by a single method invocation.(ˆ¶Œ8Ñ…½ø1J$c20bd72f-13e8-4853-bf4e-48cd171acacc
