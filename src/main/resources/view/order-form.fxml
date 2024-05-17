@@ -19,7 +19,7 @@
    <children>
       <BorderPane prefHeight="658.0" prefWidth="1169.0">
          <top>
-            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1169.0" style="-fx-background-color: #FAA300;" text="Order Form" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1169.0" style="-fx-background-color: #DD761C;" text="Order Form" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

@@ -2,6 +2,8 @@ package edu.icet.demo.controller.orders;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.icet.demo.bo.BoFactory;
+import edu.icet.demo.bo.custom.CustomerBo;
+import edu.icet.demo.bo.custom.ItemBo;
 import edu.icet.demo.bo.custom.OrderBo;
 import edu.icet.demo.bo.custom.OrderDetailBo;
 import edu.icet.demo.controller.CenterController;
@@ -93,11 +95,13 @@ public class PlaceOrderController implements Initializable {
     private ObservableList<TblOrderDetail> tblOrderDetails = FXCollections.observableArrayList();
     private final OrderBo orderBo = BoFactory.getInstance().getBo(BoType.ORDER);
     private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
+    private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    private final ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
 
     @FXML
     private void customerIdSelectAction() {
         try {
-            ResultSet resultSet = CenterController.getInstance().getCustomer(customerIDs.getValue());
+            ResultSet resultSet = customerBo.getCustomer(customerIDs.getValue());
             if (resultSet.next()) {
                 if (resultSet.getString("name").length() < 10) {
                     nameDisplay.setText(resultSet.getString("name").substring(0, resultSet.getString("name").length()));
@@ -134,7 +138,7 @@ public class PlaceOrderController implements Initializable {
     @FXML
     private void itemCodeSelectAction() {
         try {
-            ResultSet resultSet = CenterController.getInstance().getItem(itemCODEs.getValue());
+            ResultSet resultSet = itemBo.getItem(itemCODEs.getValue());
             if (resultSet.next()) {
                 if (resultSet.getString(DESCRIPTION).length() < 10) {
                     descriptionDisplay.setText(resultSet.getString(DESCRIPTION).substring(0, resultSet.getString("dscription").length()));
@@ -179,7 +183,7 @@ public class PlaceOrderController implements Initializable {
     private ObservableList<String> getCustomerIDs() {
         ObservableList<String> customerIdList = FXCollections.observableArrayList();
         try {
-            ResultSet resultSet = CenterController.getInstance().getAllCustomers();
+            ResultSet resultSet = customerBo.getAllCustomers();
             while (resultSet.next()) {
                 customerIdList.add("0" + resultSet.getString("customerId"));
             }
@@ -194,7 +198,7 @@ public class PlaceOrderController implements Initializable {
     private ObservableList<String> getItemCODEs() {
         ObservableList<String> itemCodeList = FXCollections.observableArrayList();
         try {
-            ResultSet resultSet = CenterController.getInstance().getAllItem();
+            ResultSet resultSet = itemBo.getAllItems();
             while (resultSet.next()) {
                 itemCodeList.add(resultSet.getString(ITEM_CODE));
             }
@@ -311,7 +315,7 @@ public class PlaceOrderController implements Initializable {
 
     private void addOrderDetail(String itemCode, String quantity) {
         try {
-            ResultSet resultSet = CenterController.getInstance().getItem(itemCode);
+            ResultSet resultSet = itemBo.getItem(itemCode);
             resultSet.next();
 
             String total = CenterController.df.format(Integer.parseInt(quantity) * resultSet.getDouble(UNIT_PRICE));

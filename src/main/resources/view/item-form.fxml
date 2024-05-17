@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.item.ItemController">
+   <children>
+      <BorderPane prefHeight="658.0" prefWidth="1169.0">
+         <top>
+            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1169.0" style="-fx-background-color: #532E1C;" text="Item Form" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </top>
+         <bottom>
+            <HBox alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backAction" style="-fx-background-color: #4e08aa;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets right="30.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+         <left>
+            <VBox alignment="CENTER" prefHeight="535.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="70.0" prefWidth="324.0">
+                     <children>
+                        <JFXTextField fx:id="txtItemCode" layoutX="30.0" layoutY="20.0" prefHeight="30.0" prefWidth="177.0" promptText="Item Code">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXTextField>
+                        <JFXButton layoutX="232.0" layoutY="20.0" onAction="#searchAction" style="-fx-background-color: #008DDA;" text="Search" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <JFXTextField fx:id="txtDescription" promptText="Description">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtPackSize" layoutX="10.0" layoutY="87.0" promptText="Pack Size">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txtUnitPrice" layoutX="10.0" layoutY="87.0" promptText="Unit Price">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label prefHeight="17.0" prefWidth="264.0" textFill="RED" />
+                  <JFXTextField fx:id="txtQtyOnHand" layoutX="10.0" layoutY="112.0" promptText="Quantity On Hand">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label layoutX="40.0" layoutY="314.0" prefHeight="17.0" prefWidth="264.0" textFill="RED">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Pane prefHeight="100.0" prefWidth="324.0">
+                     <children>
+                        <JFXButton layoutX="193.0" layoutY="14.0" onAction="#cancelAction" style="-fx-background-color: #000000;" text="Cancel Form" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="29.0" layoutY="70.0" onAction="#addItemAction" style="-fx-background-color: #65B741;" text="Add Item" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="137.0" layoutY="70.0" onAction="#updateAction" style="-fx-background-color: #FAA300;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="231.0" layoutY="70.0" onAction="#deleteAction" style="-fx-background-color: #E72929;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator layoutY="18.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="6.0" />
+                  <TableView fx:id="tblItem" layoutX="36.0" layoutY="55.0" prefHeight="450.0" prefWidth="779.0">
+                    <columns>
+                      <TableColumn fx:id="colItemCode" prefWidth="100.0" text="Item Code" />
+                      <TableColumn fx:id="colDescription" prefWidth="359.0" text="Description" />
+                        <TableColumn fx:id="colPackSize" prefWidth="100.0" text="Pack Size" />
+                        <TableColumn fx:id="colUnitPrice" prefWidth="100.0" text="Unit Price" />
+                        <TableColumn fx:id="colQtyOnHand" prefWidth="120.0" text="Quantity On Hand" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="36.0" layoutY="19.0" text="Next Item Code">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dspNextItemCode" layoutX="179.0" layoutY="19.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

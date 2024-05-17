@@ -15,4 +15,9 @@ public class ItemBoImpl implements ItemBo {
     public ResultSet getItem(String id) {
         return itemDao.findById(id);
     }
+
+    @Override
+    public ResultSet getAllItems() {
+        return itemDao.findAll();
+    }
 }

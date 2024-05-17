@@ -40,6 +40,14 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ResultSet findAll() {
+        String sql = "SELECT * FROM item";
+        try{
+            return CrudUtil.execute(sql);
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
         return null;
     }
 }
