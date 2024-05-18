@@ -8,6 +8,7 @@ import edu.icet.demo.bo.custom.ItemBo;
 import edu.icet.demo.bo.custom.OrderBo;
 import edu.icet.demo.bo.custom.OrderDetailBo;
 import edu.icet.demo.controller.CenterController;
+import edu.icet.demo.model.Item;
 import edu.icet.demo.model.TblOrderDetail;
 import edu.icet.demo.model.Order;
 import edu.icet.demo.util.BoType;
@@ -81,6 +82,7 @@ public class OrderFormController implements Initializable {
     private static final String ITEM_CODE = "itemCode";
     private static final String QUANTITY = "quantity";
     private static final String UNIT_PRICE = "unitPrice";
+    private static final String DESCRIPTION = "description";
 
     private final OrderBo orderBo = BoFactory.getInstance().getBo(BoType.ORDER);
     private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
@@ -117,7 +119,7 @@ public class OrderFormController implements Initializable {
                 String total = CenterController.df.format(resultSetOrderDetail.getInt(QUANTITY) * resultSetItem.getDouble(UNIT_PRICE));
                 TblOrderDetail orderDetail = new TblOrderDetail(
                         resultSetItem.getString(ITEM_CODE),
-                        resultSetItem.getString("description"),
+                        resultSetItem.getString(DESCRIPTION),
                         resultSetOrderDetail.getString(QUANTITY),
                         resultSetItem.getString(UNIT_PRICE),
                         total
@@ -164,11 +166,54 @@ public class OrderFormController implements Initializable {
 
     @FXML
     private void deleteAction() {
-        boolean res = orderBo.deleteOrder(txtOrderId.getText());
-        if (res) {
-            clearForm();
-            tblOrder.setItems(getOrdersTableData());
+        boolean resIVT = updateInventory(txtOrderId.getText());
+        if(resIVT){
+            boolean res = orderBo.deleteOrder(txtOrderId.getText());
+            if (res) {
+                clearForm();
+                tblOrder.setItems(getOrdersTableData());
+            }
         }
+    }
+
+    private boolean updateInventory(String orderId){
+        try{
+            ResultSet resultSet = orderDetailBo.getOrderDetail(orderId);
+            while (resultSet.next()){
+                String[] arr = getNewQtyOnHand(resultSet.getString(ITEM_CODE), resultSet.getString(QUANTITY));
+                Item item = new Item(
+                        resultSet.getString(ITEM_CODE),
+                        arr[2],
+                        arr[1],
+                        arr[3],
+                        arr[0]
+                );
+                boolean res = itemBo.updateItem(item);
+                if(!res){
+                    return false;
+                }
+            }
+            return true;
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return false;
+    }
+
+    private String[] getNewQtyOnHand(String itemCode, String qty){
+        try{
+            ResultSet resultSet = itemBo.getItem(itemCode);
+            resultSet.next();
+            String newValue = String.valueOf(resultSet.getInt("qtyOnHand")+Integer.parseInt(qty));
+            return new String[]{newValue, resultSet.getString("packSize"), resultSet.getString(DESCRIPTION), resultSet.getString(UNIT_PRICE)};
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return new String[0];
     }
 
     @FXML
@@ -214,7 +259,7 @@ public class OrderFormController implements Initializable {
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>(ORDER_DATE));
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
         colItemCode.setCellValueFactory(new PropertyValueFactory<>(ITEM_CODE));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>(QUANTITY));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(UNIT_PRICE));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));

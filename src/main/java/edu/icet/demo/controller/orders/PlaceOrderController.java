@@ -7,6 +7,7 @@ import edu.icet.demo.bo.custom.ItemBo;
 import edu.icet.demo.bo.custom.OrderBo;
 import edu.icet.demo.bo.custom.OrderDetailBo;
 import edu.icet.demo.controller.CenterController;
+import edu.icet.demo.model.Item;
 import edu.icet.demo.model.Order;
 import edu.icet.demo.model.OrderDetail;
 import edu.icet.demo.model.TblOrderDetail;
@@ -378,9 +379,36 @@ public class PlaceOrderController implements Initializable {
             boolean res = orderDetailBo.addOrderDetail(orderDetail);
             if (!res) {
                 return false;
+            } else {
+                String[] arr = getNewQtyOnHand(ob.getItemCode(), ob.getQuantity());
+                Item item = new Item(
+                        ob.getItemCode(),
+                        ob.getDescription(),
+                        arr[1],
+                        ob.getUnitPrice(),
+                        arr[0]
+                );
+                boolean resIVT = itemBo.updateItem(item);
+                if(!resIVT){
+                    return false;
+                }
             }
         }
         return true;
+    }
+
+    private String[] getNewQtyOnHand(String itemCode, String qty){
+        try{
+            ResultSet resultSet = itemBo.getItem(itemCode);
+            resultSet.next();
+            String newValue = String.valueOf(resultSet.getInt("qtyOnHand")-Integer.parseInt(qty));
+            return new String[]{newValue, resultSet.getString("packSize")};
+        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
+        return new String[0];
     }
 
     @FXML
