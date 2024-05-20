@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class OrderDetail {
-    private String orderId;
-    private String itemCode;
+    private String id;
+    private String itemId;
     private String quantity;
 }

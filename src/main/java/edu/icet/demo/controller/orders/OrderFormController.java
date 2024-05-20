@@ -101,7 +101,7 @@ public class OrderFormController implements Initializable {
             dspCustomerId.setText("0" + resultSet.getString(CUSTOMER_ID));
             dspDateAndTime.setText(resultSet.getString(ORDER_DATE));
 
-            ResultSet resultSetCustomer = customerBo.getCustomer("0" + resultSet.getString(CUSTOMER_ID));
+            /*ResultSet resultSetCustomer = customerBo.getCustomer("0" + resultSet.getString(CUSTOMER_ID));
             resultSetCustomer.next();
             dspName.setText(resultSetCustomer.getString("name"));
             dspAddress.setText(resultSetCustomer.getString("address"));
@@ -126,7 +126,7 @@ public class OrderFormController implements Initializable {
                 );
                 tblOrderDetailList.add(orderDetail);
             }
-            setOrderDetailData(tblOrderDetailList);
+            setOrderDetailData(tblOrderDetailList);*/
         } catch (SQLException e) {
             btnSearch.setDisable(false);
             txtOrderId.setEditable(true);

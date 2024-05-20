@@ -4,128 +4,58 @@ import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.dao.custom.CustomerDao;
 import edu.icet.demo.entity.CustomerEntity;
 import edu.icet.demo.util.CrudUtil;
+import edu.icet.demo.util.HibernateUtil;
 import javafx.scene.control.Alert;
+import org.hibernate.Session;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean save(CustomerEntity entity) {
-        String sql = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
-        try {
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getCustomerId(),
-                    entity.getTitle(),
-                    entity.getName(),
-                    entity.getDateOfBarth(),
-                    entity.getSalary(),
-                    entity.getAddress(),
-                    entity.getCity(),
-                    entity.getProvince(),
-                    entity.getPostalCode()
-            );
-
-            if(Boolean.TRUE.equals(res)){
-                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                CenterController.alert.setContentText(entity.getCustomerId() + " Customer is entered into the system successfully.");
-                CenterController.alert.show();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-                CenterController.alert.setContentText("Failed! An error occurred while entering the "+entity.getCustomerId()+" customer.");
-                CenterController.alert.show();
-            }
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.persist(entity);
+        session.getTransaction().commit();
+        session.clear();
+        return true;
     }
 
     @Override
     public boolean update(CustomerEntity entity) {
-        String sql = "UPDATE customer SET title=?, name=?, dateOfBarth=?, salary=?, address=?, city=?, province=?, postalCode=? WHERE customerId=?";
-        try {
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getCustomerId(),
-                    entity.getTitle(),
-                    entity.getName(),
-                    entity.getDateOfBarth(),
-                    entity.getSalary(),
-                    entity.getAddress(),
-                    entity.getCity(),
-                    entity.getProvince(),
-                    entity.getPostalCode()
-            );
-
-            if(Boolean.TRUE.equals(res)){
-                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                CenterController.alert.setContentText(entity.getCustomerId() + " Customer update is successfully.");
-                CenterController.alert.show();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-                CenterController.alert.setContentText("Failed! An error occurred while updating the "+entity.getCustomerId()+" customer.");
-                CenterController.alert.show();
-            }
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return false;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.merge(entity);
+        session.getTransaction().commit();
+        session.clear();
+        return true;
     }
 
     @Override
-    public boolean delete(String id) {
-        String sql = "DELETE FROM customer WHERE customerId=?";
-        try{
-            Boolean res = CrudUtil.execute(sql, id);
-            if(Boolean.TRUE.equals(res)){
-                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                CenterController.alert.setContentText(id + " Customer delete is successfully.");
-                CenterController.alert.show();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-                CenterController.alert.setContentText("Failed! An error occurred while deleting the "+id+" customer.");
-                CenterController.alert.show();
-            }
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return false;
+    public boolean delete(CustomerEntity entity) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        session.remove(entity);
+        session.getTransaction().commit();
+        session.clear();
+        return true;
     }
 
     @Override
-    public ResultSet findById(String id) {
-        String sql = "SELECT * FROM customer WHERE customerId='"+id+"'";
-        try{
-            return CrudUtil.execute(sql, id);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return null;
+    public CustomerEntity get(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        CustomerEntity customerEntity = session.get(CustomerEntity.class, id);
+        session.getTransaction().commit();
+        session.clear();
+        return customerEntity;
     }
 
     @Override
-    public ResultSet findAll() {
-        String sql = "SELECT * FROM customer";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return null;
+    public List<CustomerEntity> getAll() {
+        Session session = HibernateUtil.getSession();
+        return session.createQuery("SELECT a FROM CustomerEntity a", CustomerEntity.class).getResultList();
     }
 }

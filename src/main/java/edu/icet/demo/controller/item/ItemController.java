@@ -140,7 +140,7 @@ public class ItemController implements Initializable {
         boolean res = itemBo.addItem(item);
         if (res) {
             CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            CenterController.alert.setContentText(item.getItemCode() + " Item is entered into the system successfully.");
+            //CenterController.alert.setContentText(item.getItemCode() + " Item is entered into the system successfully.");
             CenterController.alert.show();
             clearForm();
             tblItem.setItems(getTableData());
@@ -148,7 +148,7 @@ public class ItemController implements Initializable {
             dspNextItemCode.setText(getNextItemCode());
         } else {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText("Failed! An error occurred while adding the " + item.getItemCode() + ITEM_WORD);
+            //CenterController.alert.setContentText("Failed! An error occurred while adding the " + item.getItemCode() + ITEM_WORD);
             CenterController.alert.show();
         }
     }
@@ -309,21 +309,21 @@ public class ItemController implements Initializable {
         boolean res = itemBo.updateItem(item);
         if (res) {
             CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            CenterController.alert.setContentText(item.getItemCode() + " Item update is successfully.");
+            //CenterController.alert.setContentText(item.getItemCode() + " Item update is successfully.");
             CenterController.alert.show();
             clearForm();
             tblItem.setItems(getTableData());
             validateInputs();
         } else {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText("Failed! An error occurred while updating the " + item.getItemCode() + ITEM_WORD);
+            //CenterController.alert.setContentText("Failed! An error occurred while updating the " + item.getItemCode() + ITEM_WORD);
             CenterController.alert.show();
         }
     }
 
     @FXML
     private void deleteAction() {
-        boolean res = itemBo.deleteItem(txtItemCode.getText());
+        /*boolean res = itemBo.deleteItem(txtItemCode.getText());
         if (res) {
             CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
             CenterController.alert.setContentText(txtItemCode.getText() + " Item delete is successfully.");
@@ -336,7 +336,7 @@ public class ItemController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText("Failed! An error occurred while deleting the " + txtItemCode.getText() + ITEM_WORD);
             CenterController.alert.show();
-        }
+        }*/
     }
 
     private String getNextItemCode() {

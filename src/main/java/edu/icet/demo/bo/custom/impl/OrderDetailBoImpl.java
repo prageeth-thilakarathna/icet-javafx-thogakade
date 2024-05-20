@@ -16,7 +16,7 @@ public class OrderDetailBoImpl implements OrderDetailBo {
 
     @Override
     public ResultSet getOrderDetail(String id) {
-        return orderDetailDao.findById(id);
+        return null;
     }
 
     @Override

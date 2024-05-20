@@ -7,8 +7,9 @@ import edu.icet.demo.entity.CustomerEntity;
 import edu.icet.demo.model.Customer;
 import edu.icet.demo.util.DaoType;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public class CustomerBoImpl implements CustomerBo {
 
@@ -25,19 +26,22 @@ public class CustomerBoImpl implements CustomerBo {
     }
 
     @Override
-    public boolean deleteCustomer(String id) {
-        return customerDao.delete(id);
+    public boolean deleteCustomer(Customer customer) {
+        return customerDao.delete(new ModelMapper().map(customer, CustomerEntity.class));
     }
 
     @Override
-    public ResultSet getCustomer(String id) {
-        return customerDao.findById(id);
+    public Customer getCustomer(String id) {
+        CustomerEntity customerEntity = customerDao.get(id);
+        if(customerEntity!=null){
+            return new ModelMapper().map(customerEntity, Customer.class);
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public ResultSet getAllCustomers() {
-        return customerDao.findAll();
+    public List<Customer> getAllCustomers() {
+        return new ModelMapper().map(customerDao.getAll(), new TypeToken<List<Customer>>() {}.getType());
     }
-
-
 }

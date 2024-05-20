@@ -1,7 +1,15 @@
 
-†
-java:S1126‹"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¤Ï¼¾ø1J$381ddf86-2143-438d-96a8-3bad35ed74dc
-‹
-java:S1126‘"BReplace this if-then-else statement by a single method invocation.(¾Òð¯úÿÿÿÿ8¤Ï¼¾ø1J$e2bffbe3-6627-4d1a-8180-836833ede7f3
-‹
-java:S1126Í"BReplace this if-then-else statement by a single method invocation.(ÈòÖèøÿÿÿÿ8¤Ï¼¾ø1J$90c99726-87c7-4d0e-82ee-dc8a055ceedd
+„
+java:S1488¹"fImmediately return this expression instead of assigning it to the temporary variable "customerIdList".(´‚ú›8ù´Ï£ù1
+X	java:S125h"<This block of commented-out lines of code should be removed.(½‘Ñ³8Ÿ¶Ï£ù1
+Y	java:S125º"<This block of commented-out lines of code should be removed.(½‘Ñ³8®¶Ï£ù1
+`
+java:S1126‹"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¾¶Ï£ù1
+e
+java:S1126‘"BReplace this if-then-else statement by a single method invocation.(¾Òð¯úÿÿÿÿ8¾¶Ï£ù1
+e
+java:S1126Í"BReplace this if-then-else statement by a single method invocation.(ÈòÖèøÿÿÿÿ8Î¶Ï£ù1
+M
+java:S1068["+Remove this unused "ADDRESS" private field.(ºÊŒ’øÿÿÿÿ8í¶Ï£ù1
+K
+java:S1068c".Remove this unused "customerBo" private field.(¶í‹8í¶Ï£ù1

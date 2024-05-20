@@ -16,12 +16,12 @@ public class ItemBoImpl implements ItemBo {
 
     @Override
     public ResultSet getItem(String id) {
-        return itemDao.findById(id);
+        return null;
     }
 
     @Override
     public ResultSet getAllItems() {
-        return itemDao.findAll();
+        return null;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ItemBoImpl implements ItemBo {
     }
 
     @Override
-    public boolean deleteItem(String id) {
-        return itemDao.delete(id);
+    public boolean deleteItem(Item item) {
+        return true;
     }
 }

@@ -9,8 +9,8 @@ import javafx.scene.control.Alert;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDetailDaoImpl implements OrderDetailDao {
-    @Override
+public class OrderDetailDaoImpl {
+    /*@Override
     public boolean save(OrderDetailEntity entity) {
         String sql = "INSERT INTO orderDetail VALUES(?,?,?)";
         try{
@@ -35,7 +35,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(OrderDetailEntity entity) {
         return false;
     }
 
@@ -55,5 +55,5 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     @Override
     public ResultSet findAll() {
         return null;
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Item {
-    private String itemCode;
+    private String id;
     private String description;
     private String packSize;
     private String unitPrice;

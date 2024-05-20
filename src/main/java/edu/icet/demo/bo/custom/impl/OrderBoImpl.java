@@ -16,17 +16,17 @@ public class OrderBoImpl implements OrderBo {
 
     @Override
     public ResultSet getAllOrders() {
-        return orderDao.findAll();
+        return null;
     }
 
     @Override
     public ResultSet getOrder(String id) {
-        return orderDao.findById(id);
+        return null;
     }
 
     @Override
     public boolean deleteOrder(String id) {
-        return orderDao.delete(id);
+        return false;
     }
 
     @Override

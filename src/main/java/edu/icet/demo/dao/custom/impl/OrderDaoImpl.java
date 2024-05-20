@@ -9,8 +9,8 @@ import javafx.scene.control.Alert;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDaoImpl implements OrderDao {
-    @Override
+public class OrderDaoImpl {
+    /*@Override
     public boolean save(OrderEntity entity) {
         String sql = "INSERT INTO `order` VALUES(?,?,?)";
         try{
@@ -35,25 +35,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public boolean delete(String id) {
-        String sql = "DELETE FROM `order` WHERE orderId=?";
-        try{
-            Boolean res = CrudUtil.execute(sql, id);
-            if(Boolean.TRUE.equals(res)){
-                CenterController.alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                CenterController.alert.setContentText(id + " Order delete is successfully.");
-                CenterController.alert.show();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-                CenterController.alert.setContentText("Failed! An error occurred while deleting the "+id+" order.");
-                CenterController.alert.show();
-            }
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
+    public boolean delete(OrderEntity entity) {
         return false;
     }
 
@@ -107,5 +89,5 @@ public class OrderDaoImpl implements OrderDao {
             CenterController.alert.show();
         }
         return null;
-    }
+    }*/
 }

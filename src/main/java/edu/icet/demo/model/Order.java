@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Order {
-    private String orderId;
+    private String id;
     private String orderDate;
     private String customerId;
 }

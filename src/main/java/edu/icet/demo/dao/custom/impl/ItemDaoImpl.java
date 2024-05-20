@@ -9,11 +9,11 @@ import javafx.scene.control.Alert;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ItemDaoImpl implements ItemDao {
-    @Override
+public class ItemDaoImpl {
+    //@Override
     public boolean save(ItemEntity entity) {
         String sql = "INSERT INTO item VALUES(?,?,?,?,?)";
-        try{
+        /*try{
             Boolean res = CrudUtil.execute(
                     sql,
                     entity.getItemCode(),
@@ -27,14 +27,14 @@ public class ItemDaoImpl implements ItemDao {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return false;
     }
 
-    @Override
+    //@Override
     public boolean update(ItemEntity entity) {
         String sql = "UPDATE item SET description=?, packSize=?, unitPrice=?, qtyOnHand=? WHERE itemCode=?";
-        try{
+        /*try{
             Boolean res = CrudUtil.execute(
                     sql,
                     entity.getItemCode(),
@@ -48,24 +48,16 @@ public class ItemDaoImpl implements ItemDao {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return false;
     }
 
-    @Override
-    public boolean delete(String id) {
-        String sql = "DELETE FROM item WHERE itemCode=?";
-        try{
-            return Boolean.TRUE.equals(CrudUtil.execute(sql, id));
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
+    //@Override
+    public boolean delete(ItemEntity entity) {
         return false;
     }
 
-    @Override
+    //@Override
     public ResultSet findById(String id) {
         String sql = "SELECT * FROM item WHERE itemCode='"+id+"'";
         try{
@@ -78,7 +70,7 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
-    @Override
+    //@Override
     public ResultSet findAll() {
         String sql = "SELECT * FROM item";
         try{
@@ -91,7 +83,7 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
-    @Override
+    //@Override
     public ResultSet count() {
         String sql = "SELECT COUNT(*) AS row_count FROM item";
         try{
@@ -104,7 +96,7 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
-    @Override
+    //@Override
     public ResultSet findLast() {
         String sql = "SELECT * FROM item ORDER BY itemCode DESC LIMIT 1";
         try{

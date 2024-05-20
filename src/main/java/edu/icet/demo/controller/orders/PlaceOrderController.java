@@ -101,7 +101,7 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     private void customerIdSelectAction() {
-        try {
+        /*try {
             ResultSet resultSet = customerBo.getCustomer(customerIDs.getValue());
             if (resultSet.next()) {
                 if (resultSet.getString("name").length() < 10) {
@@ -133,7 +133,7 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
     }
 
     @FXML
@@ -183,7 +183,7 @@ public class PlaceOrderController implements Initializable {
 
     private ObservableList<String> getCustomerIDs() {
         ObservableList<String> customerIdList = FXCollections.observableArrayList();
-        try {
+        /*try {
             ResultSet resultSet = customerBo.getAllCustomers();
             while (resultSet.next()) {
                 customerIdList.add("0" + resultSet.getString("customerId"));
@@ -192,7 +192,7 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return customerIdList;
     }
 
