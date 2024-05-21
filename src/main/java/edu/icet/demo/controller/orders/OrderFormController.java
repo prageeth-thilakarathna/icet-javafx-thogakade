@@ -177,7 +177,7 @@ public class OrderFormController implements Initializable {
     }
 
     private boolean updateInventory(String orderId){
-        try{
+        /*try{
             ResultSet resultSet = orderDetailBo.getOrderDetail(orderId);
             while (resultSet.next()){
                 String[] arr = getNewQtyOnHand(resultSet.getString(ITEM_CODE), resultSet.getString(QUANTITY));
@@ -198,12 +198,12 @@ public class OrderFormController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return false;
     }
 
     private String[] getNewQtyOnHand(String itemCode, String qty){
-        try{
+        /*try{
             ResultSet resultSet = itemBo.getItem(itemCode);
             resultSet.next();
             String newValue = String.valueOf(resultSet.getInt("qtyOnHand")+Integer.parseInt(qty));
@@ -212,7 +212,7 @@ public class OrderFormController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return new String[0];
     }
 

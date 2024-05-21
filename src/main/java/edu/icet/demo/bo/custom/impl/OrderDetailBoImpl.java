@@ -20,7 +20,7 @@ public class OrderDetailBoImpl implements OrderDetailBo {
     }
 
     @Override
-    public boolean addOrderDetail(OrderDetail orderDetail) {
-        return orderDetailDao.save(new ModelMapper().map(orderDetail, OrderDetailEntity.class));
+    public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetailDao.save(new ModelMapper().map(orderDetail, OrderDetailEntity.class));
     }
 }

@@ -138,7 +138,7 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     private void itemCodeSelectAction() {
-        try {
+        /*try {
             ResultSet resultSet = itemBo.getItem(itemCODEs.getValue());
             if (resultSet.next()) {
                 if (resultSet.getString(DESCRIPTION).length() < 10) {
@@ -157,7 +157,7 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
     }
 
     @FXML
@@ -198,7 +198,7 @@ public class PlaceOrderController implements Initializable {
 
     private ObservableList<String> getItemCODEs() {
         ObservableList<String> itemCodeList = FXCollections.observableArrayList();
-        try {
+        /*try {
             ResultSet resultSet = itemBo.getAllItems();
             while (resultSet.next()) {
                 itemCodeList.add(resultSet.getString(ITEM_CODE));
@@ -207,7 +207,7 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return itemCodeList;
     }
 
@@ -315,7 +315,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void addOrderDetail(String itemCode, String quantity) {
-        try {
+        /*try {
             ResultSet resultSet = itemBo.getItem(itemCode);
             resultSet.next();
 
@@ -339,12 +339,12 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
     }
 
     @FXML
     private void placeOrderAction() {
-        Date date = new Date();
+        /*Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateAndTime = simpleDateFormat.format(date) + " " + timeDisplay.getText();
         Order order = new Order(
@@ -366,11 +366,11 @@ public class PlaceOrderController implements Initializable {
                 tblOrderDetails = FXCollections.observableArrayList();
                 tblOrderDetail.setItems(tblOrderDetails);
             }
-        }
+        }*/
     }
 
     private boolean addOrderDetail() {
-        for (TblOrderDetail ob : tblOrderDetails) {
+        /*for (TblOrderDetail ob : tblOrderDetails) {
             OrderDetail orderDetail = new OrderDetail(
                     orderIdDisplay.getText(),
                     ob.getItemCode(),
@@ -393,12 +393,12 @@ public class PlaceOrderController implements Initializable {
                     return false;
                 }
             }
-        }
+        }*/
         return true;
     }
 
     private String[] getNewQtyOnHand(String itemCode, String qty){
-        try{
+        /*try{
             ResultSet resultSet = itemBo.getItem(itemCode);
             resultSet.next();
             String newValue = String.valueOf(resultSet.getInt("qtyOnHand")-Integer.parseInt(qty));
@@ -407,7 +407,7 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return new String[0];
     }
 

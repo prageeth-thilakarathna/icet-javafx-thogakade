@@ -7,45 +7,46 @@ import edu.icet.demo.entity.ItemEntity;
 import edu.icet.demo.model.Item;
 import edu.icet.demo.util.DaoType;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public class ItemBoImpl implements ItemBo {
 
     private final ItemDao itemDao = DaoFactory.getInstance().getDao(DaoType.ITEM);
 
     @Override
-    public ResultSet getItem(String id) {
-        return null;
+    public Item getItem(String id) {
+        return new ModelMapper().map(itemDao.get(id), Item.class);
     }
 
     @Override
-    public ResultSet getAllItems() {
-        return null;
+    public List<Item> getAllItems() {
+        return new ModelMapper().map(itemDao.getAll(), new TypeToken<List<Item>>() {}.getType());
     }
 
     @Override
-    public ResultSet getTableRowCount() {
+    public int getTableRowCount() {
         return itemDao.count();
     }
 
     @Override
-    public ResultSet getTableLastId() {
+    public ItemEntity getTableLastId() {
         return itemDao.findLast();
     }
 
     @Override
-    public boolean addItem(Item item) {
-        return itemDao.save(new ModelMapper().map(item, ItemEntity.class));
+    public void addItem(Item item) {
+        itemDao.save(new ModelMapper().map(item, ItemEntity.class));
     }
 
     @Override
-    public boolean updateItem(Item item) {
-        return itemDao.update(new ModelMapper().map(item, ItemEntity.class));
+    public void updateItem(Item item) {
+        itemDao.update(new ModelMapper().map(item, ItemEntity.class));
     }
 
     @Override
-    public boolean deleteItem(Item item) {
-        return true;
+    public void deleteItem(Item item) {
+        itemDao.delete(new ModelMapper().map(item, ItemEntity.class));
     }
 }

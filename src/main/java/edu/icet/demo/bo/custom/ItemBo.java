@@ -1,22 +1,23 @@
 package edu.icet.demo.bo.custom;
 
 import edu.icet.demo.bo.SuperBo;
+import edu.icet.demo.entity.ItemEntity;
 import edu.icet.demo.model.Item;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public interface ItemBo extends SuperBo {
-    ResultSet getItem(String id);
+    Item getItem(String id);
 
-    ResultSet getAllItems();
+    List<Item> getAllItems();
 
-    ResultSet getTableRowCount();
+    int getTableRowCount();
 
-    ResultSet getTableLastId();
+    ItemEntity getTableLastId();
 
-    boolean addItem(Item item);
+    void addItem(Item item);
 
-    boolean updateItem(Item item);
+    void updateItem(Item item);
 
-    boolean deleteItem(Item item);
+    void deleteItem(Item item);
 }

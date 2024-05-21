@@ -1,3 +1,7 @@
 
 ‹
-java:S1126«"BReplace this if-then-else statement by a single method invocation.(–ÿÜ þÿÿÿÿ8îüº¦ù1J$813ae115-ae8d-4c6f-bdd3-e28058dd4b52
+java:S1126Ÿ"BReplace this if-then-else statement by a single method invocation.(–ÿÜ þÿÿÿÿ8ò¸žªù1J$9c717977-fa28-4a21-adeb-fc017d3c46df
+s
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8í™ªÐù1J$fe9ca73c-009a-4ec7-ad68-ec62c7c0deca
+z
+java:S1068d"7Remove this unused "CUSTOMER_ALERT_NAME" private field.(üó•¢8ÁóŸªù1J$a6ab750e-eea0-4e94-8d75-c773eef62812

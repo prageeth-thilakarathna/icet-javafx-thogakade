@@ -1,111 +1,126 @@
 package edu.icet.demo.dao.custom.impl;
 
-import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.dao.custom.ItemDao;
 import edu.icet.demo.entity.ItemEntity;
-import edu.icet.demo.util.CrudUtil;
-import javafx.scene.control.Alert;
+import edu.icet.demo.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class ItemDaoImpl {
-    //@Override
-    public boolean save(ItemEntity entity) {
-        String sql = "INSERT INTO item VALUES(?,?,?,?,?)";
-        /*try{
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getItemCode(),
-                    entity.getDescription(),
-                    entity.getPackSize(),
-                    entity.getUnitPrice(),
-                    entity.getQtyOnHand()
-            );
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }*/
-        return false;
-    }
-
-    //@Override
-    public boolean update(ItemEntity entity) {
-        String sql = "UPDATE item SET description=?, packSize=?, unitPrice=?, qtyOnHand=? WHERE itemCode=?";
-        /*try{
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getItemCode(),
-                    entity.getDescription(),
-                    entity.getPackSize(),
-                    entity.getUnitPrice(),
-                    entity.getQtyOnHand()
-            );
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }*/
-        return false;
-    }
-
-    //@Override
-    public boolean delete(ItemEntity entity) {
-        return false;
-    }
-
-    //@Override
-    public ResultSet findById(String id) {
-        String sql = "SELECT * FROM item WHERE itemCode='"+id+"'";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+public class ItemDaoImpl implements ItemDao {
+    @Override
+    public void save(ItemEntity entity) {
+        Session session = HibernateUtil.getItemSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.persist(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
     }
 
-    //@Override
-    public ResultSet findAll() {
-        String sql = "SELECT * FROM item";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    @Override
+    public void update(ItemEntity entity) {
+        Session session = HibernateUtil.getItemSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.merge(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
     }
 
-    //@Override
-    public ResultSet count() {
-        String sql = "SELECT COUNT(*) AS row_count FROM item";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    @Override
+    public void delete(ItemEntity entity) {
+        Session session = HibernateUtil.getItemSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.remove(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
     }
 
-    //@Override
-    public ResultSet findLast() {
-        String sql = "SELECT * FROM item ORDER BY itemCode DESC LIMIT 1";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    @Override
+    public ItemEntity get(String id) {
+        Session session = HibernateUtil.getItemSession();
+        Transaction tx = null;
+        ItemEntity itemEntity;
+        try {
+            tx = session.beginTransaction();
+            itemEntity = session.get(ItemEntity.class, id);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
+        return itemEntity;
+    }
+
+    @Override
+    public List<ItemEntity> getAll() {
+        Session session = HibernateUtil.getItemSession();
+        Transaction tx = null;
+        List<ItemEntity> itemEntityList;
+        try {
+            tx = session.beginTransaction();
+            itemEntityList = session.createQuery("SELECT a FROM ItemEntity a", ItemEntity.class).getResultList();
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return itemEntityList;
+    }
+
+    @Override
+    public int count() {
+        Session session = HibernateUtil.getItemSession();
+        AtomicInteger count = new AtomicInteger();
+        session.doWork(connection -> {
+            try(Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS row_count FROM item");
+                resultSet.next();
+                count.set(resultSet.getInt("row_count"));
+            }
+        });
+        return count.get();
+    }
+
+    @Override
+    public ItemEntity findLast() {
+        Session session = HibernateUtil.getItemSession();
+        ItemEntity item = new ItemEntity();
+        session.doWork(connection -> {
+            try(Statement statement = connection.createStatement()){
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM item ORDER BY id DESC LIMIT 1");
+                resultSet.next();
+                item.setId(resultSet.getString("id"));
+            }
+        });
+        return item;
     }
 }

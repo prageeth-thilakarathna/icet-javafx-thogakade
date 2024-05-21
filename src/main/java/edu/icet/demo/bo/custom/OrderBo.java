@@ -16,5 +16,5 @@ public interface OrderBo extends SuperBo {
 
     ResultSet getTableLastId();
 
-    boolean placeOrder(Order order);
+    void placeOrder(Order order);
 }

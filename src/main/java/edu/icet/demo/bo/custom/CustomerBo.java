@@ -6,11 +6,11 @@ import edu.icet.demo.model.Customer;
 import java.util.List;
 
 public interface CustomerBo extends SuperBo {
-    boolean addCustomer(Customer customer);
+    void addCustomer(Customer customer);
 
-    boolean updateCustomer(Customer customer);
+    void updateCustomer(Customer customer);
 
-    boolean deleteCustomer(Customer customer);
+    void deleteCustomer(Customer customer);
 
     Customer getCustomer(String id);
 

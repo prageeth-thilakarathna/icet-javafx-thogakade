@@ -40,7 +40,7 @@ public class OrderBoImpl implements OrderBo {
     }
 
     @Override
-    public boolean placeOrder(Order order) {
-        return orderDao.save(new ModelMapper().map(order, OrderEntity.class));
+    public void placeOrder(Order order) {
+        orderDao.save(new ModelMapper().map(order, OrderEntity.class));
     }
 }

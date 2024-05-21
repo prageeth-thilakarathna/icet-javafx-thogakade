@@ -16,18 +16,18 @@ public class CustomerBoImpl implements CustomerBo {
     private final CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
 
     @Override
-    public boolean addCustomer(Customer customer) {
-        return customerDao.save(new ModelMapper().map(customer, CustomerEntity.class));
+    public void addCustomer(Customer customer) {
+        customerDao.save(new ModelMapper().map(customer, CustomerEntity.class));
     }
 
     @Override
-    public boolean updateCustomer(Customer customer) {
-        return customerDao.update(new ModelMapper().map(customer, CustomerEntity.class));
+    public void updateCustomer(Customer customer) {
+        customerDao.update(new ModelMapper().map(customer, CustomerEntity.class));
     }
 
     @Override
-    public boolean deleteCustomer(Customer customer) {
-        return customerDao.delete(new ModelMapper().map(customer, CustomerEntity.class));
+    public void deleteCustomer(Customer customer) {
+        customerDao.delete(new ModelMapper().map(customer, CustomerEntity.class));
     }
 
     @Override

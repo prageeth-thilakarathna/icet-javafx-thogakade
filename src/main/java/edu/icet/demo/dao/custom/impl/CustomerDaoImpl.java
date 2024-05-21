@@ -1,61 +1,95 @@
 package edu.icet.demo.dao.custom.impl;
 
-import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.dao.custom.CustomerDao;
 import edu.icet.demo.entity.CustomerEntity;
-import edu.icet.demo.util.CrudUtil;
 import edu.icet.demo.util.HibernateUtil;
-import javafx.scene.control.Alert;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
     @Override
-    public boolean save(CustomerEntity entity) {
-        Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        session.persist(entity);
-        session.getTransaction().commit();
-        session.clear();
-        return true;
+    public void save(CustomerEntity entity) {
+        Session session = HibernateUtil.getCustomerSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.persist(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public boolean update(CustomerEntity entity) {
-        Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        session.merge(entity);
-        session.getTransaction().commit();
-        session.clear();
-        return true;
+    public void update(CustomerEntity entity) {
+        Session session = HibernateUtil.getCustomerSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.merge(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public boolean delete(CustomerEntity entity) {
-        Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        session.remove(entity);
-        session.getTransaction().commit();
-        session.clear();
-        return true;
+    public void delete(CustomerEntity entity) {
+        Session session = HibernateUtil.getCustomerSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.remove(entity);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public CustomerEntity get(String id) {
-        Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        CustomerEntity customerEntity = session.get(CustomerEntity.class, id);
-        session.getTransaction().commit();
-        session.clear();
+        Session session = HibernateUtil.getCustomerSession();
+        Transaction tx = null;
+        CustomerEntity customerEntity;
+        try {
+            tx = session.beginTransaction();
+            customerEntity = session.get(CustomerEntity.class, id);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
         return customerEntity;
     }
 
     @Override
     public List<CustomerEntity> getAll() {
-        Session session = HibernateUtil.getSession();
-        return session.createQuery("SELECT a FROM CustomerEntity a", CustomerEntity.class).getResultList();
+        Session session = HibernateUtil.getCustomerSession();
+        Transaction tx = null;
+        List<CustomerEntity> customerEntityList;
+        try {
+            tx = session.beginTransaction();
+            customerEntityList = session.createQuery("SELECT a FROM CustomerEntity a", CustomerEntity.class).getResultList();
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return customerEntityList;
     }
 }

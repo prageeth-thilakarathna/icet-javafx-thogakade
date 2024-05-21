@@ -116,17 +116,11 @@ public class CustomerFormController implements Initializable {
                     provinceInput.getText(),
                     postalCodeInput.getText()
             );
-            boolean res = customerBo.addCustomer(customer);
-            if (res) {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText(customerIdInput.getText() + " Customer is entered into the system successfully.");
-                CenterController.alert.show();
-                clearForm();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-                CenterController.alert.setContentText("Failed! An error occurred while entering the " + customerIdInput.getText() + CUSTOMER_ALERT_NAME);
-                CenterController.alert.show();
-            }
+            customerBo.addCustomer(customer);
+            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+            CenterController.alert.setContentText(customerIdInput.getText() + " Customer is entered into the system successfully.");
+            CenterController.alert.show();
+            clearForm();
         } catch (Exception exception) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(exception.getMessage());
@@ -390,17 +384,11 @@ public class CustomerFormController implements Initializable {
                     postalCodeInput.getText()
             );
 
-            boolean res = customerBo.updateCustomer(customer);
-            if (res) {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText(customerIdInput.getText() + " Customer update is successfully.");
-                CenterController.alert.show();
-                clearForm();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText("Failed! An error occurred while updating the " + customerIdInput.getText() + CUSTOMER_ALERT_NAME);
-                CenterController.alert.show();
-            }
+            customerBo.updateCustomer(customer);
+            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+            CenterController.alert.setContentText(customerIdInput.getText() + " Customer update is successfully.");
+            CenterController.alert.show();
+            clearForm();
         } catch (Exception exception) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(exception.getMessage());
@@ -449,17 +437,11 @@ public class CustomerFormController implements Initializable {
                     postalCodeInput.getText()
             );
 
-            boolean res = customerBo.deleteCustomer(customer);
-            if (res) {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText(customerIdInput.getText() + " Customer delete is successfully.");
-                CenterController.alert.show();
-                clearForm();
-            } else {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText("Failed! An error occurred while deleting the " + customerIdInput.getText() + CUSTOMER_ALERT_NAME);
-                CenterController.alert.show();
-            }
+            customerBo.deleteCustomer(customer);
+            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+            CenterController.alert.setContentText(customerIdInput.getText() + " Customer delete is successfully.");
+            CenterController.alert.show();
+            clearForm();
         } catch (Exception exception) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(exception.getMessage());
@@ -499,8 +481,13 @@ public class CustomerFormController implements Initializable {
 
     private ObservableList<Customer> getTableData() {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
-        List<Customer> customerList = customerBo.getAllCustomers();
-        allCustomers.addAll(customerList);
+        try{
+            allCustomers.addAll(customerBo.getAllCustomers());
+        } catch (Exception e){
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
         return allCustomers;
     }
 

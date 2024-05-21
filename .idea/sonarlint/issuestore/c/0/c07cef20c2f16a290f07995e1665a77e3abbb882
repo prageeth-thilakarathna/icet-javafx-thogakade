@@ -1,15 +1,44 @@
 
-„
-java:S1488¹"fImmediately return this expression instead of assigning it to the temporary variable "customerIdList".(´‚ú›8ù´Ï£ù1
-X	java:S125h"<This block of commented-out lines of code should be removed.(½‘Ñ³8Ÿ¶Ï£ù1
-Y	java:S125º"<This block of commented-out lines of code should be removed.(½‘Ñ³8®¶Ï£ù1
-`
-java:S1126‹"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8¾¶Ï£ù1
-e
-java:S1126‘"BReplace this if-then-else statement by a single method invocation.(¾Òð¯úÿÿÿÿ8¾¶Ï£ù1
-e
-java:S1126Í"BReplace this if-then-else statement by a single method invocation.(ÈòÖèøÿÿÿÿ8Î¶Ï£ù1
-M
-java:S1068["+Remove this unused "ADDRESS" private field.(ºÊŒ’øÿÿÿÿ8í¶Ï£ù1
-K
-java:S1068c".Remove this unused "customerBo" private field.(¶í‹8í¶Ï£ù1
+ª
+java:S1488¹"fImmediately return this expression instead of assigning it to the temporary variable "customerIdList".(´‚ú›8Èâ°«ù1J$4de2419d-54f8-4e38-9743-80ae60dbaccf
+­
+java:S1488È"dImmediately return this expression instead of assigning it to the temporary variable "itemCodeList".(©–¸ïùÿÿÿÿ8Á‚²«ù1J$4d852ef2-a661-496e-9c93-1b3d98b29d12
+~	java:S125h"<This block of commented-out lines of code should be removed.(½‘Ñ³8‘€†©ù1J$9f9ff076-db86-4351-9258-cfcf20a8dedf
+	java:S125"<This block of commented-out lines of code should be removed.(½‘Ñ³8¡€†©ù1J$71ec3736-99ce-4940-a28e-2ff68a72dfe2
+	java:S125º"<This block of commented-out lines of code should be removed.(½‘Ñ³8¨ã°«ù1J$f9cc9d94-2be0-4028-a1d0-021575dcca2f
+	java:S125É"<This block of commented-out lines of code should be removed.(½‘Ñ³8ºê±«ù1J$7155d9aa-e728-454f-b082-48100b2235dd
+†
+java:S1126‹"BReplace this if-then-else statement by a single method invocation.(Ç×ùß8ƒ²«ù1J$157d53d4-b37c-49ee-9764-3beff7c7bddf
+‹
+java:S1126‘"BReplace this if-then-else statement by a single method invocation.(¾Òð¯úÿÿÿÿ8ƒ²«ù1J$b2393676-8442-4257-9c3c-48fef3de28ec
+†
+java:S1172½"=Remove these unused method parameters "itemCode", "quantity".(ôíÌúÿÿÿÿ8¹ä²«ù1J$34ac31c6-af4f-42de-bc23-b9dd4a44af66
+	java:S125¾"<This block of commented-out lines of code should be removed.(½‘Ñ³8¹ä²«ù1J$8289b9d2-f81d-4c93-b6b4-2df1b8b879db
+„	java:S125Û"<This block of commented-out lines of code should be removed.(Ùâáëýÿÿÿÿ8Ÿƒ²«ù1J$02051cee-ebbc-4daf-89c0-9a58eeff9ada
+}
+java:S3400"9Remove this method and declare a constant for this value.(§¼Éç8‰Ÿ®ªù1J$29dd4bad-9a8b-4231-b015-752ea135237e
+~	java:S125õ"<This block of commented-out lines of code should be removed.(‘É–C8‰Ÿ®ªù1J$e92ad148-ba9c-4c9e-ae16-5a233f70258b
+|
+java:S1172"8Remove these unused method parameters "itemCode", "qty".(¢ð³8Ì°´«ù1J$df9d66d7-b8b7-47f5-892d-2f692952d49e
+	java:S125‘"<This block of commented-out lines of code should be removed.(½‘Ñ³8Ì°´«ù1J$ebade4d9-fa1b-4211-8743-58724aaa7daa
+R
+java:S1128
+"5Remove this unused import 'edu.icet.demo.model.Item'.(Íåäì8ð’á¹ù1
+X
+java:S1128"6Remove this unused import 'edu.icet.demo.model.Order'.(€¢¤ïþÿÿÿÿ8ð’á¹ù1
+^
+java:S1128"<Remove this unused import 'edu.icet.demo.model.OrderDetail'.(½…Ïðÿÿÿÿÿ8ð’á¹ù1
+s
+java:S1068["+Remove this unused "ADDRESS" private field.(ºÊŒ’øÿÿÿÿ8Ð€†©ù1J$35446ccb-0676-4ec4-9881-00ec03bae094
+v
+java:S1068`"3Remove this unused "tblOrderDetails" private field.(ïñƒ•8Èä²«ù1J$ce4bbca8-5245-4b6e-916d-04a6bf5925fb
+t
+java:S1068b"1Remove this unused "orderDetailBo" private field.(„ºãì8Ð€†©ù1J$bbc43be6-bb74-43cf-bbae-b7c3b2e4015b
+q
+java:S1068c".Remove this unused "customerBo" private field.(¶í‹8Ð€†©ù1J$27347d1b-73d0-4cd8-bf31-93f53a977e40
+r
+java:S1068d"*Remove this unused "itemBo" private field.(Û¬âêýÿÿÿÿ8Û°´«ù1J$95a420fa-c813-4682-843a-d51657376400
+w
+java:S1144ô"3Remove this unused private "addOrderDetail" method.(‚ÕºÃ8™Ÿ®ªù1J$f15cb354-7709-4fdb-bb3b-3e64644ba3f5
+x
+java:S1144"4Remove this unused private "getNewQtyOnHand" method.(¢ð³8Ð€†©ù1J$f21efedd-2352-47de-92f2-ee2e452fcfde

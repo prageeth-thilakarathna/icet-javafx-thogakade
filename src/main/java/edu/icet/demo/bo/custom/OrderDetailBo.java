@@ -8,5 +8,5 @@ import java.sql.ResultSet;
 public interface OrderDetailBo extends SuperBo {
     ResultSet getOrderDetail(String id);
 
-    boolean addOrderDetail(OrderDetail orderDetail);
+    void addOrderDetail(OrderDetail orderDetail);
 }

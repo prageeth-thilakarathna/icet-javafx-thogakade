@@ -17,6 +17,6 @@ public class ItemEntity {
     private String id;
     private String description;
     private String packSize;
-    private String unitPrice;
-    private String qtyOnHand;
+    private Double unitPrice;
+    private Integer qtyOnHand;
 }

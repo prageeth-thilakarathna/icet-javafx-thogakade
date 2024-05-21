@@ -1,13 +1,15 @@
 package edu.icet.demo.dao;
 
-import edu.icet.demo.entity.CustomerEntity;
+import java.util.List;
 
 public interface CrudDao <T> extends SuperDao{
-    boolean save(T entity);
+    void save(T entity);
 
-    boolean update(T entity);
+    void update(T entity);
 
-    boolean delete(T entity);
+    void delete(T entity);
 
-    CustomerEntity get(String id);
+    T get(String id);
+
+    List<T> getAll();
 }
