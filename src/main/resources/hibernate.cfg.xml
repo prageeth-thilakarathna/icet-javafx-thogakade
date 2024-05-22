@@ -14,8 +14,11 @@
         <property name="connection.password">200284</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="show_sql">true</property>
-
-        <!-- DB schema will be updated if needed -->
         <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="edu.icet.demo.entity.CustomerEntity"/>
+        <mapping class="edu.icet.demo.entity.ItemEntity"/>
+        <mapping class="edu.icet.demo.entity.OrderEntity"/>
+        <mapping class="edu.icet.demo.entity.OrderDetailEntity"/>
     </session-factory>
 </hibernate-configuration>

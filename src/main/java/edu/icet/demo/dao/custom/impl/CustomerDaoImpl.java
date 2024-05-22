@@ -11,7 +11,7 @@ import java.util.List;
 public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void save(CustomerEntity entity) {
-        Session session = HibernateUtil.getCustomerSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -27,7 +27,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void update(CustomerEntity entity) {
-        Session session = HibernateUtil.getCustomerSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -43,7 +43,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void delete(CustomerEntity entity) {
-        Session session = HibernateUtil.getCustomerSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -59,7 +59,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public CustomerEntity get(String id) {
-        Session session = HibernateUtil.getCustomerSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         CustomerEntity customerEntity;
         try {
@@ -70,14 +70,14 @@ public class CustomerDaoImpl implements CustomerDao {
             if(tx!=null) tx.rollback();
             throw e;
         } finally {
-            session.close();
+            session.clear();
         }
         return customerEntity;
     }
 
     @Override
     public List<CustomerEntity> getAll() {
-        Session session = HibernateUtil.getCustomerSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         List<CustomerEntity> customerEntityList;
         try {

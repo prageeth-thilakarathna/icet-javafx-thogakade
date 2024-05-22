@@ -7,4 +7,6 @@ public interface ItemDao extends CrudDao<ItemEntity> {
     int count();
 
     ItemEntity findLast();
+
+    void modifyItem(ItemEntity itemEntity);
 }

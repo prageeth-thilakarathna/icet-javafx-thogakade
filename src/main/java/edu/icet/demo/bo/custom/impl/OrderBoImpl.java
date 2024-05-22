@@ -20,8 +20,8 @@ public class OrderBoImpl implements OrderBo {
     }
 
     @Override
-    public ResultSet getOrder(String id) {
-        return null;
+    public Order getOrder(String id) {
+        return new ModelMapper().map(orderDao.get(id), Order.class);
     }
 
     @Override
@@ -30,13 +30,13 @@ public class OrderBoImpl implements OrderBo {
     }
 
     @Override
-    public ResultSet getTableRowCount() {
+    public int getTableRowCount() {
         return orderDao.count();
     }
 
     @Override
-    public ResultSet getTableLastId() {
-        return orderDao.findLast();
+    public Order getTableLastId() {
+        return new ModelMapper().map(orderDao.findLast(), Order.class);
     }
 
     @Override

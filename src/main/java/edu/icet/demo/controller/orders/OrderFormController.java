@@ -91,7 +91,7 @@ public class OrderFormController implements Initializable {
 
     @FXML
     private void searchAction() {
-        try {
+        /*try {
             ResultSet resultSet = orderBo.getOrder(txtOrderId.getText());
             resultSet.next();
             txtOrderId.setEditable(false);
@@ -126,7 +126,7 @@ public class OrderFormController implements Initializable {
                 );
                 tblOrderDetailList.add(orderDetail);
             }
-            setOrderDetailData(tblOrderDetailList);*/
+            setOrderDetailData(tblOrderDetailList);
         } catch (SQLException e) {
             btnSearch.setDisable(false);
             txtOrderId.setEditable(true);
@@ -136,7 +136,7 @@ public class OrderFormController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
     }
 
     private void setOrderDetailData(ObservableList<TblOrderDetail> tblOrderDetail) {
@@ -232,7 +232,7 @@ public class OrderFormController implements Initializable {
 
     private ObservableList<Order> getOrdersTableData() {
         ObservableList<Order> allOrders = FXCollections.observableArrayList();
-        try {
+        /*try {
             ResultSet resultSet = orderBo.getAllOrders();
             while (resultSet.next()) {
                 Order order = new Order(
@@ -247,7 +247,7 @@ public class OrderFormController implements Initializable {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }
+        }*/
         return FXCollections.observableArrayList();
     }
 

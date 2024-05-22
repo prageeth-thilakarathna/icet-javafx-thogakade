@@ -8,13 +8,13 @@ import java.sql.ResultSet;
 public interface OrderBo extends SuperBo {
     ResultSet getAllOrders();
 
-    ResultSet getOrder(String id);
+    Order getOrder(String id);
 
     boolean deleteOrder(String id);
 
-    ResultSet getTableRowCount();
+    int getTableRowCount();
 
-    ResultSet getTableLastId();
+    Order getTableLastId();
 
     void placeOrder(Order order);
 }

@@ -219,7 +219,7 @@
                       <TableColumn fx:id="colFirstTblCustomerId" prefWidth="170.0" text="Customer ID" />
                       <TableColumn fx:id="colTitle" prefWidth="50.0" text="Title" />
                         <TableColumn fx:id="colName" prefWidth="300.0" text="Name" />
-                        <TableColumn fx:id="colDateOfBarth" prefWidth="131.0" text="Date of Barth" />
+                        <TableColumn fx:id="colDateOfBirth" prefWidth="131.0" text="Date of Birth" />
                         <TableColumn fx:id="colSalary" prefWidth="132.0" text="Salary" />
                     </columns>
                   </TableView>

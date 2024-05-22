@@ -7,11 +7,12 @@ import edu.icet.demo.bo.custom.ItemBo;
 import edu.icet.demo.bo.custom.OrderBo;
 import edu.icet.demo.bo.custom.OrderDetailBo;
 import edu.icet.demo.controller.CenterController;
-import edu.icet.demo.model.Item;
-import edu.icet.demo.model.Order;
-import edu.icet.demo.model.OrderDetail;
-import edu.icet.demo.model.TblOrderDetail;
+import edu.icet.demo.entity.CustomerEntity;
+import edu.icet.demo.entity.ItemEntity;
+import edu.icet.demo.entity.OrderEntity;
+import edu.icet.demo.model.*;
 import edu.icet.demo.util.BoType;
+import edu.icet.demo.util.HibernateUtil;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,13 +27,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import org.modelmapper.ModelMapper;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class PlaceOrderController implements Initializable {
@@ -88,12 +91,8 @@ public class PlaceOrderController implements Initializable {
     private JFXComboBox<String> itemCODEs;
     @FXML
     private JFXComboBox<String> customerIDs;
-    private static final String ADDRESS = "address";
-    private static final String DESCRIPTION = "description";
-    private static final String UNIT_PRICE = "unitPrice";
-    private static final String ITEM_CODE = "itemCode";
 
-    private ObservableList<TblOrderDetail> tblOrderDetails = FXCollections.observableArrayList();
+    private ObservableList<TblOrderDetail> tblOrderDetailData = FXCollections.observableArrayList();
     private final OrderBo orderBo = BoFactory.getInstance().getBo(BoType.ORDER);
     private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
@@ -101,63 +100,63 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     private void customerIdSelectAction() {
-        /*try {
-            ResultSet resultSet = customerBo.getCustomer(customerIDs.getValue());
-            if (resultSet.next()) {
-                if (resultSet.getString("name").length() < 10) {
-                    nameDisplay.setText(resultSet.getString("name").substring(0, resultSet.getString("name").length()));
+        try {
+            if (!Objects.equals(customerIDs.getValue(), "")) {
+                Customer customer = customerBo.getCustomer(customerIDs.getValue());
+                if (customer.getName().length() < 10) {
+                    nameDisplay.setText(customer.getName().substring(0, customer.getName().length()));
                 } else {
-                    nameDisplay.setText(resultSet.getString("name").substring(0, 10) + "...");
-                    nameDisplay.setTooltip(new Tooltip(resultSet.getString("name")));
+                    nameDisplay.setText(customer.getName().substring(0, 10) + "...");
+                    nameDisplay.setTooltip(new Tooltip(customer.getName()));
                 }
 
-                if (resultSet.getString(ADDRESS).length() < 10) {
-                    addressDisplay.setText(resultSet.getString(ADDRESS).substring(0, resultSet.getString(ADDRESS).length()));
+                if (customer.getAddress().length() < 10) {
+                    addressDisplay.setText(customer.getAddress().substring(0, customer.getAddress().length()));
                 } else {
-                    addressDisplay.setText(resultSet.getString(ADDRESS).substring(0, 10) + "...");
-                    addressDisplay.setTooltip(new Tooltip(resultSet.getString(ADDRESS)));
+                    addressDisplay.setText(customer.getAddress().substring(0, 10) + "...");
+                    addressDisplay.setTooltip(new Tooltip(customer.getAddress()));
                 }
 
-                salaryDisplay.setText(resultSet.getString("salary"));
+                salaryDisplay.setText(String.valueOf(customer.getSalary()));
 
-                if (resultSet.getString("city").length() < 10) {
-                    cityDisplay.setText(resultSet.getString("city").substring(0, resultSet.getString("city").length()));
+                if (customer.getCity().length() < 10) {
+                    cityDisplay.setText(customer.getCity().substring(0, customer.getCity().length()));
                 } else {
-                    cityDisplay.setText(resultSet.getString("city").substring(0, 10) + "...");
-                    cityDisplay.setTooltip(new Tooltip(resultSet.getString("city")));
+                    cityDisplay.setText(customer.getCity().substring(0, 10) + "...");
+                    cityDisplay.setTooltip(new Tooltip(customer.getCity()));
                 }
                 dspCustomerId.setText(customerIDs.getValue());
                 inputValidation();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        }
     }
 
     @FXML
     private void itemCodeSelectAction() {
-        /*try {
-            ResultSet resultSet = itemBo.getItem(itemCODEs.getValue());
-            if (resultSet.next()) {
-                if (resultSet.getString(DESCRIPTION).length() < 10) {
-                    descriptionDisplay.setText(resultSet.getString(DESCRIPTION).substring(0, resultSet.getString("dscription").length()));
+        try {
+            if (!Objects.equals(itemCODEs.getValue(), "")) {
+                Item item = itemBo.getItem(itemCODEs.getValue());
+                if (item.getDescription().length() < 10) {
+                    descriptionDisplay.setText(item.getDescription().substring(0, item.getDescription().length()));
                 } else {
-                    descriptionDisplay.setText(resultSet.getString(DESCRIPTION).substring(0, 10) + "...");
-                    descriptionDisplay.setTooltip(new Tooltip(resultSet.getString(DESCRIPTION)));
+                    descriptionDisplay.setText(item.getDescription().substring(0, 10) + "...");
+                    descriptionDisplay.setTooltip(new Tooltip(item.getDescription()));
                 }
 
-                packSizeDisplay.setText(resultSet.getString("packSize"));
-                unitPriceDisplay.setText(resultSet.getString(UNIT_PRICE));
-                qtyOnHandDisplay.setText(resultSet.getString("qtyOnHand"));
+                packSizeDisplay.setText(item.getPackSize());
+                unitPriceDisplay.setText(String.valueOf(item.getUnitPrice()));
+                qtyOnHandDisplay.setText(String.valueOf(item.getQtyOnHand()));
                 inputValidation();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        }
     }
 
     @FXML
@@ -167,12 +166,12 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void clearFields() {
-        customerIDs.setValue(null);
+        customerIDs.setValue("");
         nameDisplay.setText("");
         addressDisplay.setText("");
         salaryDisplay.setText("");
         cityDisplay.setText("");
-        itemCODEs.setValue(null);
+        itemCODEs.setValue("");
         descriptionDisplay.setText("");
         packSizeDisplay.setText("");
         unitPriceDisplay.setText("");
@@ -183,31 +182,31 @@ public class PlaceOrderController implements Initializable {
 
     private ObservableList<String> getCustomerIDs() {
         ObservableList<String> customerIdList = FXCollections.observableArrayList();
-        /*try {
-            ResultSet resultSet = customerBo.getAllCustomers();
-            while (resultSet.next()) {
-                customerIdList.add("0" + resultSet.getString("customerId"));
+        try {
+            List<Customer> customerList = customerBo.getAllCustomers();
+            for (Customer customer : customerList) {
+                customerIdList.add(customer.getId());
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        }
         return customerIdList;
     }
 
     private ObservableList<String> getItemCODEs() {
         ObservableList<String> itemCodeList = FXCollections.observableArrayList();
-        /*try {
-            ResultSet resultSet = itemBo.getAllItems();
-            while (resultSet.next()) {
-                itemCodeList.add(resultSet.getString(ITEM_CODE));
+        try {
+            List<Item> itemList = itemBo.getAllItems();
+            for (Item item : itemList) {
+                itemCodeList.add(item.getId());
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        }
         return itemCodeList;
     }
 
@@ -229,16 +228,10 @@ public class PlaceOrderController implements Initializable {
     // id generate
     private String getOrderId() {
         try {
-            ResultSet resultTableRowCount = orderBo.getTableRowCount();
-            resultTableRowCount.next();
-
-            int size = resultTableRowCount.getInt("row_count");
+            int size = orderBo.getTableRowCount();
 
             if (size > 0) {
-                ResultSet resultSet = orderBo.getTableLastId();
-                resultSet.next();
-
-                String lastId = resultSet.getString("orderId");
+                String lastId = orderBo.getTableLastId().getId();
 
                 String[] part = lastId.split("OR");
                 int num = Integer.parseInt(part[1]);
@@ -248,7 +241,7 @@ public class PlaceOrderController implements Initializable {
             } else {
                 return "OR0001";
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
@@ -264,13 +257,13 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void inputValidation() {
-        if (customerIDs.getValue() != null && itemCODEs.getValue() != null && !inputQuantity.getText().isEmpty()) {
+        if (!Objects.equals(customerIDs.getValue(), "") && !Objects.equals(itemCODEs.getValue(), "") && !inputQuantity.getText().isEmpty()) {
             btnAddToCart.setDisable(false);
         } else {
             btnAddToCart.setDisable(true);
         }
 
-        if (customerIDs.getValue() != null || itemCODEs.getValue() != null || !inputQuantity.getText().isEmpty()) {
+        if (!Objects.equals(customerIDs.getValue(), "") || !Objects.equals(itemCODEs.getValue(), "") || !inputQuantity.getText().isEmpty()) {
             btnCancel.setDisable(false);
         } else {
             btnCancel.setDisable(true);
@@ -315,99 +308,94 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void addOrderDetail(String itemCode, String quantity) {
-        /*try {
-            ResultSet resultSet = itemBo.getItem(itemCode);
-            resultSet.next();
-
-            String total = CenterController.df.format(Integer.parseInt(quantity) * resultSet.getDouble(UNIT_PRICE));
+        try {
+            Item item = itemBo.getItem(itemCode);
+            String total = CenterController.df.format(Integer.parseInt(quantity) * item.getUnitPrice());
             TblOrderDetail orderDetail = new TblOrderDetail(
-                    resultSet.getString(ITEM_CODE),
-                    resultSet.getString(DESCRIPTION),
+                    item.getId(),
+                    item.getDescription(),
                     quantity,
-                    resultSet.getString(UNIT_PRICE),
+                    String.valueOf(item.getUnitPrice()),
                     total
             );
-            tblOrderDetails.add(orderDetail);
-            this.tblOrderDetail.setItems(tblOrderDetails);
-
-            if (!tblOrderDetails.isEmpty()) {
-                btnPlaceOrder.setDisable(false);
-            } else {
-                btnPlaceOrder.setDisable(true);
-            }
-        } catch (SQLException e) {
+            tblOrderDetailData.add(orderDetail);
+            this.tblOrderDetail.setItems(tblOrderDetailData);
+            btnPlaceOrder.setDisable(tblOrderDetailData.isEmpty());
+        } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        }
     }
 
     @FXML
     private void placeOrderAction() {
-        /*Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dateAndTime = simpleDateFormat.format(date) + " " + timeDisplay.getText();
-        Order order = new Order(
-                orderIdDisplay.getText(),
-                dateAndTime,
-                dspCustomerId.getText()
-        );
-        boolean res = orderBo.placeOrder(order);
-        if (res) {
-            boolean response = addOrderDetail();
-            if (response) {
-                CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
-                CenterController.alert.setContentText(orderIdDisplay.getText() + " Order is entered into the system successfully.");
-                CenterController.alert.show();
-                orderIdDisplay.setText(getOrderId());
-                btnPlaceOrder.setDisable(true);
-                clearFields();
-                dspCustomerId.setText("");
-                tblOrderDetails = FXCollections.observableArrayList();
-                tblOrderDetail.setItems(tblOrderDetails);
-            }
-        }*/
-    }
-
-    private boolean addOrderDetail() {
-        /*for (TblOrderDetail ob : tblOrderDetails) {
-            OrderDetail orderDetail = new OrderDetail(
+        try {
+            Date date = new Date();
+            CustomerEntity customerEntity = new ModelMapper().map(customerBo.getCustomer(dspCustomerId.getText()), CustomerEntity.class);
+            Order order = new Order(
                     orderIdDisplay.getText(),
-                    ob.getItemCode(),
-                    ob.getQuantity()
+                    date,
+                    customerEntity
             );
-            boolean res = orderDetailBo.addOrderDetail(orderDetail);
-            if (!res) {
-                return false;
-            } else {
-                String[] arr = getNewQtyOnHand(ob.getItemCode(), ob.getQuantity());
-                Item item = new Item(
-                        ob.getItemCode(),
-                        ob.getDescription(),
-                        arr[1],
-                        ob.getUnitPrice(),
-                        arr[0]
-                );
-                boolean resIVT = itemBo.updateItem(item);
-                if(!resIVT){
-                    return false;
-                }
-            }
-        }*/
-        return true;
-    }
+            orderBo.placeOrder(order);
+            addOrderDetail(new ModelMapper().map(order, OrderEntity.class));
 
-    private String[] getNewQtyOnHand(String itemCode, String qty){
-        /*try{
-            ResultSet resultSet = itemBo.getItem(itemCode);
-            resultSet.next();
-            String newValue = String.valueOf(resultSet.getInt("qtyOnHand")-Integer.parseInt(qty));
-            return new String[]{newValue, resultSet.getString("packSize")};
-        } catch (SQLException e) {
+            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+            CenterController.alert.setContentText(orderIdDisplay.getText() + " Order is entered into the system successfully.");
+            CenterController.alert.show();
+            orderIdDisplay.setText(getOrderId());
+            btnPlaceOrder.setDisable(true);
+            clearFields();
+            dspCustomerId.setText("");
+            tblOrderDetailData = FXCollections.observableArrayList();
+            tblOrderDetail.setItems(tblOrderDetailData);
+
+        } catch (Exception e) {
+            HibernateUtil.singletonRollback();
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
             CenterController.alert.setContentText(e.getMessage());
             CenterController.alert.show();
-        }*/
+        } finally {
+            HibernateUtil.singletonSessionClose();
+        }
+    }
+
+    private void addOrderDetail(OrderEntity orderEntity) {
+        for (TblOrderDetail tblOb : tblOrderDetailData) {
+            OrderDetail orderDetail = new OrderDetail();
+
+            ItemEntity itemEntity = new ModelMapper().map(itemBo.getItem(tblOb.getItemCode()), ItemEntity.class);
+
+            orderDetail.setOrder(orderEntity);
+            orderDetail.setItem(itemEntity);
+            orderDetail.setQuantity(Integer.parseInt(tblOb.getQuantity()));
+
+            orderDetailBo.addOrderDetail(orderDetail);
+
+            String[] arr = getNewQtyOnHand(tblOb.getItemCode(), tblOb.getQuantity());
+            Item item = new Item(
+                    tblOb.getItemCode(),
+                    tblOb.getDescription(),
+                    arr[1],
+                    Double.parseDouble(tblOb.getUnitPrice()),
+                    Integer.parseInt(arr[0])
+            );
+            itemBo.updateInventory(item);
+        }
+        HibernateUtil.singletonCommit();
+    }
+
+    private String[] getNewQtyOnHand(String itemCode, String qty) {
+        try {
+            Item item = itemBo.getItem(itemCode);
+            String newValue = String.valueOf(item.getQtyOnHand() - Integer.parseInt(qty));
+            return new String[]{newValue, item.getPackSize()};
+        } catch (Exception e) {
+            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
+            CenterController.alert.setContentText(e.getMessage());
+            CenterController.alert.show();
+        }
         return new String[0];
     }
 
@@ -436,10 +424,10 @@ public class PlaceOrderController implements Initializable {
         btnAddToCart.setDisable(true);
         btnCancel.setDisable(true);
         btnPlaceOrder.setDisable(true);
-        colItemCode.setCellValueFactory(new PropertyValueFactory<>(ITEM_CODE));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>(DESCRIPTION));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(UNIT_PRICE));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 }

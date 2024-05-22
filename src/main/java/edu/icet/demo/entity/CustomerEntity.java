@@ -1,13 +1,14 @@
 package edu.icet.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -19,10 +20,13 @@ public class CustomerEntity {
     private String id;
     private String title;
     private String name;
-    private LocalDate dateOfBarth;
+    private LocalDate dateOfBirth;
     private Double salary;
     private String address;
     private String city;
     private String province;
     private String postalCode;
+
+    @OneToMany(mappedBy = "customer")
+    private List<OrderEntity> orders;
 }

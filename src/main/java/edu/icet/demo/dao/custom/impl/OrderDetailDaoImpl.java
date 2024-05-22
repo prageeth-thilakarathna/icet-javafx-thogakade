@@ -1,59 +1,59 @@
 package edu.icet.demo.dao.custom.impl;
 
-import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.dao.custom.OrderDetailDao;
 import edu.icet.demo.entity.OrderDetailEntity;
-import edu.icet.demo.util.CrudUtil;
-import javafx.scene.control.Alert;
+import edu.icet.demo.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
-public class OrderDetailDaoImpl {
-    /*@Override
-    public boolean save(OrderDetailEntity entity) {
-        String sql = "INSERT INTO orderDetail VALUES(?,?,?)";
-        try{
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getOrderId(),
-                    entity.getItemCode(),
-                    entity.getQuantity()
-            );
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+public class OrderDetailDaoImpl implements OrderDetailDao {
+    @Override
+    public void save(OrderDetailEntity entity) {
+        Session session = HibernateUtil.getSingletonSession();
+        session.persist(entity);
+    }
+
+    @Override
+    public void update(OrderDetailEntity entity) {}
+
+    @Override
+    public void delete(OrderDetailEntity entity) {}
+
+    @Override
+    public OrderDetailEntity get(String id) {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = null;
+        OrderDetailEntity orderDetailEntity;
+        try {
+            tx = session.beginTransaction();
+            orderDetailEntity = session.get(OrderDetailEntity.class, id);
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return false;
+        return orderDetailEntity;
     }
 
     @Override
-    public boolean update(OrderDetailEntity entity) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(OrderDetailEntity entity) {
-        return false;
-    }
-
-    @Override
-    public ResultSet findById(String id) {
-        String sql = "SELECT * FROM orderDetail WHERE orderId='"+id+"'";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    public List<OrderDetailEntity> getAll() {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = null;
+        List<OrderDetailEntity> orderDetailEntityList;
+        try {
+            tx = session.beginTransaction();
+            orderDetailEntityList = session.createQuery("SELECT a FROM OrderDetailEntity a", OrderDetailEntity.class).getResultList();
+            tx.commit();
+        } catch (Exception e){
+            if(tx!=null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
+        return orderDetailEntityList;
     }
-
-    @Override
-    public ResultSet findAll() {
-        return null;
-    }*/
 }

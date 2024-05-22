@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ItemDaoImpl implements ItemDao {
     @Override
     public void save(ItemEntity entity) {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -30,7 +30,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void update(ItemEntity entity) {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -46,7 +46,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void delete(ItemEntity entity) {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -62,7 +62,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemEntity get(String id) {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         ItemEntity itemEntity;
         try {
@@ -80,7 +80,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<ItemEntity> getAll() {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         Transaction tx = null;
         List<ItemEntity> itemEntityList;
         try {
@@ -98,7 +98,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public int count() {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         AtomicInteger count = new AtomicInteger();
         session.doWork(connection -> {
             try(Statement statement = connection.createStatement()) {
@@ -112,7 +112,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public ItemEntity findLast() {
-        Session session = HibernateUtil.getItemSession();
+        Session session = HibernateUtil.getSession();
         ItemEntity item = new ItemEntity();
         session.doWork(connection -> {
             try(Statement statement = connection.createStatement()){
@@ -122,5 +122,11 @@ public class ItemDaoImpl implements ItemDao {
             }
         });
         return item;
+    }
+
+    @Override
+    public void modifyItem(ItemEntity itemEntity) {
+        Session session = HibernateUtil.getSingletonSession();
+        session.merge(itemEntity);
     }
 }

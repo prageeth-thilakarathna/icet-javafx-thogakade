@@ -1,20 +1,30 @@
 package edu.icet.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderEntity {
     @Id
     private String id;
-    private String orderDate;
-    private String customerId;
+    private Date orderDate;
+
+    @ManyToOne()
+    @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "fk_customer_order"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private CustomerEntity customer;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetailEntity> orderDetail;
 }

@@ -22,7 +22,6 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {
@@ -39,7 +38,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private TableColumn<Customer, String> colName;
     @FXML
-    private TableColumn<Customer, String> colDateOfBarth;
+    private TableColumn<Customer, String> colDateOfBirth;
     @FXML
     private TableColumn<Customer, String> colSalary;
     @FXML
@@ -89,15 +88,6 @@ public class CustomerFormController implements Initializable {
     private Customer searchCustomer;
     private static final String CHAR_SAFE = "* only digits(0-9)";
     private static final String CUSTOMER_ID = "id";
-    private static final String TITLE_TYPE = "title";
-    private static final String NAME = "name";
-    private static final String DATE_OF_BARTH = "dateOfBarth";
-    private static final String SALARY = "salary";
-    private static final String ADDRESS = "address";
-    private static final String CITY = "city";
-    private static final String PROVINCE = "province";
-    private static final String POSTAL_CODE = "postalCode";
-    private static final String CUSTOMER_ALERT_NAME = " customer.";
 
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
 
@@ -402,7 +392,7 @@ public class CustomerFormController implements Initializable {
                 btnUpdate.setDisable(false);
             } else if (!nameInput.getText().equals(searchCustomer.getName())) {
                 btnUpdate.setDisable(false);
-            } else if (!dateOfBarth.getValue().equals(searchCustomer.getDateOfBarth())) {
+            } else if (!dateOfBarth.getValue().equals(searchCustomer.getDateOfBirth())) {
                 btnUpdate.setDisable(false);
             } else if (!salaryInput.getText().equals(String.valueOf(searchCustomer.getSalary()))) {
                 btnUpdate.setDisable(false);
@@ -457,7 +447,7 @@ public class CustomerFormController implements Initializable {
         if (customer != null) {
             title.setValue(customer.getTitle());
             nameInput.setText(customer.getName());
-            dateOfBarth.setValue(customer.getDateOfBarth());
+            dateOfBarth.setValue(customer.getDateOfBirth());
             salaryInput.setText(String.valueOf(customer.getSalary()));
             addressInput.setText(customer.getAddress());
             cityInput.setText(customer.getCity());
@@ -509,15 +499,15 @@ public class CustomerFormController implements Initializable {
         btnSearch.setDisable(true);
 
         colFirstTblCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
-        colTitle.setCellValueFactory(new PropertyValueFactory<>(TITLE_TYPE));
-        colName.setCellValueFactory(new PropertyValueFactory<>(NAME));
-        colDateOfBarth.setCellValueFactory(new PropertyValueFactory<>(DATE_OF_BARTH));
-        colSalary.setCellValueFactory(new PropertyValueFactory<>(SALARY));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDateOfBirth.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         colSecondTblCustomerId.setCellValueFactory(new PropertyValueFactory<>(CUSTOMER_ID));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>(ADDRESS));
-        colCity.setCellValueFactory(new PropertyValueFactory<>(CITY));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>(PROVINCE));
-        colPostalCode.setCellValueFactory(new PropertyValueFactory<>(POSTAL_CODE));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
 
         tableFirst.setItems(getTableData());
         tableSecond.setItems(getTableData());

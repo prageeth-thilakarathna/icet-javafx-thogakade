@@ -1,93 +1,104 @@
 package edu.icet.demo.dao.custom.impl;
 
-import edu.icet.demo.controller.CenterController;
 import edu.icet.demo.dao.custom.OrderDao;
 import edu.icet.demo.entity.OrderEntity;
-import edu.icet.demo.util.CrudUtil;
-import javafx.scene.control.Alert;
+import edu.icet.demo.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class OrderDaoImpl {
-    /*@Override
-    public boolean save(OrderEntity entity) {
-        String sql = "INSERT INTO `order` VALUES(?,?,?)";
-        try{
-            Boolean res = CrudUtil.execute(
-                    sql,
-                    entity.getOrderId(),
-                    entity.getOrderDate(),
-                    entity.getCustomerId()
-            );
-            return Boolean.TRUE.equals(res);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+public class OrderDaoImpl implements OrderDao {
+    @Override
+    public void save(OrderEntity entity) {
+        Session session = HibernateUtil.getSingletonSession();
+        HibernateUtil.singletonBegin();
+        session.persist(entity);
+    }
+
+    @Override
+    public void update(OrderEntity entity) {}
+
+    @Override
+    public void delete(OrderEntity entity) {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.remove(entity);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return false;
     }
 
     @Override
-    public boolean update(OrderEntity entity) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(OrderEntity entity) {
-        return false;
-    }
-
-    @Override
-    public ResultSet findById(String id) {
-        String sql = "SELECT * FROM `order` WHERE orderId='"+id+"'";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    public OrderEntity get(String id) {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = null;
+        OrderEntity orderEntity;
+        try {
+            tx = session.beginTransaction();
+            orderEntity = session.get(OrderEntity.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
+        return orderEntity;
     }
 
     @Override
-    public ResultSet findAll() {
-        String sql = "SELECT * FROM `order`";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
+    public List<OrderEntity> getAll() {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = null;
+        List<OrderEntity> orderEntityList;
+        try {
+            tx = session.beginTransaction();
+            orderEntityList = session.createQuery("SELECT a FROM OrderEntity a", OrderEntity.class).getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
+        return orderEntityList;
     }
 
     @Override
-    public ResultSet count() {
-        String sql = "SELECT COUNT(*) AS row_count FROM `order`";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return null;
+    public int count() {
+        Session session = HibernateUtil.getSession();
+        AtomicInteger count = new AtomicInteger();
+        session.doWork(connection -> {
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS row_count FROM orders");
+                resultSet.next();
+                count.set(resultSet.getInt("row_count"));
+            }
+        });
+        return count.get();
     }
 
     @Override
-    public ResultSet findLast() {
-        String sql = "SELECT * FROM `order` ORDER BY orderId DESC LIMIT 1";
-        try{
-            return CrudUtil.execute(sql);
-        } catch (SQLException e) {
-            CenterController.alert.setAlertType(Alert.AlertType.ERROR);
-            CenterController.alert.setContentText(e.getMessage());
-            CenterController.alert.show();
-        }
-        return null;
-    }*/
+    public OrderEntity findLast() {
+        Session session = HibernateUtil.getSession();
+        OrderEntity orderEntity = new OrderEntity();
+        session.doWork(connection -> {
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY id DESC LIMIT 1");
+                resultSet.next();
+                orderEntity.setId(resultSet.getString("id"));
+            }
+        });
+        return orderEntity;
+    }
 }

@@ -49,4 +49,9 @@ public class ItemBoImpl implements ItemBo {
     public void deleteItem(Item item) {
         itemDao.delete(new ModelMapper().map(item, ItemEntity.class));
     }
+
+    @Override
+    public void updateInventory(Item item) {
+        itemDao.modifyItem(new ModelMapper().map(item, ItemEntity.class));
+    }
 }

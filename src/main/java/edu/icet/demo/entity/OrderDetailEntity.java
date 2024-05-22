@@ -1,11 +1,11 @@
 package edu.icet.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @NoArgsConstructor
@@ -14,7 +14,18 @@ import lombok.Setter;
 @Table(name = "orderDetail")
 public class OrderDetailEntity {
     @Id
-    private String id;
-    private String itemId;
-    private String quantity;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne()
+    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "fk_order_orderDetail"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private OrderEntity order;
+
+    @ManyToOne()
+    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(name = "fk_item_orderDetail"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ItemEntity item;
+
+    private Integer quantity;
 }

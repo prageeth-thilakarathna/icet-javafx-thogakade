@@ -20,4 +20,6 @@ public interface ItemBo extends SuperBo {
     void updateItem(Item item);
 
     void deleteItem(Item item);
+
+    void updateInventory(Item item);
 }
