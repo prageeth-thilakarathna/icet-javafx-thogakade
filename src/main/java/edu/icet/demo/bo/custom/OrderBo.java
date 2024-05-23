@@ -3,14 +3,14 @@ package edu.icet.demo.bo.custom;
 import edu.icet.demo.bo.SuperBo;
 import edu.icet.demo.model.Order;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public interface OrderBo extends SuperBo {
-    ResultSet getAllOrders();
+    List<Order> getAllOrders();
 
     Order getOrder(String id);
 
-    boolean deleteOrder(String id);
+    void deleteOrder(Order order);
 
     int getTableRowCount();
 

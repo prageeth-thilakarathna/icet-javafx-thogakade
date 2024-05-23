@@ -1,36 +1,3 @@
 
-g
-java:S2583ª"DChange this condition so that it does not always evaluate to "false"(úÖáÿÿÿÿÿ8ˆÃ–ıù1
-X	java:S125^"<This block of commented-out lines of code should be removed.(½‘Ñ³8ˆÃ–ıù1
-V
-java:S3400Ê"9Remove this method and declare a constant for this value.(¸®Ã'8ˆÃ–ıù1
-L
-java:S1172³".Remove this unused method parameter "orderId".(Ä—–…8ˆÃ–ıù1
-Y	java:S125´"<This block of commented-out lines of code should be removed.(½‘Ñ³8ˆÃ–ıù1
-V
-java:S1172Í"8Remove these unused method parameters "itemCode", "qty".(¢ğ³8ˆÃ–ıù1
-Y	java:S125Î"<This block of commented-out lines of code should be removed.(½‘Ñ³8ˆÃ–ıù1
-[
-java:S1854ê"=Remove this useless assignment to local variable "allOrders".(—ìßè8˜Ã–ıù1
-L
-java:S1481ê".Remove this unused "allOrders" local variable.(—ìßè8˜Ã–ıù1
-Y	java:S125ë"<This block of commented-out lines of code should be removed.(½‘Ñ³8˜Ã–ıù1
-h
-java:S1128
-"FRemove this unused import 'edu.icet.demo.controller.CenterController'.(‘‘‰÷üÿÿÿÿ8˜Ã–ıù1
-R
-java:S1128"5Remove this unused import 'edu.icet.demo.model.Item'.(Íåäì8˜Ã–ıù1
-S
-java:S1128"7Remove this unused import 'javafx.scene.control.Alert'.(ÊÇê:8˜Ã–ıù1
-K
-java:S1128"/Remove this unused import 'java.sql.ResultSet'.(ˆóÚw8˜Ã–ıù1
-O
-java:S1128"2Remove this unused import 'java.sql.SQLException'.(ÛïÆŸ8˜Ã–ıù1
-N
-java:S1068X"1Remove this unused "orderDetailBo" private field.(„ºãì8˜Ã–ıù1
-L
-java:S1068Y"*Remove this unused "itemBo" private field.(Û¬âêıÿÿÿÿ8˜Ã–ıù1
-K
-java:S1068Z".Remove this unused "customerBo" private field.(¶í‹8˜Ã–ıù1
-R
-java:S1144Í"4Remove this unused private "getNewQtyOnHand" method.(¢ğ³8˜Ã–ıù1
+z
+java:S1128"2Remove this unused import 'org.hibernate.Session'.(È¹›§ùÿÿÿÿ8’°‹©ú1J$b96bc25e-fdaa-4173-a10e-e55a44d0aee9

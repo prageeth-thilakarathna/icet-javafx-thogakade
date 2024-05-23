@@ -338,6 +338,7 @@ public class PlaceOrderController implements Initializable {
                     date,
                     customerEntity
             );
+            updateInventory();
             orderBo.placeOrder(order);
             addOrderDetail(new ModelMapper().map(order, OrderEntity.class));
 
@@ -372,7 +373,12 @@ public class PlaceOrderController implements Initializable {
             orderDetail.setQuantity(Integer.parseInt(tblOb.getQuantity()));
 
             orderDetailBo.addOrderDetail(orderDetail);
+        }
+        HibernateUtil.singletonCommit();
+    }
 
+    private void updateInventory(){
+        for (TblOrderDetail tblOb : tblOrderDetailData) {
             String[] arr = getNewQtyOnHand(tblOb.getItemCode(), tblOb.getQuantity());
             Item item = new Item(
                     tblOb.getItemCode(),
@@ -383,7 +389,6 @@ public class PlaceOrderController implements Initializable {
             );
             itemBo.updateInventory(item);
         }
-        HibernateUtil.singletonCommit();
     }
 
     private String[] getNewQtyOnHand(String itemCode, String qty) {

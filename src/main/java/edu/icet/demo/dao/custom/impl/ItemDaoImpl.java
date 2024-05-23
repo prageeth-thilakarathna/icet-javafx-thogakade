@@ -127,6 +127,7 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public void modifyItem(ItemEntity itemEntity) {
         Session session = HibernateUtil.getSingletonSession();
+        HibernateUtil.singletonBegin();
         session.merge(itemEntity);
     }
 }
