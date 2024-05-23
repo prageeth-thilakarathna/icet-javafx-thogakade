@@ -70,7 +70,7 @@ public class CustomerDaoImpl implements CustomerDao {
             if(tx!=null) tx.rollback();
             throw e;
         } finally {
-            session.clear();
+            session.close();
         }
         return customerEntity;
     }

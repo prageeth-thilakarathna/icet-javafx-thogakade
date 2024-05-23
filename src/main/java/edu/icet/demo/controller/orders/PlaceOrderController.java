@@ -200,7 +200,13 @@ public class PlaceOrderController implements Initializable {
         try {
             List<Item> itemList = itemBo.getAllItems();
             for (Item item : itemList) {
-                itemCodeList.add(item.getId());
+                if(tblOrderDetailData.isEmpty()){
+                    itemCodeList.add(item.getId());
+                } else {
+                    if(!isExist(item.getId())){
+                        itemCodeList.add(item.getId());
+                    }
+                }
             }
         } catch (Exception e) {
             CenterController.alert.setAlertType(Alert.AlertType.ERROR);
@@ -208,6 +214,15 @@ public class PlaceOrderController implements Initializable {
             CenterController.alert.show();
         }
         return itemCodeList;
+    }
+
+    private boolean isExist(String id){
+        for(TblOrderDetail tblOrderDetailOb : tblOrderDetailData){
+            if(Objects.equals(tblOrderDetailOb.getItemCode(), id)){
+                return true;
+            }
+        }
+        return false;
     }
 
     // set data and time
@@ -254,11 +269,20 @@ public class PlaceOrderController implements Initializable {
         addOrderDetail(itemCODEs.getValue(), inputQuantity.getText());
         clearFields();
         inputValidation();
+        itemCODEs.setItems(getItemCODEs());
+        itemCODEs.setVisibleRowCount(5);
     }
 
     private void inputValidation() {
         if (!Objects.equals(customerIDs.getValue(), "") && !Objects.equals(itemCODEs.getValue(), "") && !inputQuantity.getText().isEmpty()) {
-            btnAddToCart.setDisable(false);
+            Item item = itemBo.getItem(itemCODEs.getValue());
+            if(Integer.parseInt(inputQuantity.getText())<=item.getQtyOnHand()){
+                btnAddToCart.setDisable(false);
+                quantityError.setText("");
+            } else {
+                btnAddToCart.setDisable(true);
+                quantityError.setText("* Not QTY greater than QTYOnHand");
+            }
         } else {
             btnAddToCart.setDisable(true);
         }
@@ -338,8 +362,8 @@ public class PlaceOrderController implements Initializable {
                     date,
                     customerEntity
             );
-            updateInventory();
             orderBo.placeOrder(order);
+            updateInventory();
             addOrderDetail(new ModelMapper().map(order, OrderEntity.class));
 
             CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
@@ -351,6 +375,8 @@ public class PlaceOrderController implements Initializable {
             dspCustomerId.setText("");
             tblOrderDetailData = FXCollections.observableArrayList();
             tblOrderDetail.setItems(tblOrderDetailData);
+            itemCODEs.setItems(getItemCODEs());
+            itemCODEs.setVisibleRowCount(5);
 
         } catch (Exception e) {
             HibernateUtil.singletonRollback();

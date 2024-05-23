@@ -23,7 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -102,7 +101,7 @@ public class OrderFormController implements Initializable {
             dspProvince.setText(customer.getProvince());
             dspPostalCode.setText(customer.getPostalCode());
 
-            List<OrderDetail> orderDetailList = orderDetailBo.getOrderDetailInOrder(order);
+            List<OrderDetail> orderDetailList = orderDetailBo.getOrderDetail(order);
             ObservableList<TblOrderDetail> tblOrderDetailList = FXCollections.observableArrayList();
 
             for (OrderDetail orderDetail : orderDetailList) {
@@ -158,9 +157,11 @@ public class OrderFormController implements Initializable {
     @FXML
     private void deleteAction() {
         try {
-            updateInventory();
             orderBo.deleteOrder(orderBo.getOrder(txtOrderId.getText()));
-            HibernateUtil.singletonCommit();
+            updateInventory();
+            CenterController.alert.setAlertType(Alert.AlertType.INFORMATION);
+            CenterController.alert.setContentText(txtOrderId.getText() + " Order delete is successfully.");
+            CenterController.alert.show();
             clearForm();
             tblOrder.setItems(getOrdersTableData());
 
@@ -175,7 +176,7 @@ public class OrderFormController implements Initializable {
     }
 
     private void updateInventory() {
-        List<OrderDetail> orderDetailList = orderDetailBo.getOrderDetailInOrder(orderBo.getOrder(txtOrderId.getText()));
+        List<OrderDetail> orderDetailList = orderDetailBo.getOrderDetail(orderBo.getOrder(txtOrderId.getText()));
         for (OrderDetail orderDetail : orderDetailList) {
             Integer[] arr = getNewQtyOnHand(orderDetail.getItem().getId(), orderDetail.getQuantity());
             Item item = new Item(
@@ -187,6 +188,7 @@ public class OrderFormController implements Initializable {
             );
             itemBo.updateInventory(item);
         }
+        HibernateUtil.singletonCommit();
     }
 
     private Integer[] getNewQtyOnHand(String itemCode, Integer qty) {

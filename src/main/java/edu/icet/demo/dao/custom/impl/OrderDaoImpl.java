@@ -15,6 +15,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void save(OrderEntity entity) {
         Session session = HibernateUtil.getSingletonSession();
+        HibernateUtil.singletonBegin();
         session.persist(entity);
     }
 
@@ -24,6 +25,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void delete(OrderEntity entity) {
         Session session = HibernateUtil.getSingletonSession();
+        HibernateUtil.singletonBegin();
         session.remove(entity);
     }
 
