@@ -31,4 +31,9 @@ public class HomeController {
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(parent);
     }
+
+    @FXML
+    private void exitAction() {
+        System.exit(0);
+    }
 }

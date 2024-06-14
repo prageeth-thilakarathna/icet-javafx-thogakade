@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -25,17 +26,27 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="110.0" prefWidth="1169.0">
+                  <ImageView fitHeight="593.0" fitWidth="1169.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/home-page.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="500.0" layoutY="64.0" text="Welcome!">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" layoutY="117.0" prefHeight="206.0" prefWidth="1169.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#customerAction" style="-fx-background-color: #8da1af;" text="Customer" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#customerAction" prefHeight="125.0" prefWidth="250.0" style="-fx-background-color: #8da1af;" text="Customer" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
                               <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
                            </padding>
                            <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="58.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                  <image>
                                     <Image url="@../img/customer-icon.png" />
                                  </image>
@@ -45,15 +56,15 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#orderAction" style="-fx-background-color: #8da1af;" text="Order" textFill="WHITE">
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#orderAction" prefHeight="125.0" prefWidth="250.0" style="-fx-background-color: #8da1af;" text="Order" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
                               <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
                            </padding>
                            <graphic>
-                              <ImageView fitHeight="57.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="39.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                  <image>
                                     <Image url="@../img/orders-icon.png" />
                                  </image>
@@ -66,15 +77,15 @@
                               <Insets left="50.0" right="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="176.0" layoutY="10.0" mnemonicParsing="false" onAction="#itemAction" style="-fx-background-color: #8da1af;" text="Item" textFill="WHITE">
+                        <Button layoutX="176.0" layoutY="10.0" mnemonicParsing="false" onAction="#itemAction" prefHeight="125.0" prefWidth="250.0" style="-fx-background-color: #8da1af;" text="Item" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
                               <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
                            </padding>
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                  <image>
                                     <Image url="@../img/item-icon.png" />
                                  </image>
@@ -88,6 +99,26 @@
                </children>
             </Pane>
          </center>
+         <bottom>
+            <HBox alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="1169.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton onAction="#exitAction" style="-fx-background-color: #4e08aa;" text="Exit" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

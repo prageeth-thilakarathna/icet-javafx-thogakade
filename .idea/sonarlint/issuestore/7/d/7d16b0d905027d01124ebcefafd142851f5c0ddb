@@ -1,12 +1,0 @@
-
-—
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ì‚ÉÊúÿÿÿÿ8¹æíı÷1J$9bdcf76c-4a28-4874-ad9d-93729c77fb7e
-
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ò½¾øÿÿÿÿ8¹æíı÷1J$6cf16aef-a41a-42cc-b02f-f3cb7296b226
-‚
-java:S1118	":Add a private constructor to hide the implicit public one.(ş¼¬·ÿÿÿÿÿ8­ß¦â÷1J$eaa89db2-a30a-4e7c-b964-5cb27bfb5cd6
-š
-java:S3776
-"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(©ÙÂƒúÿÿÿÿ8­ß¦â÷1J$779c325f-5279-4e59-b74a-93593ad2c775
-p
-java:S1125"(Remove the unnecessary boolean literals.(–ÌªÖøÿÿÿÿ8­ß¦â÷1J$e6501a4b-57a4-4afe-9629-98be1bd154dd

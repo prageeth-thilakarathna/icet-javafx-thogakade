@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.orders.PlaceOrderController">
+<AnchorPane fx:id="anchorPane" prefHeight="658.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.demo.controller.order.PlaceOrderController">
    <children>
       <BorderPane prefHeight="658.0" prefWidth="1169.0">
          <top>
-            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1243.0" style="-fx-background-color: #DD761C;" text="Place Order Form" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1243.0" style="-fx-background-color: #454545;" text="Place Order Form" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
